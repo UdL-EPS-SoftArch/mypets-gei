@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API: 'https://spring-template.fly.dev'
+  API: 'https://mypets-gei-api.fly.dev'
 };
