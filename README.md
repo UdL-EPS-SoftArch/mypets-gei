@@ -2,8 +2,8 @@
 
 [![Open Issues](https://img.shields.io/github/issues-raw/UdL-EPS-SoftArch/mypets-gei?logo=github)](https://github.com/orgs/UdL-EPS-SoftArch/projects/20)
 [![CI/CD](https://github.com/UdL-EPS-SoftArch/mypets-gei/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/UdL-EPS-SoftArch/mypets-gei/actions)
-[![CypressE2E](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/4isjgp&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/4isjgp/runs)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bed54a5c-1e02-4083-aa58-5c226cf1bb38/deploy-status)](https://mypets-gei.netlify.app)
+[![CypressE2E](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/z85gu2&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/z85gu2/runs)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/47accd67-7359-4fec-b268-bfd1aa0b1855/deploy-status)](https://mypets-gei.netlify.app)
 
 ## Development server
 
