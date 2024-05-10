@@ -10,7 +10,7 @@ export class PetsService {
     name: 'Fluffy',
     species: 'Cat',
     breed: 'Siamese',
-    photo: 'https://www.pexels.com/photo/adorable-animal-blur-cat-617278/',
+    photo: 'https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     shelter: 'Shady Pines Shelter'
   },
   {
@@ -18,7 +18,7 @@ export class PetsService {
     name: 'Fido',
     species: 'Dog',
     breed: 'Golden Retriever',
-    photo: 'https://www.pexels.com/photo/animal-dog-puppy-german-shepherd-33537/',
+    photo: 'https://images.pexels.com/photos/33537/cat-animal-cat-portrait-mackerel.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     shelter: 'Paws and Claws Shelter'
   },
   {
@@ -26,7 +26,7 @@ export class PetsService {
     name: 'Squawks',
     species: 'Bird',
     breed: 'Parrot',
-    photo: 'https://www.pexels.com/photo/animal-avian-beak-beautiful-356378/',
+    photo: 'https://images.pexels.com/photos/2930204/pexels-photo-2930204.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     shelter: 'Wings of Love Shelter'
   }];
   getAllPets(): PetData[] {

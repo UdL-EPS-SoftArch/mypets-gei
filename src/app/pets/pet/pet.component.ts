@@ -8,7 +8,7 @@ import { PetData } from '../pet-data';
   standalone: true,
   imports: [CommonModule,RouterModule],
   templateUrl: './pet.component.html',
-  styleUrl: './pet.component.scss'
+  styleUrl: './pet.component.css'
 })
 export class PetComponent {
   @Input() petData!: PetData;
