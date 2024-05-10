@@ -29,7 +29,7 @@ export class PetsService {
     photo: 'https://images.pexels.com/photos/2930204/pexels-photo-2930204.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     shelter: 'Wings of Love Shelter'
   }];
-  getAllPets(): PetData[] {
+  async getAllPets(): Promise<PetData[]> {
     return this.petsList;
   }
   getPet(id: number): PetData | undefined {

@@ -11,13 +11,28 @@ import { PetsService } from '../pets.service';
   styleUrls: ['./pets-grid.component.css'],
   imports: [CommonModule,PetComponent]
 })
+
 export class PetsGridComponent {
   
   petsList: PetData[] = [];
   petsService: PetsService = inject(PetsService);
-  
+  filteredPetsList: PetData[] = [];
+
   constructor() {
-    this.petsList = this.petsService.getAllPets();
+    this.petsService.getAllPets().then((petsList:PetData[]) => {
+      this.petsList = petsList;
+      this.filteredPetsList = petsList;
+    });
    }
 
+   filterResultsByName(name: string) {
+    if (name === "") {
+      this.filteredPetsList = this.petsList;
+    } else {
+      this.filteredPetsList = this.petsList.filter(pet => {
+        return pet.name.toLowerCase().includes(name.toLowerCase());
+      });
+    }
+  }  
+  
 }
