@@ -32,4 +32,7 @@ export class PetsService {
   getAllPets(): PetData[] {
     return this.petsList;
   }
+  getPet(id: number): PetData | undefined {
+    return this.petsList.find(pet => pet.id === id);
+  }
 }

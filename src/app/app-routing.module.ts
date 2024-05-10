@@ -8,7 +8,8 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
-import { PetsGridComponent } from './pets/pets-grid/pets-grid.component';
+import { PetsGridComponent } from './pets/pet-grid/pets-grid.component';
+import { PetDetailsComponent } from './pets/pet-details/pet-details.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
   { path: 'pets-grid', component: PetsGridComponent},
+  { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
