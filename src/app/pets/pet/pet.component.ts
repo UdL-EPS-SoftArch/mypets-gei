@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PetData } from '../pet-data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pet',
@@ -12,4 +13,5 @@ import { PetData } from '../pet-data';
 })
 export class PetComponent {
   @Input() petData!: PetData;
+
 }

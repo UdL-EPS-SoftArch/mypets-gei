@@ -1,16 +1,17 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PetsService } from '../pets.service';
 import { PetData } from '../pet-data';
+
 @Component({
-  selector: 'app-pet-details',
+  selector: 'app-pet-delete',
   standalone: true,
-  imports: [CommonModule,RouterModule],
-  templateUrl: './pet-details.component.html',
-  styleUrl: './pet-details.component.css'
+  imports: [],
+  templateUrl: './pet-delete.component.html',
+  styleUrl: './pet-delete.component.css'
 })
-export class PetDetailsComponent {
+export class PetDeleteComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   petsService: PetsService = inject(PetsService);
   petData: PetData | undefined;
