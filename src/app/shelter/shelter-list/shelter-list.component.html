@@ -1,18 +1,24 @@
 
-
-<div class="card mb-1">
+<p class="lead">Shelters</p>
+<button id="editBtn" type="button"
+      class="btn m-1 btn-outline-primary">Add new Shelter
+      </button>
+<div class="card mb-1" *ngFor="let shelter of shelters">
   <div class="card-block row m-1 col-12">
     <div class="card-body row align-items-center">
       <div class="col-6 mt-1">
-        <h6 class="card-subtitle text-muted">ShelterName</h6>
-        <a class="card-text"></a>
+        <h6 class="card-subtitle text-muted">Shelter Name</h6>
+        <p class="card-text">{{ shelter.name }}</p>
       </div>
       <div class="col-6 mt-1">
-        <h6 class="card-subtitle text-muted">ViewDetails</h6>
-        <p class="card-text"></p>
+        <p class="card-text">Email: {{ shelter.email }}</p>
+        <p class="card-text">Mobile: {{ shelter.mobile }}</p>
+        <p class="card-text">Rating: {{ shelter.rating}}</p>
+      </div>
+      <div class="col-6 mt-1">
+        <button id="editBtn" type="button" class="btn m-1 btn-outline-success">Edit</button>
+        <button id="deleteBtn" type="button" class="btn m-1 btn-outline-danger">Delete</button>
       </div>
     </div>
   </div>
 </div>
-
-
