@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './shelter-edit.component.html',
-  styleUrl: './shelter-edit.component.scss'
+  styleUrl: './shelter-edit.component.css'
 })
 export class ShelterEditComponent {
 
