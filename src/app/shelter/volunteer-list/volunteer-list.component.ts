@@ -26,6 +26,6 @@ import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client';
     }
   
     detail(user: User): void {
-      this.router.navigate(['users', user.username]);
+      
     }
   }
