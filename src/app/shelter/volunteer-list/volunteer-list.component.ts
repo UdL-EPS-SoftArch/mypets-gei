@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../login-basic/user';
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client';
+import { ShelterVolunteerService } from '../shelterVolunteer.service';
 
 @Component({
   selector: 'app-volunteer-list',
@@ -15,11 +16,11 @@ export class ShelterVolunteersListComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private userService: UserService) {
+    private shelterVolunteerService: ShelterVolunteerService) {
   }
 
   ngOnInit(): void {
-    this.userService.getPage({ pageParams:  { size: this.pageSize }, sort: { username: 'ASC' } }).subscribe(
+    this.shelterVolunteerService.getPage({ pageParams:  { size: this.pageSize }, sort: { username: 'ASC' } }).subscribe(
         (page: PagedResourceCollection<User>) => {
           this.users = page.resources;
           this.totalVolunteers = page.totalElements;
@@ -27,7 +28,7 @@ export class ShelterVolunteersListComponent implements OnInit {
   }
 
   changePage(): void {
-    this.userService.getPage({ pageParams: { page: this.page - 1, size: this.pageSize }, sort: { username: 'ASC' } }).subscribe(
+    this.shelterVolunteerService.getPage({ pageParams: { page: this.page - 1, size: this.pageSize }, sort: { username: 'ASC' } }).subscribe(
       (page: PagedResourceCollection<User>) => this.users = page.resources);
   }
 
