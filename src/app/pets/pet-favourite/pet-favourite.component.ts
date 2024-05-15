@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { PetData } from '../pet-data';
+import { PetsService } from '../pets.service';
 
 @Component({
   selector: 'app-pet-favourite',
@@ -10,15 +12,36 @@ import { RouterModule } from '@angular/router';
   styleUrl: './pet-favourite.component.scss'
 })
 export class PetFavouriteComponent implements OnInit {
+  text: string = "Like pet"
+  route: ActivatedRoute = inject(ActivatedRoute);
+  petsService: PetsService = inject(PetsService);
+  petData: PetData | undefined;
+  isClicked: Boolean;
 
-  constructor(){}
+  constructor(){
+    const petId = Number(this.route.snapshot.paramMap.get('id'));
+    this.petData = this.petsService.getPet(petId);
+  }
 
   ngOnInit(): void {
-      
+      //visually get if pet is liked or disliked by user
+      this.isClicked = this.petData.favouritedByUser;
+      if (this.isClicked){
+        this.text = "💔"
+      } else{
+        this.text = "❤"
+      }
   }
 
   onClick(){
-    console.log("clicked button")
+    //Visual
+    this.isClicked = !this.isClicked
+    if (this.isClicked){
+      this.text = "💔"
+    } else{
+      this.text = "❤"
+    }
+    //Caldrà updatejar al backed el fet que el user té o no el pet likejat
   }
 
 }

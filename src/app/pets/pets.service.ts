@@ -17,7 +17,8 @@ export class PetsService {
     size: 'Medium',
     weight: 5,
     age: '2 years',
-    description: 'Fluffy is a playful and affectionate Siamese cat.'
+    description: 'Fluffy is a playful and affectionate Siamese cat.',
+    favouritedByUser: true
   },
   {
     id: 2,
@@ -31,7 +32,8 @@ export class PetsService {
     size: 'Large',
     weight: 30,
     age: '3 years',
-    description: 'Fido is a friendly and loyal Golden Retriever.'
+    description: 'Fido is a friendly and loyal Golden Retriever.',
+    favouritedByUser: false
   },
   {
     id: 3,
@@ -45,7 +47,8 @@ export class PetsService {
     size: 'Small',
     weight: 0.5,
     age: '1 year',
-    description: 'Squawks is a colorful and talkative parrot.'
+    description: 'Squawks is a colorful and talkative parrot.',
+    favouritedByUser: true
   }];
 
   async getAllPets(): Promise<PetData[]> {

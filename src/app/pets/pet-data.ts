@@ -11,5 +11,6 @@ export interface PetData {
     weight: number;
     age: String;
     description: String;
+    favouritedByUser: Boolean;
    
 }
