@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PetData } from '../pet-data';
 import { PetsService } from '../pets.service';
+import { UserService } from '../../user/user.service';
+import { User } from '../../login-basic/user';
 
 @Component({
   selector: 'app-pet-favourite',
@@ -16,16 +18,29 @@ export class PetFavouriteComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   petsService: PetsService = inject(PetsService);
   petData: PetData | undefined;
-  isClicked: Boolean;
+  isClicked: Boolean = false;
+  user: User = new User();
 
-  constructor(){
+  constructor(private userService: UserService){
     const petId = Number(this.route.snapshot.paramMap.get('id'));
     this.petData = this.petsService.getPet(petId);
   }
 
   ngOnInit(): void {
+      //get User to get their liked pets
+      const id = this.route.snapshot.paramMap.get('id');
+      this.userService.getResource(id).subscribe(
+      user => {
+        this.user = user;
+      });
       //visually get if pet is liked or disliked by user
-      this.isClicked = this.petData.favouritedByUser;
+      for (var i=0; i < this.user.favouritedPets.length; i++){
+        if(this.petData.id === this.user.favouritedPets[i].id){
+          this.isClicked = true
+          break
+        }
+      }
+      console.log(this.user.favouritedPets)
       if (this.isClicked){
         this.text = "💔"
       } else{
