@@ -23,7 +23,7 @@ import {HttpErrorInterceptor} from './error-handler/http-error-interceptor';
 import {AuthenticationBasicService} from './login-basic/authentication-basic.service';
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
-import { FavouriteButtonComponent } from './favourite-button/favourite-button.component';
+import { FavouriteButtonComponent } from './pets/pet-favourite/pet-favourite.component';
 
 @NgModule({
   declarations: [
