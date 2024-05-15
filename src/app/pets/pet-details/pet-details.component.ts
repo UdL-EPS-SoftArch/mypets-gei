@@ -17,6 +17,6 @@ export class PetDetailsComponent {
 
   constructor() {
     const petId = Number(this.route.snapshot.paramMap.get('id'));
-    this.petData= this.petsService.getPet(petId);
+    this.petData= this.petsService.findByIdContaining(petId.toString(); 
   }
 }

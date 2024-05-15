@@ -1,15 +1,20 @@
-export interface PetData {
-    id:number;
-    name:string;
-    species:string;
-    breed:string;
-    photo:string;
-    shelter:string;  // maybe this should be the shelter's id or name if names are unique
-    isAdopted: Boolean;
-    color: String;
-    size: String;
-    weight: number;
-    age: String;
-    description: String;
+import { HateoasResource, Resource } from "@lagoshny/ngx-hateoas-client";
+
+@HateoasResource('pets')
+export class PetData extends Resource {
+
+    name: String
+    isAdopted: Boolean
+    color: String
+    size: String
+    weight: number
+    age: String
+    description: String //Shelter name here
+    breed: String
+    img: String
    
+    constructor(values: object = {}) {
+        super();
+        Object.assign(this as any, values);
+    }
 }
