@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { Shelter } from '../shelter-data'
 import { ShelterService } from '../shelter.service'
-import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client'
+import { Include, PagedResourceCollection } from '@lagoshny/ngx-hateoas-client'
 
 @Component({
   selector: 'app-shelter-list',
@@ -17,60 +17,38 @@ export class ShelterListComponent implements OnInit {
   constructor(private shelterService: ShelterService) {}
 
   ngOnInit(): void {
+    this.fetchShelters()
+  }
+
+  fetchShelters(): void {
     this.shelterService
       .getPage()
       .subscribe((collection: PagedResourceCollection<Shelter>) => {
-        if (collection.totalElements == 0) {
-          this.shelters = [
-            new Shelter({
-              id: 1,
-              name: 'Example Shelter',
-              email: 'shelter@example.com',
-              mobile: '1234567890',
-              createdAt: new Date(),
-              updatedAt: new Date(),
-              isActive: true,
-              rating: 4.5,
-              locatedAt: {},
-            }),
-
-            new Shelter({
-              id: 2,
-              name: 'Example Shelter',
-              email: 'shelter@example.com',
-              mobile: '1234567890',
-              createdAt: new Date(),
-              updatedAt: new Date(),
-              isActive: true,
-              rating: 4.5,
-              locatedAt: {},
-            }),
-          ]
-        } else {
-          this.shelters = collection.resources
-        }
+        this.shelters = collection.resources
       })
   }
 
   addFakeShelter(): void {
+    // email and mobile must be unique
     const fakeShelter = new Shelter({
-      id: 1,
       name: 'Example Shelter',
-      email: 'shelter@example.com',
-      mobile: '1234567890',
+      email: 'shelter@example.com' + this.shelters.length,
+      mobile: '1234567890' + this.shelters.length,
       createdAt: new Date(),
-      updatedAt: new Date(),
+      updatedAt: null,
       isActive: true,
       rating: 4.5,
       locatedAt: {},
     })
-    this.shelterService.createResource({ body: fakeShelter }).subscribe({
-      next: () => {
-        console.log('added')
-      },
-      error: (error) => {
-        console.log(error)
-      },
-    })
+    this.shelterService
+      .createResource({
+        body: fakeShelter,
+        valuesOption: { include: Include.NULL_VALUES },
+      })
+      .subscribe({
+        next: () => {
+          this.fetchShelters()
+        },
+      })
   }
 }
