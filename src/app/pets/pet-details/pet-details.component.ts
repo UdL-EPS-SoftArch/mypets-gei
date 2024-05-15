@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PetsService } from '../pets.service';
 import { PetData } from '../pet-data';
@@ -15,8 +15,13 @@ export class PetDetailsComponent {
   petsService: PetsService = inject(PetsService);
   petData: PetData | undefined;
 
-  constructor() {
+  constructor() 
+  {
     const petId = Number(this.route.snapshot.paramMap.get('id'));
-    this.petData= this.petsService.getPet(petId);
+    this.petData = this.petsService.getPet(petId);
+  }
+
+  ngOnInit():void{
+
   }
 }
