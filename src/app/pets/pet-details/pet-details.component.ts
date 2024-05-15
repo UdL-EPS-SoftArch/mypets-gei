@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PetsService } from '../pets.service';
 import { PetData } from '../pet-data';
+import { PetFavouriteComponent } from '../pet-favourite/pet-favourite.component';
 @Component({
   selector: 'app-pet-details',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,PetFavouriteComponent],
   templateUrl: './pet-details.component.html',
   styleUrl: './pet-details.component.css'
 })

@@ -23,7 +23,7 @@ import {HttpErrorInterceptor} from './error-handler/http-error-interceptor';
 import {AuthenticationBasicService} from './login-basic/authentication-basic.service';
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
-import { FavouriteButtonComponent } from './pets/pet-favourite/pet-favourite.component';
+import {PetFavouriteComponent} from './pets/pet-favourite/pet-favourite.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import { FavouriteButtonComponent } from './pets/pet-favourite/pet-favourite.com
     UserDetailComponent,
     UserRegisterComponent,
     UserEditComponent,
-    FavouriteButtonComponent,
     UserDeleteComponent,
     UserSearchComponent
   ],
@@ -52,6 +51,7 @@ import { FavouriteButtonComponent } from './pets/pet-favourite/pet-favourite.com
     ErrorHandlerModule,
     NgbModule,
     ReactiveFormsModule,
+    PetFavouriteComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-favourite-button',
-  //standalone: true,
-  //imports: [],
-  templateUrl: './favourite-button.component.html',
-  styleUrl: './favourite-button.component.scss'
+  selector: 'app-pet-favourite',
+  standalone: true,
+  imports: [CommonModule,RouterModule],
+  templateUrl: './pet-favourite.component.html',
+  styleUrl: './pet-favourite.component.scss'
 })
-export class FavouriteButtonComponent implements OnInit {
+export class PetFavouriteComponent implements OnInit {
 
   constructor(){}
 
