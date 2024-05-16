@@ -10,6 +10,7 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
 import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
+import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
+  { path: 'add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]}
 ];
 
 @NgModule({
