@@ -23,6 +23,9 @@ import {HttpErrorInterceptor} from './error-handler/http-error-interceptor';
 import {AuthenticationBasicService} from './login-basic/authentication-basic.service';
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
+import { MedicalRecordListComponent } from './medical-record/medical-list/medical-record-list.component';
+import { MedicalRecordAddComponent } from './medical-record/medical-add/medical-record-add.component';
+import { MedicalRecordEditComponent } from './medical-record/medical-edit/medical-record-edit.component';
 
 @NgModule({
   declarations: [
