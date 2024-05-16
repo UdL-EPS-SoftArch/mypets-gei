@@ -19,6 +19,7 @@
           <p class="card-text">Email: {{ shelter.email }}</p>
           <p class="card-text">Mobile: {{ shelter.mobile }}</p>
           <p class="card-text">Rating: {{ shelter.rating }}</p>
+          <p class="card-text">Uri: {{ shelter.uri }}</p>
         </div>
         <div class="col-6 mt-1">
           <button
@@ -32,7 +33,8 @@
             id="deleteBtn"
             type="button"
             class="btn m-1 btn-outline-danger"
-          >
+            [routerLink]="['/shelter', extractNumberFromUri(shelter.uri) ,'delete']"
+            >
             Delete
           </button>
         </div>
@@ -40,5 +42,5 @@
     </div>
   </div>
   } @empty {
-    <p>No shelters :(</p>
+    <p>No shelters :</p>
   }
