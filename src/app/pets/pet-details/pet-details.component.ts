@@ -11,12 +11,16 @@ import { PetData } from '../pet-data';
   styleUrl: './pet-details.component.css'
 })
 export class PetDetailsComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  petsService: PetsService = inject(PetsService);
-  petData: PetData | undefined;
+  public petData: PetData = new PetData();
 
-  constructor() {
-    const petId = Number(this.route.snapshot.paramMap.get('id'));
-    this.petData= this.petsService.findByIdContaining(petId.toString(); 
+  constructor(private petsService: PetsService,
+              private route: ActivatedRoute
+  ) { }
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.petsService.getResource(id).subscribe(
+      petData => {
+        this.petData = petData;
+      });
   }
 }
