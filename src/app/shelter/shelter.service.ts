@@ -1,44 +1,27 @@
-import { Injectable } from '@angular/core';
-import { ShelterData } from './shelter-data';
+import { Injectable } from '@angular/core'
+import {
+  HateoasResourceOperation,
+  ResourceCollection,
+} from '@lagoshny/ngx-hateoas-client'
+import { Observable } from 'rxjs'
+import { Shelter } from './shelter-data'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ShelterService {
-  protected shelters: ShelterData[] = [
-    {
-      id: 1,
-      name: 'Lleida Shelter',
-      email: 'shelter1@example.com',
-      mobile: '1234567890',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      isActive: true,
-      rating: 4.5
-    },
-    {
-      id: 2,
-      name: 'Barcelona Shelter ',
-      email: 'shelter2@example.com',
-      mobile: '9876543210',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      isActive: true,
-      rating: 3.8
-    },
-    {
-      id: 3,
-      name: 'Tarragona Shelter',
-      email: 'shelter3@example.com',
-      mobile: '5555555555',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      isActive: false,
-      rating: 4.2
-    }
-  ]
+export class ShelterService extends HateoasResourceOperation<Shelter> {
+  constructor() {
+    super(Shelter)
+  }
 
-  async getAllShelters(): Promise<ShelterData[]> {
-    return this.shelters;
+  public findByName(query: string): Observable<ResourceCollection<Shelter>> {
+    return this.searchCollection('findByName', { params: { name: query } })
+  }
+
+  public findByEmail(query: string): Observable<ResourceCollection<Shelter>> {
+    return this.searchCollection('findByEmail', { params: { email: query } })
+  }
+  public findByMobile(query: string): Observable<ResourceCollection<Shelter>> {
+    return this.searchCollection('findByMobile', { params: { mobile: query } })
   }
 }
