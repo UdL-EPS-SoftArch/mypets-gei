@@ -12,6 +12,6 @@
   <p>Description: {{ petData.description }}</p>
   <div class="card-footer text-right">
     <button id="editBtn" type="button" class="btn m-1 btn-outline-success">Edit Pet</button>
-    <button id="deleteBtn" type="button" [routerLink]="['/pet-details', petData.name]" class="btn m-1 btn-outline-danger">Delete</button>
+    <button id="deleteBtn" type="button" [routerLink]="['delete']" class="btn m-1 btn-outline-danger">Delete</button>
   </div>
 </div>
