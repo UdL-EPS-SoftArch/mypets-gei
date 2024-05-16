@@ -1,0 +1,52 @@
+<div class="container">
+  <h2>Add Medical Record</h2>
+  <form [formGroup]="medicalRecordForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="issue">Issue</label>
+      <input type="text" id="issue" formControlName="issue" class="form-control" placeholder="Enter issue">
+      <div *ngIf="medicalRecordForm.controls['issue'].invalid && (medicalRecordForm.controls['issue'].dirty || medicalRecordForm.controls['issue'].touched)" class="text-danger">
+        Issue is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" placeholder="Enter description"></textarea>
+      <div *ngIf="medicalRecordForm.controls['description'].invalid && (medicalRecordForm.controls['description'].dirty || medicalRecordForm.controls['description'].touched)" class="text-danger">
+        Description is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" id="date" formControlName="date" class="form-control">
+      <div *ngIf="medicalRecordForm.controls['date'].invalid && (medicalRecordForm.controls['date'].dirty || medicalRecordForm.controls['date'].touched)" class="text-danger">
+        Date is required.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="medicalRecordForm.invalid">Add Medical Record</button>
+  </form>
+</div>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  .btn {
+    margin-top: 15px;
+  }
+  .text-danger {
+    color: red;
+    font-size: 0.875em;
+  }
+</style>
