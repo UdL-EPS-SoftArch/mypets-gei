@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { MedicalRecordService } from './medical-record.service';
+//import { MedicalRecordService } from './medical-record.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MedicalRecord } from './medical-record.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+//import { MedicalRecord } from './medical-record.model';
+import {FormGroup, FormBuilder, Validators, ReactiveFormsModule} from '@angular/forms';
+import {MedicalRecordService} from "../medical-record.service";
+import {MedicalRecord} from "../medical-record";
 
 @Component({
   selector: 'app-medical-record-add',
   templateUrl: './medical-record-add.component.html',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule
+  ],
   styleUrls: ['./medical-record-add.component.css']
 })
 export class MedicalRecordAddComponent implements OnInit {
