@@ -24,6 +24,8 @@ import {AuthenticationBasicService} from './login-basic/authentication-basic.ser
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
 import { VolunteerKickComponent } from './shelter/volunteer-kick/volunteer-kick.component';
+import {AddPetComponent} from "./pet/add-pet/add-pet.component";
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { VolunteerKickComponent } from './shelter/volunteer-kick/volunteer-kick.
     UserDeleteComponent,
     UserSearchComponent,
     VolunteerKickComponent,
+    AddPetComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { VolunteerKickComponent } from './shelter/volunteer-kick/volunteer-kick.
     ErrorHandlerModule,
     NgbModule,
     ReactiveFormsModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
