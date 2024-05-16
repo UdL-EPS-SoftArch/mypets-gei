@@ -22,8 +22,7 @@ export class AddPetComponent {
     if (!this.pet.name || !this.pet.color || !this.pet.size || !this.pet.weight || !this.pet.age || !this.pet.breed || !this.pet.description) {
       alert('Please fill out all fields!');
       return;
-    }
-      this.pet.id = 1;
+      }
     this.petService.addPet(this.pet).subscribe(
         (response) => {
           alert("Pet added successfully");
