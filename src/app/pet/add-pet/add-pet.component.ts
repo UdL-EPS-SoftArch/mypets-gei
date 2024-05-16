@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { PetService } from '../pet.service';
 import { Router } from "@angular/router";
-import {Pet} from "../pet";
+import { Pet } from '../pet';
+import { PetService } from '../pet.service';
 
 @Component({
   selector: 'app-add-pet',
@@ -12,29 +11,33 @@ import {Pet} from "../pet";
 export class AddPetComponent {
   pet: Pet = new Pet(); // Create a new instance of Pet
 
-  constructor(private petService: PetService, private router: Router) {}
+  constructor(private petService: PetService, private router: Router) {
+    // For testing purposes only...
+    this.pet = new Pet({
+      name: 'Fake Pet 4',
+      color: 'Black',
+      size: 'Medium',
+      weight: 10,
+      age: '1 year',
+      description: 'This is a fake pet.',
+      breed: 'Fake',
+      // Replace shelterId with the actual ID of the shelter
+      img: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600'
+    });
+  }
 
   cancelClicked() {
-    this.router.navigateByUrl("/about");
+    this.router.navigateByUrl("/pets-grid");
   }
 
   addPet(): void {
-    if (!this.pet.name || !this.pet.color || !this.pet.size || !this.pet.weight || !this.pet.age || !this.pet.breed || !this.pet.description) {
+    if (!this.pet.name || !this.pet.color || !this.pet.size || !this.pet.weight || !this.pet.age ||
+      !this.pet.breed || !this.pet.description) {
       alert('Please fill out all fields!');
-      return;
-      }
-    this.petService.addPet(this.pet).subscribe(
+    }
+    this.petService.createResource({ body: this.pet }).subscribe(
         (response) => {
-          alert("Pet added successfully");
-          this.pet = new Pet();
-        },
-        (error: HttpErrorResponse) => {
-          console.error('Error adding pet:', error);
-          if (error.error && error.error.message) {
-            console.error('Server error message:', error.error.message);
-          }
-          alert('Something went wrong; please try again later.');
-        }
-    );
+          this.router.navigateByUrl("/pets-grid");
+        });
   }
 }
