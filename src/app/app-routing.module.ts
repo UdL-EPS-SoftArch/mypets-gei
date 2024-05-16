@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'pets-grid', component: PetsGridComponent},
   { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
-  { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete'},
+  { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete', canActivate: [LoggedInGuard]},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
   { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]}
