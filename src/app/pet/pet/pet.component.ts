@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PetData } from '../pet-data';
-import { Router } from '@angular/router';
+import { Pet } from '../pet';
 
 @Component({
   selector: 'app-pet',
@@ -11,14 +10,20 @@ import { Router } from '@angular/router';
   templateUrl: './pet.component.html',
   styleUrl: './pet.component.css'
 })
-export class PetComponent {
-  @Input() petData!: PetData;
+export class PetComponent implements OnInit {
+  @Input() pet!: Pet;
   petId: number | null = null;
-  getPetId() {
-    console.log("id",this.petData.id);
-    return this.petData.id;
+
+  ngOnInit(): void {
+    this.extractNumberFromUri(this.pet.uri);
+    console.log("petId",this.petId);
   }
-  
+
+  getPetId() {
+    console.log("id",this.pet.id);
+    return this.pet.id;
+  }
+
   extractNumberFromUri(uri: string): void {
   const regex = /\/pets\/(\d+)/; // Regular expression to match digits after '/pets/'
   const match = uri.match(regex); // Matching the URI with the regular expression
@@ -29,9 +34,5 @@ export class PetComponent {
       // Handling case where the URI format doesn't match expected pattern
       console.error("URI format doesn't match expected pattern.");
     }
-  } 
-  ngOnInit(): void {
-    this.extractNumberFromUri(this.petData.uri);
-    console.log("petId",this.petId);
   }
 }

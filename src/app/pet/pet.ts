@@ -1,7 +1,7 @@
 import { HateoasResource, Resource } from "@lagoshny/ngx-hateoas-client";
 
 @HateoasResource('pets')
-export class PetData extends Resource {
+export class Pet extends Resource {
     id: number;
     name: string;
     isAdopted: boolean;
@@ -14,7 +14,7 @@ export class PetData extends Resource {
     isIn: string;
     img: string;
     uri: string;
-   
+
     constructor(values: object = {}) {
         super();
         Object.assign(this as any, values);

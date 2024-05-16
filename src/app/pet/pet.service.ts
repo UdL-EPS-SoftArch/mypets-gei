@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { PetData } from './pet-data';
 import { Observable } from 'rxjs/internal/Observable';
 import { HateoasResourceOperation, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
+import { Pet } from './pet';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PetsService extends HateoasResourceOperation<PetData> {
+export class PetService extends HateoasResourceOperation<Pet> {
 
   constructor() {
-    super(PetData);
+    super(Pet);
   }
 
-  public findByIdContaining(query: string): Observable<ResourceCollection<PetData>> {
+  public findByIdContaining(query: string): Observable<ResourceCollection<Pet>> {
     return this.searchCollection('findByIdContaining', { params: { text: query } });
   }
-  public getAllPets(): Observable<ResourceCollection<PetData>> {
-    return this.getCollection();  
+  public getAllPets(): Observable<ResourceCollection<Pet>> {
+    return this.getCollection();
   }
 
 }

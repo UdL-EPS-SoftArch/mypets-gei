@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { PetsService } from '../pets.service';
-import { PetData } from '../pet-data';
+import { PetService } from '../pet.service';
+import { Pet } from '../pet';
 @Component({
   selector: 'app-pet-details',
   standalone: true,
@@ -10,10 +10,10 @@ import { PetData } from '../pet-data';
   templateUrl: './pet-details.component.html',
   styleUrl: './pet-details.component.css'
 })
-export class PetDetailsComponent {
-  public petData: PetData = new PetData();
+export class PetDetailsComponent implements OnInit {
+  public pet: Pet = new Pet();
 
-  constructor(private petsService: PetsService,
+  constructor(private petsService: PetService,
               private route: ActivatedRoute
   ) { }
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class PetDetailsComponent {
     this.petsService.getResource(this.route.snapshot.params.id)
       .subscribe({
         next: (response) => {
-          this.petData = response;
+          this.pet = response;
         }
       });
   }
