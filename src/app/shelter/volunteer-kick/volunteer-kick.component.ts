@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Volunteer } from '../../volunteer/volunteer';
 import { VolunteerService } from 'src/app/volunteer/volunteer.service';
 import { Shelter } from '../shelter';
-import { ShelterService } from '../shelter.service';
 @Component({
   selector: 'app-volunteer-kick',
   templateUrl: './volunteer-kick.component.html',
@@ -11,13 +10,11 @@ import { ShelterService } from '../shelter.service';
 export class VolunteerKickComponent implements OnInit{
   public shelter: Shelter = new Shelter();
   public volunteer: Volunteer = new Volunteer();
-  private shleter_id: string;
   private volunteer_id: string;
   
   constructor(
     private route: ActivatedRoute,
     private volunteerService: VolunteerService,
-    private shleterService: ShelterService,
     private router: Router,
 ) {
 }
