@@ -18,6 +18,8 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'medical-record', component: MedicalRecordComponent},
+  { path: 'medical-record/:id', component: MedicalRecordComponent},
+  { path: '/pet/:id/medical-record/:id', component: MedicalRecordComponent},
   { path: 'about', component: AboutComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
