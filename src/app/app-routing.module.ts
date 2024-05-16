@@ -9,6 +9,7 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
+import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters', component: ShelterListComponent },
+  { path: 'shelters/create', component: ShelterCreateComponent },
   { path: 'about', component: AboutComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},

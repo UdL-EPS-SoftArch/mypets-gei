@@ -3,9 +3,9 @@
   id="editBtn"
   type="button"
   class="btn m-1 btn-outline-primary"
-  (click)="addFakeShelter()"
+  (click)="navigateToCreate()"
 >
-  Add new Shelter
+  Create new Shelter
 </button>
 @for (shelter of shelters; track shelter) {
   <div class="card mb-1">
@@ -39,6 +39,6 @@
       </div>
     </div>
   </div>
-  } @empty {
-    <p>No shelters :(</p>
-  }
+} @empty {
+  <p>No shelters :(</p>
+}
