@@ -11,7 +11,7 @@ import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { PetsGridComponent } from './pets/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pets/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pets/pet-delete/pet-delete.component';
-import {AddPetComponent} from "../pet/add-pet/add-pet.component";
+import {AddPetComponent} from "./pets/add-pet/add-pet.component";
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete'},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
-  { path: 'add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]}
+  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]}
 ];
 
 @NgModule({

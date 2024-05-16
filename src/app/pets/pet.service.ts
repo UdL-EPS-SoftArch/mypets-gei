@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Pet } from './pet';
+import { PetData } from './pet-data';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +12,7 @@ export class PetService {
 
     constructor(private http: HttpClient) { }
 
-    addPet(pet: Pet): Observable<any> {
+    addPet(pet: PetData): Observable<any> {
         return this.http.post<any>(`${this.baseUrl}`, pet).pipe(
             catchError((error: HttpErrorResponse) => {
                 console.error('Error adding pet:', error);

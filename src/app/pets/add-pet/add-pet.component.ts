@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { PetService } from '../pet.service';
 import { Router } from "@angular/router";
-import {Pet} from "../pet";
+import { PetData } from '../pet-data';
+import { PetsService } from '../pets.service';
 
 @Component({
   selector: 'app-add-pet',
@@ -10,24 +10,46 @@ import {Pet} from "../pet";
   styleUrls: ['./add-pet.component.scss']
 })
 export class AddPetComponent {
-  pet: Pet = new Pet(); // Create a new instance of Pet
+  pet: PetData = new PetData(); // Create a new instance of Pet
 
-  constructor(private petService: PetService, private router: Router) {}
+  constructor(private petService: PetsService, private router: Router) {}
 
   cancelClicked() {
-    this.router.navigateByUrl("/about");
+    this.router.navigateByUrl("/pets-grid");
   }
+
+  addFakePet(): void {
+    const fakePet = new PetData({
+      name: 'Fake Pet',
+      color: 'Black',
+      size: 'Medium',
+      weight: 10,
+      age: '1 year',
+      description: 'This is a fake pet.',
+      breed: 'Fake',
+       // Replace shelterId with the actual ID of the shelter
+      img: 'https://images.pexels.com/photos/11499392/pexels-photo-11499392.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    });
+    this.petService.createResource({ body: fakePet })
+      .subscribe({
+        next: (response) => {
+          alert("Fake pet added successfully");
+          this.pet = new PetData();
+        }
+      });
+  }
+  
 
   addPet(): void {
     if (!this.pet.name || !this.pet.color || !this.pet.size || !this.pet.weight || !this.pet.age || !this.pet.breed || !this.pet.description) {
       alert('Please fill out all fields!');
       return;
     }
-      this.pet.id = 1;
+    /*
     this.petService.addPet(this.pet).subscribe(
         (response) => {
           alert("Pet added successfully");
-          this.pet = new Pet();
+          this.pet = new PetData();
         },
         (error: HttpErrorResponse) => {
           console.error('Error adding pet:', error);
@@ -37,5 +59,6 @@ export class AddPetComponent {
           alert('Something went wrong; please try again later.');
         }
     );
+    */
   }
 }

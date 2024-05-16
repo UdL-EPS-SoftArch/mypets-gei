@@ -18,4 +18,5 @@ export class PetsService extends HateoasResourceOperation<PetData> {
   public getAllPets(): Observable<ResourceCollection<PetData>> {
     return this.getCollection();  
   }
+
 }

@@ -5,13 +5,13 @@ import { PetData } from '../pet-data';
 import { PetsService } from '../pets.service';
 import { Router } from '@angular/router';
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client';
-
+import { ActivatedRoute ,RouterModule} from '@angular/router';
 @Component({
   selector: 'app-pets-grid',
   standalone: true,
   templateUrl: './pets-grid.component.html',
   styleUrls: ['./pets-grid.component.css'],
-  imports: [CommonModule,PetComponent]
+  imports: [CommonModule,PetComponent,RouterModule]
 })
 
 export class PetsGridComponent implements OnInit{
@@ -19,11 +19,10 @@ export class PetsGridComponent implements OnInit{
   public petsList: PetData[] = [];
   public pageSize = 5;
   public page = 1;
-  public totalUsers = 0;
   public filteredPetsList: PetData[] = [];
   constructor(
     public petsService: PetsService,
-    public router: Router
+    public router: Router,
   ) {}
 
    filterResultsByName(name: string) {
@@ -37,13 +36,16 @@ export class PetsGridComponent implements OnInit{
   }  
  
   ngOnInit(): void {
-    console.log("Hello, world!");    
+    console.log("Hello");    
     this.petsService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
       (page: PagedResourceCollection<PetData>) => {
         this.petsList = page.resources;
         console.log(this.petsList);
-        this.totalUsers = page.totalElements;
+        this.filteredPetsList = this.petsList;
+      
       });
   }
-  
+  navigateToAddPet() {
+    this.router.navigate(['/pet-grid/add-pet']);
+  }
 }

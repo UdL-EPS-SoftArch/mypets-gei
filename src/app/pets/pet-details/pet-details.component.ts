@@ -17,10 +17,15 @@ export class PetDetailsComponent {
               private route: ActivatedRoute
   ) { }
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.petsService.getResource(id).subscribe(
-      petData => {
-        this.petData = petData;
+    this.fetchPet()
+  }
+
+  fetchPet(): void {
+    this.petsService.getResource(this.route.snapshot.params.id)
+      .subscribe({
+        next: (response) => {
+          this.petData = response;
+        }
       });
   }
 }
