@@ -20,7 +20,7 @@ export class AddPetComponent {
 
   addFakePet(): void {
     const fakePet = new PetData({
-      name: 'Fake Pet 5',
+      name: 'Fake Pet 4',
       color: 'Black',
       size: 'Medium',
       weight: 10,
@@ -29,7 +29,6 @@ export class AddPetComponent {
       breed: 'Fake',
        // Replace shelterId with the actual ID of the shelter
       img: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600'
-      //https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600
     });
     this.petService.createResource({ body: fakePet })
       .subscribe({
