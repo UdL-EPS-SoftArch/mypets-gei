@@ -1,15 +1,35 @@
-import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
+import {HateoasResource, Resource, ResourceCollection} from '@lagoshny/ngx-hateoas-client';
+import {Pet} from "../pet/pet";
 
-@HateoasResource('medical-records')
+@HateoasResource('medicalRecord')
 export class MedicalRecord extends Resource {
-  id: number;
+  uri: string;
   issue: string;
   description: string;
   date: string;
-  pet: number;
+  pet: Pet;
+  id: string;
 
   constructor(values: object = {}) {
     super();
-    Object.assign(this as any, values);
+    this.initialize(values);
+  }
+
+  initialize(values: object): void {
+    Object.assign(this, values);
+    if (typeof this.uri === 'string') {
+      this.id = this.extractId(this.uri);
+    }
+  }
+
+  public set_id_from_uri(): void {
+    if (typeof this.uri === 'string') {
+      this.id = this.extractId(this.uri);
+    }
+  }
+
+  private extractId(uri: string): string {
+    const lastIndex = uri.lastIndexOf('/');
+    return lastIndex > -1 ? uri.substring(lastIndex + 1) : '';
   }
 }

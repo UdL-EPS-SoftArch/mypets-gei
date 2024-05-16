@@ -23,7 +23,7 @@ import {HttpErrorInterceptor} from './error-handler/http-error-interceptor';
 import {AuthenticationBasicService} from './login-basic/authentication-basic.service';
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
-import { MedicalRecordAddComponent } from './medical-record/medical-add/medical-record-add.component';
+import { MedicalRecordListComponent } from './medical-record/medical-list/medical-record-list.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 
 @NgModule({

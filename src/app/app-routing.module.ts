@@ -9,6 +9,7 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { MedicalRecordComponent } from './medical-record/medical-main/medical-record.component';
+import {MedicalRecordListComponent} from "./medical-record/medical-list/medical-record-list.component";
 
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 import {ShelterVolunteerGuard} from "./guards/volunteer.role.guard";
@@ -20,8 +21,9 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'medical-record', component: MedicalRecordComponent},
-  { path: 'medical-record/:id', component: MedicalRecordComponent},
-  { path: '/pet/:id/medical-record/:id', component: MedicalRecordComponent},
+  { path: 'medical-records', component: MedicalRecordListComponent },
+  //{ path: 'medical-records/add', component: MedicalRecordAddComponent },
+  //{ path: 'medical-records/:recordId/edit', component: MedicalRecordEditComponent },
   { path: 'about', component: AboutComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},

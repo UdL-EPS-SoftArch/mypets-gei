@@ -1,30 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import { MedicalRecordService } from './medical-record.service';
-import { ActivatedRoute } from '@angular/router';
-import { MedicalRecord } from './medical-record.model';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {MedicalRecord} from "../medical-record";
+import {MedicalRecordService} from "../medical-record.service";
+import {Pet} from "../../pet/pet";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-medical-record-list',
   templateUrl: './medical-record-list.component.html',
+  standalone: true,
+  imports: [
+    RouterLink,
+    CommonModule,
+  ],
   styleUrls: ['./medical-record-list.component.css']
 })
 export class MedicalRecordListComponent implements OnInit {
-  petId!: number;
-  medicalRecords!: MedicalRecord[];
+  medicalRecords: MedicalRecord[] = [];
 
   constructor(
     private medicalRecordService: MedicalRecordService,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.petId = this.route.snapshot.params['petId'];
     this.fetchMedicalRecords();
   }
 
   fetchMedicalRecords() {
-    this.medicalRecordService.getMedicalRecords(this.petId).subscribe(records => {
-      this.medicalRecords = records;
+    this.medicalRecordService.getMedicalRecords().subscribe({
+      next: (records) => {
+        if (Array.isArray(records)) {
+          records.forEach(record => {
+            let lastIndex = record.uri.lastIndexOf('/');
+            record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
+          })
+          this.medicalRecords = records;
+        } else {
+          console.error('Data returned is not an array:', records);
+        }
+      },
+      error: (error) => {
+        console.error('Failed to fetch medical records:', error);
+        this.medicalRecords = []; // Reset or handle as needed
+      }
+    });
+  }
+
+
+  editRecord(recordId: number) {
+    this.router.navigate([`/medical-records/${recordId}/edit`]);
+  }
+
+  deleteRecord(recordId: number) {
+    this.medicalRecordService.deleteMedicalRecord(recordId).subscribe(() => {
+      this.fetchMedicalRecords();
     });
   }
 }

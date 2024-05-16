@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+.record {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.record:last-child {
+  border-bottom: none;
+}
+
+.record p {
+  margin: 5px 0;
+}
+
+.label {
+  font-weight: bold;
+}

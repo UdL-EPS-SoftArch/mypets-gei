@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Medical Records</h2>
+  <div *ngIf="medicalRecords.length > 0; else noRecords">
+    <div *ngFor="let record of medicalRecords" class="record">
+      <p><span class="label">URI:</span> {{ record.uri }}</p>
+      <p><span class="label">ID:</span> {{ record.id }}</p>
+      <p><span class="label">Issue:</span> {{ record.issue }}</p>
+      <p><span class="label">Description:</span> {{ record.description }}</p>
+      <p><span class="label">Date:</span> {{ record.date }}</p>
+      <p><span class="label">Pet ID:</span> {{ record.pet }}</p>
+      <button (click)="editRecord(record.id)">Edit</button>
+      <button (click)="deleteRecord(record.id)">Delete</button>
+    </div>
+  </div>
+  <ng-template #noRecords>
+    <p>No medical records found.</p>
+  </ng-template>
+  <button [routerLink]="['/medical-records', 'add']">Add Medical Record</button>
+</div>

@@ -1,34 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-// @ts-ignore
-import { MedicalRecord } from './medical-record.model';
+import {Observable, of} from 'rxjs';
+import {environment} from "../../environments/environment";
+import {MedicalRecord} from "./medical-record";
+import {catchError, map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedicalRecordService {
-  private baseUrl = 'http://your-backend-url/api';
+
+  private apiUrl = `${environment.API}/medicalRecords`;
 
   constructor(private http: HttpClient) { }
 
-  getMedicalRecords(petId: number): Observable<MedicalRecord[]> {
-    return this.http.get<MedicalRecord[]>(`${this.baseUrl}/pets/${petId}/medical-records`);
+  getMedicalRecordsByPet(petId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/search/findByPet?pet=${petId}`);
   }
 
-  getMedicalRecord(petId: number, recordId: number): Observable<MedicalRecord> {
-    return this.http.get<MedicalRecord>(`${this.baseUrl}/pets/${petId}/medical-records/${recordId}`);
+  getMedicalRecords(): Observable<MedicalRecord[]> {
+    return this.http.get<{_embedded: {medicalRecords: MedicalRecord[]}}>(this.apiUrl)
+      .pipe(
+        map(response => response._embedded ? response._embedded.medicalRecords : []),
+        catchError(error => {
+          console.error('Error fetching medical records', error);
+          return of([]); // Return an empty array on error
+        })
+      );
   }
 
-  addMedicalRecord(petId: number, record: MedicalRecord): Observable<MedicalRecord> {
-    return this.http.post<MedicalRecord>(`${this.baseUrl}/pets/${petId}/medical-records`, record);
+
+  getMedicalRecord(id: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  updateMedicalRecord(petId: number, recordId: number, record: MedicalRecord): Observable<MedicalRecord> {
-    return this.http.put<MedicalRecord>(`${this.baseUrl}/pets/${petId}/medical-records/${recordId}`, record);
+  createMedicalRecord(medicalRecord: MedicalRecord): Observable<any> {
+    return this.http.post(this.apiUrl, medicalRecord);
   }
 
-  deleteMedicalRecord(petId: number, recordId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/pets/${petId}/medical-records/${recordId}`);
+  updateMedicalRecord(id: number, medicalRecord: MedicalRecord): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, medicalRecord);
   }
+
+  deleteMedicalRecord(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      catchError(error => {
+        console.error(`Error deleting medical record with id ${id}`, error);
+        return of(); // Return empty observable on error
+      })
+    );
+  }
+
 }
