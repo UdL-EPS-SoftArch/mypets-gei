@@ -1,10 +1,10 @@
 <div class="container">
-  <img class="img-fluid rounded" [src]="petData.photo" alt="Pet Photo" style="max-width: 200px;">
+  <img class="img-fluid rounded" [src]="petData.img" alt="Pet Photo" style="max-width: 200px;">
   <app-pet-favourite style="max-width: 100px;"></app-pet-favourite>
   <h2>{{ petData.name }}</h2>
-  <p>Species: {{ petData.species }}</p>
+  <p>Species: {{ petData.breed }}</p>
   <p>Breed: {{ petData.breed }}</p>
-  <p>Shelter: {{ petData.shelter }}</p>
+  <p>Shelter: {{ petData.description }}</p>
   <p>Adopted: {{ petData.isAdopted ? 'Yes' : 'No' }}</p>
   <p>Color: {{ petData.color }}</p>
   <p>Size: {{ petData.size }}</p>
@@ -13,6 +13,6 @@
   <p>Description: {{ petData.description }}</p>
   <div class="card-footer text-right">
     <button id="editBtn" type="button" [routerLink]="['/pet-details', petData?.id, 'edit']"class="btn m-1 btn-outline-success">Edit Pet</button>
-    <button id="deleteBtn" type="button" [routerLink]="['/pet-details', petData?.id, 'delete']" class="btn m-1 btn-outline-danger">Delete</button>
+    <button id="deleteBtn" type="button" [routerLink]="['/pet-details', petData.name]" class="btn m-1 btn-outline-danger">Delete</button>
   </div>
 </div>

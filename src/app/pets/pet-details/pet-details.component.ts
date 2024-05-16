@@ -12,17 +12,21 @@ import { PetFavouriteComponent } from '../pet-favourite/pet-favourite.component'
   styleUrl: './pet-details.component.css'
 })
 export class PetDetailsComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  petsService: PetsService = inject(PetsService);
-  petData: PetData | undefined;
+  public petData: PetData = new PetData();
 
-  constructor() 
-  {
-    const petId = Number(this.route.snapshot.paramMap.get('id'));
-    this.petData = this.petsService.getPet(petId);
+  constructor(private petsService: PetsService,
+              private route: ActivatedRoute
+  ) { }
+  ngOnInit(): void {
+    this.fetchPet()
   }
 
-  ngOnInit():void{
-
+  fetchPet(): void {
+    this.petsService.getResource(this.route.snapshot.params.id)
+      .subscribe({
+        next: (response) => {
+          this.petData = response;
+        }
+      });
   }
 }

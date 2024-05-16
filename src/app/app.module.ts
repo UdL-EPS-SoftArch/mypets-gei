@@ -23,6 +23,7 @@ import {HttpErrorInterceptor} from './error-handler/http-error-interceptor';
 import {AuthenticationBasicService} from './login-basic/authentication-basic.service';
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
+import {AddPetComponent} from "./pets/add-pet/add-pet.component";
 import {PetFavouriteComponent} from './pets/pet-favourite/pet-favourite.component';
 
 @NgModule({
@@ -36,7 +37,8 @@ import {PetFavouriteComponent} from './pets/pet-favourite/pet-favourite.componen
     UserRegisterComponent,
     UserEditComponent,
     UserDeleteComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    AddPetComponent
   ],
   imports: [
     BrowserModule,

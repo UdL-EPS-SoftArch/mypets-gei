@@ -1,7 +1,8 @@
 <section >
-    <img class="listing-photo" [src]="petData.photo">
+    <img class="listing-photo" [src]="petData.img">
     <h2 >{{petData.name}}</h2>
-    <p >{{petData.shelter}}</p>
+    <p >{{petData.description}}</p>
     <p >{{petData.breed}}</p>
-    <a [routerLink]="['/pet-details',petData.id]">View details</a>
+    <a [routerLink]="['/pet-details', petId]">View details</a>
+   
 </section>
