@@ -24,6 +24,7 @@ import {AuthenticationBasicService} from './login-basic/authentication-basic.ser
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
 import { MedicalRecordAddComponent } from './medical-record/medical-add/medical-record-add.component';
+import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MedicalRecordAddComponent } from './medical-record/medical-add/medical-
     UserRegisterComponent,
     UserEditComponent,
     UserDeleteComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    AddPetComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { MedicalRecordAddComponent } from './medical-record/medical-add/medical-
     ErrorHandlerModule,
     NgbModule,
     ReactiveFormsModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
