@@ -14,7 +14,7 @@ import { Shelter } from '../shelter-data'
   styleUrl: './shelter-edit.component.css',
 })
 export class ShelterEditComponent implements OnInit {
-  public oldShelter: Shelter
+  public shelter: Shelter
   shelterForm: FormGroup
 
   constructor(
@@ -27,39 +27,76 @@ export class ShelterEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.oldShelter = new Shelter()
+    this.shelter = new Shelter()
     const shelterId = this.activatedRoute.snapshot.paramMap.get('id')
     this.shelterService.getResource(shelterId).subscribe((_shelter) => {
-      this.oldShelter = _shelter
-      this.shelterForm.setValue({
-        name: this.oldShelter.name,
-        email: this.oldShelter.email,
-        mobile: this.oldShelter.mobile,
-      })
+      this.shelter = _shelter
+      this.setUpValidators()
     })
 
     this.shelterForm = this.formBuilder.group({
       name: new FormControl('', {
         validators: [Validators.required, Validators.minLength(3)],
       }),
-      email: new FormControl(this.oldShelter.email, {
+      email: new FormControl('', {
         validators: [Validators.required, Validators.email],
-        asyncValidators: true
-          ? [this.uniqueEmailValidator.validate.bind(this.uniqueEmailValidator)]
-          : [],
         updateOn: 'blur', // When form loses focus
       }),
-      mobile: new FormControl(this.oldShelter.mobile, {
+      mobile: new FormControl('', {
         validators: [Validators.required, Validators.pattern('^[+0-9]*$')],
-        asyncValidators: [
-          this.uniqueMobileValidator.validate.bind(this.uniqueMobileValidator),
-        ],
         updateOn: 'blur',
       }),
+      location: {},
+      createdAt: {},
+      updatedAt: {},
     })
   }
 
-  onSubmit(): void {}
+  setUpValidators(): void {
+    this.shelterForm.setValue({
+      name: this.shelter.name,
+      email: this.shelter.email,
+      mobile: this.shelter.mobile,
+      location: this.shelter.locatedAt ?? '',
+      createdAt: (new Date(this.shelter.createdAt)).toLocaleString(),
+      updatedAt: (new Date(this.shelter.updatedAt)).toLocaleString(),
+    })
+
+    this.email.valueChanges.subscribe((newValue: string) => {
+      if (newValue != this.shelter.email) {
+        this.email.setAsyncValidators(
+          this.uniqueEmailValidator.validate.bind(this.uniqueEmailValidator),
+        )
+      } else {
+        this.email.clearAsyncValidators()
+      }
+      this.email.updateValueAndValidity({ emitEvent: false })
+    })
+
+    this.mobile.valueChanges.subscribe((newValue: string) => {
+      if (newValue != this.shelter.mobile) {
+        this.mobile.setAsyncValidators(
+          this.uniqueMobileValidator.validate.bind(this.uniqueMobileValidator),
+        )
+      } else {
+        this.mobile.clearAsyncValidators()
+      }
+      this.mobile.updateValueAndValidity({ emitEvent: false })
+    })
+  }
+
+  onSubmit(): void {
+    this.shelter.name = this.shelterForm.value.name
+    this.shelter.email = this.shelterForm.value.email
+    this.shelter.mobile = this.shelterForm.value.mobile
+    this.shelter.updatedAt = new Date()
+    this.shelterService
+      .patchResource(this.shelter)
+      .subscribe((updatedShelter: Shelter) => {
+        // this.router.navigate([updatedShelter.uri])
+        this.router.navigate(['shelters'])
+      })
+  }
 
   get name() {
     return this.shelterForm.get('name')
