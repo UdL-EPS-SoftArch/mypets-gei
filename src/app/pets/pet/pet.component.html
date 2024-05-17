@@ -1,0 +1,7 @@
+<section >
+    <img class="listing-photo" [src]="petData.photo">
+    <h2 >{{petData.name}}</h2>
+    <p >{{petData.shelter}}</p>
+    <p >{{petData.breed}}</p>
+    <a [routerLink]="['/pet-details',petData.id]">View details</a>
+</section>
