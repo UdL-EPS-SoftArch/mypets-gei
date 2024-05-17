@@ -10,12 +10,8 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import {MedicalRecordListComponent} from "./medical-record/medical-list/medical-record-list.component";
 
-import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 import {ShelterVolunteerGuard} from "./guards/volunteer.role.guard";
 import {MedicalRecordAddComponent} from "./medical-record/medical-add/medical-record-add.component";
-import { PetsGridComponent } from './pets/pet-grid/pets-grid.component';
-import { PetDetailsComponent } from './pets/pet-details/pet-details.component';
-import { PetDeleteComponent } from './pets/pet-delete/pet-delete.component';
 import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
@@ -29,6 +25,7 @@ const routes: Routes = [
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'medical-records', component: MedicalRecordListComponent },
   { path: 'medical-records/add', component: MedicalRecordAddComponent },
+  { path: 'medical-records/:petId', component: MedicalRecordListComponent },
   //{ path: 'medical-records/:recordId/edit', component: MedicalRecordEditComponent },
   { path: 'about', component: AboutComponent},
   { path: 'pets-grid', component: PetsGridComponent},

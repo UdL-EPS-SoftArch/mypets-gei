@@ -29,6 +29,7 @@ export class MedicalRecordAddComponent implements OnInit {
         issue: 'Issue 1',
         description: 'Description 1',
         date: Date.now(),
+        pet: new Pet({id: 2})
       }
     );
 

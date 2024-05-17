@@ -4,24 +4,30 @@ import { Observable, of } from 'rxjs';
 import { environment } from "../../environments/environment";
 import { MedicalRecord } from "./medical-record";
 import { catchError, map } from "rxjs/operators";
+import {HateoasResourceOperation, ResourceCollection} from "@lagoshny/ngx-hateoas-client";
+import {Pet} from "../pet/pet";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedicalRecordService {
+export class MedicalRecordService extends HateoasResourceOperation<MedicalRecord> {
 
   private apiUrl = `${environment.API}/medicalRecords`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super(MedicalRecord);
+  }
 
-  getMedicalRecordsByPetId(petId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search/findByPet?pet=${petId}`).pipe(
+  getMedicalRecordsByPetId(petId: number): Observable<MedicalRecord[]> {
+    return this.searchCollection('findByPet', { params: { pet: `/pets/${petId}` } }).pipe(
+      map((collection: ResourceCollection<MedicalRecord>) => collection.resources),
       catchError(() => {
         console.error('Error fetching medical records for pet');
-        return of(null); // Returns null to indicate an error occurred without details
+        return of([]); // Returns empty array to indicate an error occurred
       })
     );
   }
+
 
   getMedicalRecords(): Observable<MedicalRecord[]> {
     return this.http.get<{ _embedded: { medicalRecords: MedicalRecord[] } }>(this.apiUrl).pipe(

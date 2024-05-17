@@ -1,7 +1,7 @@
 import {HateoasResource, Resource, ResourceCollection} from '@lagoshny/ngx-hateoas-client';
 import {Pet} from "../pet/pet";
 
-@HateoasResource('medicalRecord')
+@HateoasResource('medicalRecords')
 export class MedicalRecord extends Resource {
   uri: string;
   issue: string;
