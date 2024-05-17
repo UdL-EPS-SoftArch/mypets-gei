@@ -16,6 +16,10 @@ import {MedicalRecordAddComponent} from "./medical-record/medical-add/medical-re
 import { PetsGridComponent } from './pets/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pets/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pets/pet-delete/pet-delete.component';
+import { AddPetComponent } from "./pet/add-pet/add-pet.component";
+import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
+import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
+import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -30,6 +34,10 @@ const routes: Routes = [
   { path: 'pets-grid', component: PetsGridComponent},
   { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
   { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete'},
+  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]},
+  { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
+  { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete', canActivate: [LoggedInGuard]},
+  { path: 'pets-grid', component: PetsGridComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
   { path: 'add-pet', component: AddPetComponent, canActivate: [ShelterVolunteerGuard]}
