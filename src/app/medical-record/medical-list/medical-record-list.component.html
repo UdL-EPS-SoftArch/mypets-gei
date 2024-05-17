@@ -15,5 +15,5 @@
   <ng-template #noRecords>
     <p>No medical records found.</p>
   </ng-template>
-  <button [routerLink]="['/medical-records', 'add']">Add Medical Record</button>
+  <button (click)="addMedicalRecord()">Add Medical Record</button>
 </div>

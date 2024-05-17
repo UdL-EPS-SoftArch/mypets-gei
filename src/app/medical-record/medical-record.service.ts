@@ -30,7 +30,7 @@ export class MedicalRecordService {
   }
 
 
-  getMedicalRecord(id: number): Observable<any> {
+  getMedicalRecord(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
@@ -38,11 +38,11 @@ export class MedicalRecordService {
     return this.http.post(this.apiUrl, medicalRecord);
   }
 
-  updateMedicalRecord(id: number, medicalRecord: MedicalRecord): Observable<any> {
+  updateMedicalRecord(id: string, medicalRecord: MedicalRecord): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, medicalRecord);
   }
 
-  deleteMedicalRecord(id: number): Observable<void> {
+  deleteMedicalRecord(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
       catchError(error => {
         console.error(`Error deleting medical record with id ${id}`, error);

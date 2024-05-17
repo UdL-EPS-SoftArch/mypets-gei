@@ -48,13 +48,17 @@ export class MedicalRecordListComponent implements OnInit {
   }
 
 
-  editRecord(recordId: number) {
+  editRecord(recordId: string) {
     this.router.navigate([`/medical-records/${recordId}/edit`]);
   }
 
-  deleteRecord(recordId: number) {
+  deleteRecord(recordId: string) {
     this.medicalRecordService.deleteMedicalRecord(recordId).subscribe(() => {
       this.fetchMedicalRecords();
     });
+  }
+
+  addMedicalRecord() {
+    this.router.navigate(['/medical-records/add']);
   }
 }
