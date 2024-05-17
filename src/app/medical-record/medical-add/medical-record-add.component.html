@@ -1,30 +1,28 @@
-<div class="container">
-  <h2>Add Medical Record</h2>
-  <form [formGroup]="medicalRecordForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="issue">Issue</label>
-      <input type="text" id="issue" formControlName="issue" class="form-control" placeholder="Enter issue">
-      <div *ngIf="medicalRecordForm.controls['issue'].invalid && (medicalRecordForm.controls['issue'].dirty || medicalRecordForm.controls['issue'].touched)" class="text-danger">
-        Issue is required.
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea id="description" formControlName="description" class="form-control" placeholder="Enter description"></textarea>
-      <div *ngIf="medicalRecordForm.controls['description'].invalid && (medicalRecordForm.controls['description'].dirty || medicalRecordForm.controls['description'].touched)" class="text-danger">
-        Description is required.
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="date">Date</label>
-      <input type="date" id="date" formControlName="date" class="form-control">
-      <div *ngIf="medicalRecordForm.controls['date'].invalid && (medicalRecordForm.controls['date'].dirty || medicalRecordForm.controls['date'].touched)" class="text-danger">
-        Date is required.
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="medicalRecordForm.invalid">Add Medical Record</button>
-  </form>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Medical Record</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .big-text {
+      font-size: 72px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="big-text">ADD MEDICAL RECORD</div>
+</body>
+</html>
 
 <style>
   .container {

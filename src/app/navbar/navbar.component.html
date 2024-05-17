@@ -11,7 +11,7 @@
         <a class="nav-link" [routerLink]="['/about']">About</a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link" [routerLink]="['/medical-record']">Medical Records</a>
+        <a class="nav-link" [routerLink]="['/medical-records']">Medical Records</a>
       </li>
       <li class="nav-item" *ngIf="isRole('user')" ngbDropdown>
         <a class="nav-link dropdown-toggle" id="playerDropdown" role="button"
