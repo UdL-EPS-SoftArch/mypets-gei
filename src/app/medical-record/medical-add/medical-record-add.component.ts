@@ -4,6 +4,7 @@ import {MedicalRecord} from "../medical-record";
 import {MedicalRecordService} from "../medical-record.service";
 import {Pet} from "../../pet/pet";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-medical-record-add',
@@ -12,11 +13,19 @@ import {CommonModule} from "@angular/common";
   imports: [
     RouterLink,
     CommonModule,
+    FormsModule,
   ],
   styleUrls: ['./medical-record-add.component.css']
 })
 export class MedicalRecordAddComponent implements OnInit {
   medicalRecords: MedicalRecord[] = [];
+  issue: any;
+  description: any;
+  date: any;
+  petId: any;
+  day: any;
+  month: any;
+  year: any;
 
   constructor(
     private medicalRecordService: MedicalRecordService,
@@ -24,11 +33,19 @@ export class MedicalRecordAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    return;
+  }
+
+  createDate(day: number, month: number, year: number) {
+    return new Date(year, month, day);
+  }
+
+  addMedicalRecord( issue: string, description: string, date: Date, petId: string) {
     let medicalRecord = new MedicalRecord(
       {
-        issue: 'Issue 1',
-        description: 'Description 1',
-        date: Date.now(),
+        issue: issue,
+        description: description,
+        date: date,
       }
     );
 
@@ -38,17 +55,8 @@ export class MedicalRecordAddComponent implements OnInit {
       },
       error: (error) => console.error('Error creating medical record:', error)
     });
+
   }
 
-  addMedicalRecord( issue: string, description: string, date: string, pet: Pet) {
-    return new MedicalRecord(
-      {
-        issue: issue,
-        description: description,
-        date: date,
-        pet: pet
-      }
-    );
-  }
 
 }
