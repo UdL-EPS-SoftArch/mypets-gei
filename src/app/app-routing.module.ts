@@ -11,6 +11,7 @@ import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
 import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
+import { ShelterEditComponent } from './shelter/shelter-edit/shelter-edit.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters', component: ShelterListComponent },
   { path: 'shelters/create', component: ShelterCreateComponent },
+  { path: 'shelters/:id/edit', component: ShelterEditComponent },
   { path: 'about', component: AboutComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
