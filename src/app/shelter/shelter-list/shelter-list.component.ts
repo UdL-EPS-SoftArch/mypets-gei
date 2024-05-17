@@ -18,7 +18,7 @@ export class ShelterListComponent implements OnInit {
   constructor(
     private shelterService: ShelterService,
     private router: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.fetchShelters()
@@ -34,5 +34,9 @@ export class ShelterListComponent implements OnInit {
 
   navigateToCreate() {
     this.router.navigate(['/shelters', 'create'])
+  }
+
+  navigateToEdit(uri: string) {
+    this.router.navigate([uri + '/edit'])
   }
 }
