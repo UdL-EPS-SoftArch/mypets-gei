@@ -1,4 +1,4 @@
-import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
+import { HateoasResource, Resource } from "@lagoshny/ngx-hateoas-client";
 
 @HateoasResource('pets')
 export class Pet extends Resource {
@@ -12,6 +12,8 @@ export class Pet extends Resource {
     description: string;
     breed: string;
     isIn: string;
+    img: string;
+    uri: string;
 
     constructor(values: object = {}) {
         super();

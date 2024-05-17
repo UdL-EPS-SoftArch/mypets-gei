@@ -11,6 +11,10 @@ import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
 import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
+import { AddPetComponent } from "./pet/add-pet/add-pet.component";
+import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
+import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
+import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -21,9 +25,12 @@ const routes: Routes = [
   { path: 'shelters', component: ShelterListComponent },
   { path: 'shelters/create', component: ShelterCreateComponent },
   { path: 'about', component: AboutComponent},
+  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]},
+  { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
+  { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete', canActivate: [LoggedInGuard]},
+  { path: 'pets-grid', component: PetsGridComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
-  { path: 'add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]}
 ];
 
 @NgModule({
