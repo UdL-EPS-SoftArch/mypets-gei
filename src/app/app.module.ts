@@ -25,7 +25,6 @@ import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
 import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
-import { ShelterEditComponent } from './shelter/shelter-edit/shelter-edit.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,6 @@ import { ShelterEditComponent } from './shelter/shelter-edit/shelter-edit.compon
     UserDeleteComponent,
     UserSearchComponent,
     ShelterCreateComponent,
-    ShelterEditComponent,
     AddPetComponent
   ],
   imports: [

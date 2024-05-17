@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms'
 import { ShelterService } from '../shelter.service'
 import {
   UniqueEmailValidator,
@@ -7,11 +13,14 @@ import {
 } from '../shared/validators'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Shelter } from '../shelter-data'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-shelter-edit',
   templateUrl: './shelter-edit.component.html',
   styleUrl: './shelter-edit.component.css',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class ShelterEditComponent implements OnInit {
   public shelter: Shelter
@@ -58,8 +67,8 @@ export class ShelterEditComponent implements OnInit {
       email: this.shelter.email,
       mobile: this.shelter.mobile,
       location: this.shelter.locatedAt ?? '',
-      createdAt: (new Date(this.shelter.createdAt)).toLocaleString(),
-      updatedAt: (new Date(this.shelter.updatedAt)).toLocaleString(),
+      createdAt: new Date(this.shelter.createdAt).toLocaleString(),
+      updatedAt: new Date(this.shelter.updatedAt).toLocaleString(),
     })
 
     this.email.valueChanges.subscribe((newValue: string) => {
