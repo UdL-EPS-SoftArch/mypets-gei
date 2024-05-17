@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core'
 import { Shelter } from '../shelter-data'
 import { ShelterService } from '../shelter.service'
 import { Router } from '@angular/router'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import {
   UniqueEmailValidator,
   UniqueMobileValidator,
 } from '../shared/validators'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-shelter-create',
   templateUrl: './shelter-create.component.html',
   styleUrl: './shelter-create.component.css',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class ShelterCreateComponent implements OnInit {
   shelterForm: FormGroup
@@ -48,7 +51,6 @@ export class ShelterCreateComponent implements OnInit {
 
   onSubmit(): void {
     const shelter = new Shelter(this.shelterForm.value)
-    console.log(shelter)
     this.shelterService.createResource({ body: shelter }).subscribe({
       next: (addedShelter: Shelter) => {
         // TODO: navigate to addedShelter.uri
