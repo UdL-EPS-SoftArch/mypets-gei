@@ -1,0 +1,17 @@
+<div class="container">
+  <img class="img-fluid rounded" [src]="pet.img" alt="Pet Photo" style="max-width: 200px;">
+  <h2>{{ pet.name }}</h2>
+  <p>Species: {{ pet.breed }}</p>
+  <p>Breed: {{ pet.breed }}</p>
+  <p>Shelter: {{ pet.description }}</p>
+  <p>Adopted: {{ pet.isAdopted ? 'Yes' : 'No' }}</p>
+  <p>Color: {{ pet.color }}</p>
+  <p>Size: {{ pet.size }}</p>
+  <p>Weight: {{ pet.weight }} kg</p>
+  <p>Age: {{ pet.age }}</p>
+  <p>Description: {{ pet.description }}</p>
+  <div class="card-footer text-right">
+    <button id="editBtn" type="button" class="btn m-1 btn-outline-success">Edit Pet</button>
+    <button id="deleteBtn" type="button" [routerLink]="['delete']" class="btn m-1 btn-outline-danger">Delete</button>
+  </div>
+</div>
