@@ -11,6 +11,9 @@
         <a class="nav-link" [routerLink]="['/about']">About</a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" [routerLink]="['/pets-grid']">Pets</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
         <a class="nav-link" [routerLink]="['/shelters']">Shelters</a>
       </li>
       <li class="nav-item" *ngIf="isRole('user')" ngbDropdown>
@@ -19,6 +22,14 @@
         <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>
           <a class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
              [routerLink]="['/users']"><span class="fas fa-user-circle"></span> List</a>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="isRole('SHELTER_VOLUNTEER')" ngbDropdown>
+        <a class="nav-link dropdown-toggle" role="button"
+           aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Pets</a>
+        <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>
+          <a *ngIf="isRole('SHELTER_VOLUNTEER')" [routerLink]="['/add-pet']" class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" >
+            <span class="fas fa-paw"></span> Add</a>
         </div>
       </li>
     </ul>
