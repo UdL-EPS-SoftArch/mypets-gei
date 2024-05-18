@@ -25,6 +25,8 @@ import { CommonModule } from '@angular/common'
 export class ShelterEditComponent implements OnInit {
   public shelter: Shelter
   shelterForm: FormGroup
+  createdAt: string
+  lastUpdate: string
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,10 +40,6 @@ export class ShelterEditComponent implements OnInit {
   ngOnInit() {
     this.shelter = new Shelter()
     const shelterId = this.activatedRoute.snapshot.paramMap.get('id')
-    this.shelterService.getResource(shelterId).subscribe((_shelter) => {
-      this.shelter = _shelter
-      this.setUpValidators()
-    })
 
     this.shelterForm = this.formBuilder.group({
       name: new FormControl('', {
@@ -56,8 +54,13 @@ export class ShelterEditComponent implements OnInit {
         updateOn: 'blur',
       }),
       location: {},
-      createdAt: {},
-      updatedAt: {},
+    })
+
+    this.shelterService.getResource(shelterId).subscribe((_shelter) => {
+      this.shelter = _shelter
+      this.createdAt = new Date(_shelter.createdAt).toLocaleString()
+      this.lastUpdate = new Date(_shelter.updatedAt).toLocaleString()
+      this.setUpValidators()
     })
   }
 
@@ -67,8 +70,6 @@ export class ShelterEditComponent implements OnInit {
       email: this.shelter.email,
       mobile: this.shelter.mobile,
       location: this.shelter.locatedAt ?? '',
-      createdAt: new Date(this.shelter.createdAt).toLocaleString(),
-      updatedAt: new Date(this.shelter.updatedAt).toLocaleString(),
     })
 
     this.email.valueChanges.subscribe((newValue: string) => {
@@ -105,6 +106,14 @@ export class ShelterEditComponent implements OnInit {
         // this.router.navigate([updatedShelter.uri])
         this.router.navigate(['shelters'])
       })
+  }
+
+  onCancel() {
+    this.router.navigate(['shelters'])
+  }
+
+  editCertificate() {
+    //todo
   }
 
   get name() {
