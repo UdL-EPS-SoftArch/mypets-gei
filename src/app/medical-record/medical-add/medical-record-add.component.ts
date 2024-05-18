@@ -56,6 +56,8 @@ export class MedicalRecordAddComponent implements OnInit {
       error: (error) => console.error('Error creating medical record:', error)
     });
 
+    this.router.navigate(['/medical-records']);
+
   }
 
 
