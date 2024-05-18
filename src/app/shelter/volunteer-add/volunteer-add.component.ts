@@ -13,7 +13,7 @@ import { ShelterService } from '../shelter.service';
   export class ShelterVolunteersAddComponent{
   
     volunteer: ShelterVolunteer = new ShelterVolunteer();
-    
+
     constructor(
       private route: ActivatedRoute,
       public router: Router,
@@ -28,23 +28,31 @@ import { ShelterService } from '../shelter.service';
     }
 
     addVolunteer(): void {
-        const shelter = this.shelterService.getResource(this.shelterId).subscribe(
-          (shelter) => {
-            this.shelterVolunteerService.getResource(this.volunteer.username).subscribe
-            ((volunteer) => { 
-              this.volunteer = volunteer;
-              this.volunteer.userShelter = shelter; 
-              this.volunteer.password = volunteer.password
-              this.volunteer.passwordReset = volunteer.passwordReset
-              this.shelterVolunteerService.patchResource(this.volunteer).subscribe(
-                (volunteer: ShelterVolunteer) => {
-                  console.log('Volunteer Udpated:', volunteer);
+      this.shelterService.getResource(this.shelterId).subscribe(
+        (shelter) => {
+          this.shelterVolunteerService.getResource(this.volunteer.username).subscribe(
+            (volunteer) => { 
+              volunteer.password = "password";
+              volunteer.userShelter = shelter;
+              volunteer.passwordReset = false;
+              this.shelterVolunteerService.patchResource(volunteer).subscribe(
+                (updatedVolunteer: ShelterVolunteer) => {
+                  console.log('Volunteer Updated:', updatedVolunteer);
                   this.router.navigate(['shelters', this.shelterId, 'volunteers']);
+                },
+                (error) => {
+                  console.error('Error updating volunteer:', error);
                 }
-                  );
-              }
-            );
-          }
-        );
-    } 
+              );
+            },
+            (error) => {
+              console.error('Error retrieving volunteer:', error);
+            }
+          );
+        },
+        (error) => {
+          console.error('Error retrieving shelter:', error);
+        }
+      );
+    }
   }
