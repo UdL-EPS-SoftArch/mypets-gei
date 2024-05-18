@@ -52,4 +52,9 @@ export class ShelterVolunteersListComponent implements OnInit {
     const currentUrl = this.router.url;
     this.router.navigate([`${currentUrl}`, user.username]);
   }
+
+  addVolunteer(): void {
+    const currentUrl = this.router.url;
+    this.router.navigate([`${currentUrl}`, 'add']);
+  }
 }

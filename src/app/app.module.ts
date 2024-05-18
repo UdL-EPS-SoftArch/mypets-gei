@@ -24,6 +24,7 @@ import {AuthenticationBasicService} from './login-basic/authentication-basic.ser
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
 import { ShelterVolunteersListComponent } from './shelter/volunteer-list/volunteer-list.component';
+import { ShelterVolunteersAddComponent } from './shelter/volunteer-add/volunteer-add.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ShelterVolunteersListComponent } from './shelter/volunteer-list/volunte
     UserEditComponent,
     UserDeleteComponent,
     UserSearchComponent,
-    ShelterVolunteersListComponent
+    ShelterVolunteersListComponent,
+    ShelterVolunteersAddComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 <app-user-search (emitResults)="detail($event)"></app-user-search>
-
+<button type="button" class="btn btn-primary" (click)="addVolunteer()">Add new Volunteer</button>
 <div class="card mb-1" *ngFor="let user of users">
   <div class="card-block row m-1 col-12">
     <div class="card-body row align-items-center">
