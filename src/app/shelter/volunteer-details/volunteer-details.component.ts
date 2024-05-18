@@ -7,10 +7,10 @@ import { ShelterVolunteerService } from '../shelterVolunteer.service';
 import { ShelterVolunteer } from '../shelterVolunteer';
 
 @Component({
-    selector: 'app-volunteer-edit',
-    templateUrl: './volunteer-edit.component.html'
+    selector: 'app-volunteer-details',
+    templateUrl: './volunteer-details.component.html'
   })
-  export class ShelterVolunteersEditComponent implements OnInit {
+  export class ShelterVolunteersDetailsComponent implements OnInit {
   
     constructor(
       public route: ActivatedRoute,

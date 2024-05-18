@@ -9,15 +9,13 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { ShelterVolunteersListComponent } from './shelter/volunteer-list/volunteer-list.component';
-import { ShelterVolunteersEditComponent } from './shelter/volunteer-edit/volunteer-edit.component';
-import { ShelterVolunteersDeleteComponent } from './shelter/volunteer-delete/volunteer-delete.component';
+import { ShelterVolunteersDetailsComponent } from './shelter/volunteer-details/volunteer-details.component';
 import { ShelterVolunteersAddComponent } from './shelter/volunteer-add/volunteer-add.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
 
 const routes: Routes = [
   { path: 'shelters/:id/volunteers/add', component: ShelterVolunteersAddComponent, canActivate: [LoggedInGuard]},
-  { path: 'shelters/:id/volunteers/:vId/delete', component: ShelterVolunteersDeleteComponent, canActivate: [LoggedInGuard]},
-  { path: 'shelters/:id/volunteers/:vId', component: ShelterVolunteersEditComponent, canActivate: [LoggedInGuard]},
+  { path: 'shelters/:id/volunteers/:vId', component: ShelterVolunteersDetailsComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters/:id/volunteers', component: ShelterVolunteersListComponent, canActivate: [LoggedInGuard]},
   { path: 'users/create', component: UserRegisterComponent},
   { path: 'users/:id/delete', component: UserDeleteComponent, canActivate: [LoggedInGuard]},
