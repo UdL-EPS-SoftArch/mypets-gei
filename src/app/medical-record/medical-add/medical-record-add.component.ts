@@ -40,12 +40,13 @@ export class MedicalRecordAddComponent implements OnInit {
     return new Date(year, month, day);
   }
 
-  addMedicalRecord( issue: string, description: string, date: Date, petId: string) {
+  addMedicalRecord( issue: string, description: string, date: Date, petId: number) {
     let medicalRecord = new MedicalRecord(
       {
         issue: issue,
         description: description,
         date: date,
+        pet: `/pets/${petId}`
       }
     );
 
@@ -59,6 +60,5 @@ export class MedicalRecordAddComponent implements OnInit {
     this.router.navigate(['/medical-records']);
 
   }
-
 
 }
