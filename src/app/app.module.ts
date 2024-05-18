@@ -25,6 +25,7 @@ import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
 import { ShelterVolunteersListComponent } from './shelter/volunteer-list/volunteer-list.component';
 import { ShelterVolunteersAddComponent } from './shelter/volunteer-add/volunteer-add.component';
+import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ShelterVolunteersAddComponent } from './shelter/volunteer-add/volunteer
     UserDeleteComponent,
     UserSearchComponent,
     ShelterVolunteersListComponent,
-    ShelterVolunteersAddComponent
+    ShelterVolunteersAddComponent,
+    AddPetComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { ShelterVolunteersAddComponent } from './shelter/volunteer-add/volunteer
     ErrorHandlerModule,
     NgbModule,
     ReactiveFormsModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
