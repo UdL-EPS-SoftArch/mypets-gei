@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, of, from } from 'rxjs';
+import { map, tap, mergeMap, toArray, filter } from 'rxjs/operators';
 import { HateoasResourceOperation, PagedResourceCollection, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { ShelterVolunteer } from './shelterVolunteer';
+import { Shelter } from './shelter-data';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ShelterVolunteerService extends HateoasResourceOperation<ShelterVolunteer> {
 
   constructor() {
@@ -12,18 +13,33 @@ export class ShelterVolunteerService extends HateoasResourceOperation<ShelterVol
   }
 
   public getVolunteersByShelterId(shelterId: number): Observable<ShelterVolunteer[]> {
-    return this.getPage().pipe( // Assume a large page size to get all items
+    return this.getPage().pipe(
       tap((pagedCollection: PagedResourceCollection<ShelterVolunteer>) => {
         console.log('Received PagedResourceCollection:', pagedCollection);
       }),
-      map((pagedCollection: PagedResourceCollection<ShelterVolunteer>) => 
-        pagedCollection.resources.filter(volunteer => {
-          //implement logic to filter
-          return true;
-        })
+      mergeMap((pagedCollection: PagedResourceCollection<ShelterVolunteer>) =>
+        from(pagedCollection.resources).pipe(
+          mergeMap((volunteer: ShelterVolunteer) =>
+            this.getShelterOfVolunteer(volunteer).pipe(
+              map((shelterHref: string) => ({ volunteer, shelterHref }))
+            )
+          ),
+          filter(({ shelterHref }) => shelterHref.includes(`/shelters/${shelterId}`)),
+          map(({ volunteer }) => volunteer),
+          toArray()
+        )
       ),
       tap((filteredVolunteers: ShelterVolunteer[]) => {
         console.log('Filtered volunteers:', filteredVolunteers);
+      })
+    );
+  }
+
+  public getShelterOfVolunteer(volunteer: ShelterVolunteer): Observable<string> {
+    return volunteer.getRelation('userShelter').pipe(
+      map((shelter: Shelter) => {
+        console.log('Shelter:', shelter);
+        return shelter.getSelfLinkHref();
       })
     );
   }
