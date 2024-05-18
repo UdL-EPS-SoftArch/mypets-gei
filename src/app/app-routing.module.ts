@@ -9,6 +9,10 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { UserDisableComponent } from './user/user-disable/user-disable.component';
+import { AddPetComponent } from "./pet/add-pet/add-pet.component";
+import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
+import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
+import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -18,6 +22,10 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
+  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]},
+  { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
+  { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete', canActivate: [LoggedInGuard]},
+  { path: 'pets-grid', component: PetsGridComponent},
   { path: '404', component: NotFoundComponent},
   { path: '', redirectTo: 'about', pathMatch: 'full'},
 ];
