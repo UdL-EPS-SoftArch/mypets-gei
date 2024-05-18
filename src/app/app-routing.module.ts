@@ -12,14 +12,12 @@ import { ShelterVolunteersListComponent } from './shelter/volunteer-list/volunte
 import { ShelterVolunteersDetailsComponent } from './shelter/volunteer-details/volunteer-details.component';
 import { ShelterVolunteersAddComponent } from './shelter/volunteer-add/volunteer-add.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
-import { CertificateAddComponent } from './shelter/certificate-add/certificate-add.component';
 import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
 
 const routes: Routes = [
-  { path: 'shelter/:id/certificate/add', component: CertificateAddComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters/:id/volunteers/add', component: ShelterVolunteersAddComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters/:id/volunteers/:vId', component: ShelterVolunteersDetailsComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters/:id/volunteers', component: ShelterVolunteersListComponent, canActivate: [LoggedInGuard]},
