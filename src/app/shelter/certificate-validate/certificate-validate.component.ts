@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CertificateService } from '../certificate/certificate.service';
 import { Observable, of } from 'rxjs';
 import { Certificate } from '../certificate/certificate';
@@ -12,7 +12,7 @@ import { AsyncPipe, DatePipe, DecimalPipe, NgIf } from '@angular/common';
   templateUrl: './certificate-validate.component.html',
   styleUrl: './certificate-validate.component.scss'
 })
-export class CertificateValidateComponent {
+export class CertificateValidateComponent implements OnInit {
 
   protected certificates: Observable<Certificate[]>;
 

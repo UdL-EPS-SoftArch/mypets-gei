@@ -22,6 +22,6 @@
 		}
 	</tbody>
 </table>
-<div *ngIf="!(certificates | async) || (certificates | async)?.length === 0" class="alert alert-info" role="alert">
+<div *ngIf="(certificates | async) === false || (certificates | async)?.length === 0" class="alert alert-info" role="alert">
     No certificates to validate
 </div>
