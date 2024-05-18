@@ -1,1 +1,38 @@
-<p>certificate-add works!</p>
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Add shelter certificate</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <div class="mb-3">
+            <label>Shelter id</label>
+            <input type="text" class="form-control" value="{{shelterId}}" disabled>
+        </div>
+        <div class="mb-3">
+            <label>Shelter name</label>
+            <input type="text" class="form-control" value="{{shelterName}}" disabled>
+        </div>
+		<form>
+			<div class="mb-3">
+                <label>Certificate expiration date</label>
+                <div class="input-group">
+                    <input
+                        id="certificateExpirationDate"
+                        class="form-control"
+                        placeholder="yyyy-mm-dd"
+                        name="dp"
+                        ngbDatepicker
+                        #dp="ngbDatepicker"
+                        [(ngModel)]="expirationDateObj"
+                    />
+                    <button class="btn btn-outline-secondary fa-regular fa-calendar" (click)="dp.toggle()" type="button"></button>
+                </div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="addCertificate(modal)">Add</button>
+	</div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="open(content)">Add certificate</button>
