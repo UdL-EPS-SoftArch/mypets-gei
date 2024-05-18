@@ -27,4 +27,16 @@ export class UserDetailComponent implements OnInit {
   getCurrentUser(): User {
     return this.authenticationService.getCurrentUser();
   }
+
+  enable(): void {
+    this.userService.enable(this.user.username).subscribe({
+      next: (user: User) => {
+        alert('User Enabled');
+        window.location.reload();
+      },
+      error: (error) => {
+        alert('Error enabling user');
+      }
+    });
+  }
 }
