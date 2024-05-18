@@ -1,0 +1,27 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Shelter served</th>
+			<th scope="col">Expiration date</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (certificate of (certificates | async); track certificate.validated; let i = $index) {
+			<tr class="mx-auto">
+				<th scope="row">{{ i + 1 }}</th>
+				<td>
+					{{ certificate._links.shelterServed.href.split('/').slice(-2, -1)[0] }}
+				</td>
+				<td>{{ certificate.expirationDate | date }}</td>
+				<td>{{ certificate.validated ? 'Validated ✅' : 'Not validated ❌' }}</td>
+                <button *ngIf="!certificate.validated" class="btn btn-primary" (click)="validateCertificate(certificate.uri)">Validate</button>
+                <button *ngIf="certificate.validated" class="btn btn-danger" (click)="invalidateCertificate(certificate.uri)">Invalidate</button>
+			</tr>
+		}
+	</tbody>
+</table>
+<div *ngIf="!(certificates | async) || (certificates | async)?.length === 0" class="alert alert-info" role="alert">
+    No certificates to validate
+</div>
