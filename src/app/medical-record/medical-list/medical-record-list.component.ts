@@ -18,7 +18,7 @@ import {Subscription} from "cypress/types/net-stubbing";
 })
 export class MedicalRecordListComponent implements OnInit {
   medicalRecords: MedicalRecord[] = [];
-
+  petId: any;
 
   constructor(
     private medicalRecordService: MedicalRecordService,
@@ -29,20 +29,20 @@ export class MedicalRecordListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let petId: number | null = null;
+
     this.route.params.subscribe(params => {
       console.log(params) //log the entire params object
       console.log(params['petId']) //log the value of id
 
-      petId = params['petId'];
+      this.petId = params['petId'];
     });
 
 
 
 
-    if (petId) {
-      this.fetchPet(petId);
-      console.log("petId", petId);
+    if (this.petId) {
+      this.fetchPet(this.petId);
+      console.log("petId", this.petId);
     } else {
       this.fetchMedicalRecords();
       console.log("NO petId");
@@ -91,7 +91,8 @@ export class MedicalRecordListComponent implements OnInit {
 
 
   editRecord(recordId: string) {
-    this.router.navigate([`/medical-records/${recordId}/edit`]);
+
+    this.router.navigate([`/medical-records/${recordId}/${this.petId}/edit`, {}]);
   }
 
   deleteRecord(recordId: string) {

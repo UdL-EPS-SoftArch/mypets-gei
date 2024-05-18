@@ -16,6 +16,7 @@ import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
+import {MedicalRecordEditComponent} from "./medical-record/medical-edit/medical-record-edit.component";
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -23,10 +24,10 @@ const routes: Routes = [
   { path: 'users/:id/edit', component: UserEditComponent, canActivate: [LoggedInGuard]},
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
-  { path: 'medical-records', component: MedicalRecordListComponent },
+  //{ path: 'medical-records', component: MedicalRecordListComponent }, #Need to be commented out to avoid conflict with new route structure
   { path: 'medical-records/add', component: MedicalRecordAddComponent },
   { path: 'medical-records/:petId', component: MedicalRecordListComponent },
-  //{ path: 'medical-records/:recordId/edit', component: MedicalRecordEditComponent },
+  { path: 'medical-records/:recordId/:petId/edit', component: MedicalRecordEditComponent },
   { path: 'about', component: AboutComponent},
   { path: 'pets-grid', component: PetsGridComponent},
   { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},

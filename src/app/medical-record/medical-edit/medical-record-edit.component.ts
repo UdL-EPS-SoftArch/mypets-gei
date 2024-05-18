@@ -1,18 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { MedicalRecordService } from './medical-record.service';
+import {MedicalRecordService} from "../medical-record.service";
 import { ActivatedRoute, Router } from '@angular/router';
-import { MedicalRecord } from './medical-record.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
+import {MedicalRecord} from "../medical-record";
 
 @Component({
   selector: 'app-medical-record-edit',
   templateUrl: './medical-record-edit.component.html',
+  standalone: true,
+  imports: [
+    FormsModule
+  ],
   styleUrls: ['./medical-record-edit.component.css']
 })
 export class MedicalRecordEditComponent implements OnInit {
   petId!: number;
   recordId!: number;
-  medicalRecordForm!: FormGroup;
+  day!: number;
+  month!: number;
+  year!: number;
+  description!: string;
+  issue!: string;
+
+  medicalRecord = new MedicalRecord();
+
 
   constructor(
     private fb: FormBuilder,
@@ -22,32 +33,51 @@ export class MedicalRecordEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.petId = this.route.snapshot.params['petId'];
-    this.recordId = this.route.snapshot.params['recordId'];
-    this.initForm();
-    this.fetchMedicalRecord();
-  }
+    this.recordId = Number(this.route.snapshot.paramMap.get('recordId'));
 
-  initForm() {
-    this.medicalRecordForm = this.fb.group({
-      issue: ['', Validators.required],
-      description: ['', Validators.required],
-      date: ['', Validators.required]
+    this.medicalRecordService.getMedicalRecord(this.recordId).subscribe({
+      next: (record) => {
+        this.medicalRecord = record;
+        this.issue = this.medicalRecord.issue;
+        this.description = this.medicalRecord.description;
+        console.log('Medical Record Pet:', record);
+        this.petId = this.route.snapshot.params['petId'];
+        this.parseDate(this.medicalRecord.date);
+        console.log('Parsed date:', this.day, this.month, this.year);
+      },
+      error: (error) => {
+        console.error('Error fetching medical record');
+      }
+
+    });
+  }
+  editMedicalRecord(issue: string, description: string, day: number, month: number, year: number, petId: number ) {
+
+    let medicalRecord = new MedicalRecord(
+      {
+        issue: issue,
+        description: description,
+        date: new Date(year, month, day),
+        pet: `/pets/${petId}`
+      }
+    );
+    this.medicalRecordService.updateMedicalRecord(this.recordId, medicalRecord).subscribe({
+      next: (response) => {
+        console.log('Medical Record updated:', response);
+      },
+      error: (error) => console.error('Error updating medical record:', error)
+
     });
   }
 
-  fetchMedicalRecord() {
-    this.medicalRecordService.getMedicalRecord(this.petId, this.recordId).subscribe(record => {
-      this.medicalRecordForm.patchValue(record);
-    });
+  parseDate(dateString: string) {
+    const date = new Date(dateString);
+    this.day = date.getUTCDate();
+    this.month = date.getUTCMonth() + 1; // getUTCMonth() returns month index starting from 0
+    this.year = date.getUTCFullYear();
   }
 
-  onSubmit() {
-    if (this.medicalRecordForm.valid) {
-      const updatedRecord: MedicalRecord = this.medicalRecordForm.value;
-      this.medicalRecordService.updateMedicalRecord(this.petId, this.recordId, updatedRecord).subscribe(() => {
-        this.router.navigate([`/pets/${this.petId}/medical-records`]);
-      });
-    }
-  }
+
+
+
 }
