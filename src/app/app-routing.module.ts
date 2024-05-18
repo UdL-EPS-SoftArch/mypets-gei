@@ -18,8 +18,10 @@ import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
+import { CertificateValidateComponent } from './shelter/certificate-validate/certificate-validate.component';
 
 const routes: Routes = [
+  { path: 'shelter/certificates/validate', component: CertificateValidateComponent, canActivate: [LoggedInGuard]},
   { path: 'shelter/:id/certificate/add', component: CertificateAddComponent, canActivate: [LoggedInGuard]},
   { path: 'shelter/:id/volunteers/add', component: ShelterVolunteersAddComponent, canActivate: [LoggedInGuard]},
   { path: 'shelter/:id/volunteers/:vId/delete', component: ShelterVolunteersDeleteComponent, canActivate: [LoggedInGuard]},
