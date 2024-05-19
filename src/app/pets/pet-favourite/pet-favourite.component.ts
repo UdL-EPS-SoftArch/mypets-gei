@@ -82,23 +82,23 @@ export class PetFavouriteComponent implements OnInit {
     // isNowFavourited means the state to which it just changed
     if (!this.isNowFavourited){ //was favourited, not anymore
       // Find entry to delete
-      this.favPetsService.findByUserIdAndPetId(this.user.username, String(this.petId)).subscribe(
-        foundEntries=>{
+      this.favPetsService.findByUserIdAndPetId(this.user.username, String(this.petId)).subscribe({
+        next: (foundEntries)=>{
           //console.log("Found "+foundEntries.resources.length+" entries. Should be 1."); //its always 1, but old entry :C
           // Obtain entry in itself.
           const foundEntry = foundEntries.resources[(foundEntries.resources.length-1)];
-          //console.log("foundEntry: {\n\tuserId: "+foundEntry.userId+",\n\tpetId: "+foundEntry.petId+",\n\turi: "+foundEntry.uri+",\n}");
+          console.log("foundEntry: {\n\tuserId: "+foundEntry.userId+",\n\tpetId: "+foundEntry.petId+",\n\turi: "+foundEntry.uri+",\n}");
           //potser es tema de caché, pero està trobant les entrades antigues que s'acaben de borrar :/
           //provant amb deleteResource asecas tampoc funciona, foundEntry segueix sent la vella ://
           // Request deletion to backend
           this.favPetsService.deleteResource(foundEntry).subscribe(
             res=>{
-              console.log("Deleted pet "+this.petId+" from liked pets of user "+this.user.username+". Register nº:"+res.url.split("/")[4]);
+              console.log("Deleted pet "+this.petId+" from liked pets of user "+this.user.username+". Instance nº:"+res.url.split("/")[4]);
               // Update local repo
               this.retrieveFavourites();
           });
         }
-      );      
+      });   
     } else { //was not favourited, now it is
       // Create new FavouritePets object
       const newPair = {userId: this.user.username, petId: this.petId};
