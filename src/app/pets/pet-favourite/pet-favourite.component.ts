@@ -9,6 +9,7 @@ import { Pet } from '../pet';
 import { AuthenticationBasicService } from 'src/app/login-basic/authentication-basic.service';
 import { HttpClient } from '@angular/common/http';
 import { FavouritedPets } from '../favourited-pets';
+import { FavouritedPetsService } from '../favourited-pets.service';
 
 @Component({
   selector: 'app-pet-favourite',
@@ -22,6 +23,7 @@ export class PetFavouriteComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   petsService: PetsService = inject(PetsService);
   userService: UserService = inject(UserService)
+  favPetsService: FavouritedPetsService = inject(FavouritedPetsService)
   petData: PetData | undefined;
   isClicked: Boolean = false;
   user: User = new User();
@@ -89,11 +91,11 @@ export class PetFavouriteComponent implements OnInit {
           foundEntry = new FavouritedPets({userId: pair.userId, petId: pair.petId});
         }
     });
-
     if (found){
-      // perform patch(?) removing entry
-      // maybe findByUserIdAndPetId, then get id, then delete base/favouritedPetses/id? that what was done on the features idk
-      this.http.post<any>(`${this.baseUrl}/favouritedPetses`, {foundEntry}).subscribe(
+      // ?
+      const entry = this.favPetsService.findByUserIdAndPetId(user.username, pet.id)[0];
+      console.log("entryId:"+entry.id);
+      this.http.delete<any>(`${this.baseUrl}/favouritedPetses/${entry.id}`).subscribe(
         res=>{
           console.log(res);
       });
@@ -102,7 +104,7 @@ export class PetFavouriteComponent implements OnInit {
       const newPair = {userId: user.username, petId: 1};
       const newEntry = new FavouritedPets(newPair);
       console.log("newEntryPetId="+newEntry.petId+"\nnewEntryUserId="+newEntry.userId);
-      this.http.post<any>(`${this.baseUrl}/favouritedPetses`, {newEntry}).subscribe(
+      this.favPetsService.createResource({body: newEntry}).subscribe(
         res=>{
           console.log(res);
       });
