@@ -13,7 +13,7 @@ export class FavouritedPetsService extends HateoasResourceOperation<FavouritedPe
     return this.searchCollection('findByUserId', { params: { text: query } });
   }
 
-  public findByUserIdAndPetId(userId: string, petId: number): Observable<ResourceCollection<FavouritedPets>> {
-    return this.searchCollection('findByUserIdAndPetId', { params: { userId: userId, petId: petId.toString() }});
+  public findByUserIdAndPetId(userId: string, petId: string): Observable<ResourceCollection<FavouritedPets>> {
+    return this.searchCollection('findByUserIdAndPetId', { params: { userId: userId, petId: petId }});
   }
 }
