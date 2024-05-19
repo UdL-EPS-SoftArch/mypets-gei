@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import { PetComponent } from '../pet/pet.component';
-import { PetData } from '../pet-data';
-import { PetsService } from '../pets.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client';
-import { ActivatedRoute ,RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { PetComponent } from '../pet/pet.component';
+import { Pet } from '../pet';
+import { PetService } from '../pet.service';
 @Component({
   selector: 'app-pets-grid',
   standalone: true,
@@ -15,13 +15,13 @@ import { ActivatedRoute ,RouterModule} from '@angular/router';
 })
 
 export class PetsGridComponent implements OnInit{
-  
-  public petsList: PetData[] = [];
+
+  public petsList: Pet[] = [];
   public pageSize = 5;
   public page = 1;
-  public filteredPetsList: PetData[] = [];
+  public filteredPetsList: Pet[] = [];
   constructor(
-    public petsService: PetsService,
+    public petService: PetService,
     public router: Router,
   ) {}
 
@@ -33,16 +33,16 @@ export class PetsGridComponent implements OnInit{
         return pet.name.toLowerCase().includes(name.toLowerCase());
       });
     }
-  }  
- 
+  }
+
   ngOnInit(): void {
-    console.log("Hello");    
-    this.petsService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
-      (page: PagedResourceCollection<PetData>) => {
+    console.log("Hello");
+    this.petService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
+      (page: PagedResourceCollection<Pet>) => {
         this.petsList = page.resources;
         console.log(this.petsList);
         this.filteredPetsList = this.petsList;
-      
+
       });
   }
   navigateToAddPet() {
