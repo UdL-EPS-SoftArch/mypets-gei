@@ -1,5 +1,4 @@
-import { FavouritedPets } from '../pets/favourited-pets';
-import { Pet } from '../pets/pet';
+import { FavouritedPets } from '../pet/favourited-pets';
 import { Authority } from './authority';
 import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
 

@@ -24,6 +24,7 @@ import {AuthenticationBasicService} from './login-basic/authentication-basic.ser
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
+import { PetFavouriteComponent } from './pet/pet-favourite/pet-favourite.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import {AddPetComponent} from "./pet/add-pet/add-pet.component";
     UserEditComponent,
     UserDeleteComponent,
     UserSearchComponent,
-    AddPetComponent
+    AddPetComponent,
   ],
   imports: [
     BrowserModule,
