@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { PetData } from '../pet-data';
 import { PetsService } from '../pets.service';
 import { UserService } from '../../user/user.service';
 import { User } from '../../login-basic/user';
@@ -21,120 +20,116 @@ import { FavouritedPetsService } from '../favourited-pets.service';
 export class PetFavouriteComponent implements OnInit {
   text: string = "Like pet"
   route: ActivatedRoute = inject(ActivatedRoute);
-  petsService: PetsService = inject(PetsService);
-  userService: UserService = inject(UserService)
-  favPetsService: FavouritedPetsService = inject(FavouritedPetsService)
-  petData: PetData | undefined;
-  isClicked: Boolean = false;
+  userService: UserService = inject(UserService);
+  favPetsService: FavouritedPetsService = inject(FavouritedPetsService);
+  isNowFavourited: Boolean = false;
   user: User = new User();
   pet:Pet = new Pet();
   baseUrl: String = "http://localhost:8080";
+  petId:number;
 
   constructor(private authService: AuthenticationBasicService, 
     private router: Router,
-    private http:HttpClient){
-    const petId = Number(this.route.snapshot.paramMap.get('id'));
-    this.petData = this.petsService.findByID(petId.toString())[0];
-  }
+    private http:HttpClient){}
 
   ngOnInit(): void {
-      //get User to fill their liked pets from server request
-      this.user = this.authService.getCurrentUser();
-      this.http.get<any>(`${this.baseUrl}/favouritedPetses`).subscribe(
-        res => {
-          const favPets = res._embedded.favouritedPetses;
-          console.log("favPets = "+favPets);
-          // Check if user in FavouritedPets pair is actual user
-          favPets.forEach(
-            pair=>{
-              console.log("pair: "+pair);
-              // When he is, add pair to user's parameter
-              if (pair[0] == this.user.username){
-                this.user.favouritedPets.push(new FavouritedPets(pair))
-              }
-          });
+    // Get id of pet on display
+    this.petId = Number(this.route.snapshot.paramMap.get('id'));
+    
+    // Get current user data
+    this.user = this.authService.getCurrentUser();
+
+    // Fill user.favouritedPets from info on the backend
+    // Instead of using retrieveFavourites, we'll do it directly since we need to wait for the update to take effect
+    this.http.get<any>(`${this.baseUrl}/favouritedPetses`).subscribe(
+      res => {
+        const favPets:FavouritedPets[] = res._embedded.favouritedPetses;
+        // Check if user in FavouritedPets pair is actual user
+        favPets.forEach(
+          pair=>{
+            // When he is, add pair to user's parameter
+            if (pair.userId === this.user.username){
+              this.user.favouritedPets.push(new FavouritedPets({userId: pair.userId, petId: pair.petId}))
+            }
+        });
+
+        // With updated values, visually show if pet is liked or disliked by user
+        for (var i=0; i < this.user.favouritedPets.length; i++){
+          if(this.petId === this.user.favouritedPets[i].petId){
+            this.isNowFavourited = true
+            break
+          }
         }
-      )       
-      //visually show if pet is liked or disliked by user
-      for (var i=0; i < this.user.favouritedPets.length; i++){
-        if(this.petData.id === this.user.favouritedPets[i].petId){
-          this.isClicked = true
-          break
+        if (this.isNowFavourited){
+          this.text = "💔"
+        } else{
+          this.text = "❤"
         }
       }
-      if (this.isClicked){
-        this.text = "💔"
-      } else{
-        this.text = "❤"
-      }
+    )
   }
 
   onClick(){
     // Visual update
-    this.isClicked = !this.isClicked
-    if (this.isClicked){
+    this.isNowFavourited = !this.isNowFavourited
+    if (this.isNowFavourited){
       this.text = "💔"
     } else{
       this.text = "❤"
     }
+
     // Backend update
-    this.updateFavourite(this.user, this.pet);
+    this.updateFavourite();
   }
 
-  updateFavourite(user: User, pet: Pet){
-    let found = false;
-    let foundEntry;
-    user.favouritedPets.forEach(
-      pair=>{
-        if ((pair.petId == pet.id) || found){
-          found = true;
-          foundEntry = new FavouritedPets({userId: pair.userId, petId: pair.petId});
+  updateFavourite(){
+    // isNowFavourited means the state to which it just changed
+    //    true -> user just favourited pet -> create
+    //    false -> user just defavourited pet -> delete
+    if (!this.isNowFavourited){
+      this.favPetsService.findByUserIdAndPetId(this.user.username, String(this.petId)).subscribe(
+        foundEntries=>{
+          //console.log("Found "+foundEntries.resources.length+" entries. Should be 1.") //its always 1, but old entry :C
+          // Should only exist one, obtain last one in case it didn't update propperly.
+          const foundEntry = foundEntries.resources[(foundEntries.resources.length-1)];
+          //console.log("foundEntry: {\n\tuserId: "+foundEntry.userId+",\n\tpetId: "+foundEntry.petId+",\n\turi: "+foundEntry.uri+",\n}")
+          const entryId = foundEntry.uri.split("/")[2]; //obtain entry id
+          // potser es tema de caché, pero està trobant les entrades antigues que s'acaben de borrar :/
+          // provant amb deleteResource asecas tampoc funciona, foundEntry segueix sent la vella ://
+          this.favPetsService.deleteResourceById(entryId).subscribe(
+            res=>{
+              console.log("Deleted pet "+this.petId+" from liked pets of user "+this.user.username+". Register nº:"+res.url.split("/")[4]);
+              this.retrieveFavourites();
+          });
         }
-    });
-    if (found){
-      // ?
-      const entry = this.favPetsService.findByUserIdAndPetId(user.username, pet.id)[0];
-      console.log("entryId:"+entry.id);
-      this.http.delete<any>(`${this.baseUrl}/favouritedPetses/${entry.id}`).subscribe(
-        res=>{
-          console.log(res);
-      });
+      );      
     } else {
       //perform patch adding just new entry
-      const newPair = {userId: user.username, petId: 1};
+      const newPair = {userId: this.user.username, petId: this.petId};
       const newEntry = new FavouritedPets(newPair);
-      console.log("newEntryPetId="+newEntry.petId+"\nnewEntryUserId="+newEntry.userId);
       this.favPetsService.createResource({body: newEntry}).subscribe(
         res=>{
-          console.log(res);
+          console.log("Created instance "+res.uri.split("/")[2]+" for liked pet "+this.petId+" from user "+this.user.username+".");
+          this.retrieveFavourites();
       });
     }
   }
-
-  // addFavourite(): void {
-  //   this.userService.getResource(this.user.username).subscribe(
-  //     (user) => {
-  //       this.petsService.getResource(this.petData.id).subscribe(
-  //         (pet) => { 
-  //           const newPair = [user.username, pet.id];
-  //           this.userService.patchResource(user).subscribe(
-  //             (updatedUser: User) => {
-  //               console.log('Volunteer Updated:', updatedUser);
-  //               //this.router.navigate(['shelters', this.shelterId, 'volunteers']);
-  //             },
-  //             (error) => {
-  //               console.error('Error updating volunteer:', error);
-  //             }
-  //           );
-  //         },
-  //         (error) => {
-  //           console.error('Error retrieving volunteer:', error);
-  //         }
-  //       );
-  //     },
-  //     (error) => {
-  //       console.error('Error retrieving shelter:', error);
-  //     }
-  //   );
-  // }
+  
+  retrieveFavourites(){
+    this.http.get<any>(`${this.baseUrl}/favouritedPetses`).subscribe(
+      res => {
+        const favPets:FavouritedPets[] = res._embedded.favouritedPetses;
+        this.user.favouritedPets = []
+        // Check if user in FavouritedPets pair is actual user
+        favPets.forEach(
+          pair=>{
+            // When he is, add pair to user's parameter
+            if (pair.userId === this.user.username){
+              this.user.favouritedPets.push(new FavouritedPets({userId: pair.userId, petId: pair.petId}));
+            }
+        });
+        console.log("Updated favourite pets for user "+this.user.username+".");
+      }
+    )
+  }
 }
