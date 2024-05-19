@@ -1,5 +1,6 @@
 export class FavouritedPets {
-  favouritedPets = '';
+  userId = '';
+  petId = 0;
 
   constructor(values: object = {}) {
     Object.assign(this, values);

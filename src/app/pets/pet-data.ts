@@ -8,7 +8,6 @@ export class PetData extends Resource {
     color: string;
     size: string;
     weight: number;
-    favouritedByUser: Boolean;
     age: string;
     description: string;
     breed: string;

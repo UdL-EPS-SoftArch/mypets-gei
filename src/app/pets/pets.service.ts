@@ -12,6 +12,10 @@ export class PetsService extends HateoasResourceOperation<PetData> {
     super(PetData);
   }
 
+  public findByID(query: string): Observable<ResourceCollection<PetData>>{
+    return this.searchCollection('findById', { params: { text: query } });
+  }
+
   public findByIdContaining(query: string): Observable<ResourceCollection<PetData>> {
     return this.searchCollection('findByIdContaining', { params: { text: query } });
   }
