@@ -23,9 +23,10 @@ import {HttpErrorInterceptor} from './error-handler/http-error-interceptor';
 import {AuthenticationBasicService} from './login-basic/authentication-basic.service';
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
-import { VolunteerKickComponent } from './shelter/volunteer-kick/volunteer-kick.component';
+import {VolunteerKickComponent} from './shelter/volunteer-kick/volunteer-kick.component';
+import {ShelterVolunteersListComponent} from './shelter/volunteer-list/volunteer-list.component';
+import {ShelterVolunteersAddComponent} from './shelter/volunteer-add/volunteer-add.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
-
 
 @NgModule({
   declarations: [
@@ -40,6 +41,8 @@ import {AddPetComponent} from "./pet/add-pet/add-pet.component";
     UserDeleteComponent,
     UserSearchComponent,
     VolunteerKickComponent,
+    ShelterVolunteersListComponent,
+    ShelterVolunteersAddComponent,
     AddPetComponent
   ],
   imports: [
