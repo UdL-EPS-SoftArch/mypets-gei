@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Shelter } from '../shelter-data'
 import { ShelterService } from '../shelter.service'
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client'
-import { RouterModule } from '@angular/router'
+import { Router, RouterModule } from '@angular/router'
 
 @Component({
   selector: 'app-shelter-list',

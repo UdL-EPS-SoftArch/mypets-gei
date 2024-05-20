@@ -1,6 +1,6 @@
 <p class="lead">Shelters</p>
 <button
-  id="editBtn"
+  id="createBtn"
   type="button"
   class="btn m-1 btn-outline-primary"
   (click)="navigateToCreate()"
@@ -32,7 +32,7 @@
             id="deleteBtn"
             type="button"
             class="btn m-1 btn-outline-danger"
-            [routerLink]="['/shelter', extractNumberFromUri(shelter.uri) ,'delete']"
+            [routerLink]="[shelter.uri ,'delete']"
             >
             Delete
           </button>
