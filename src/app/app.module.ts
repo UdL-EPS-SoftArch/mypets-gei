@@ -52,7 +52,6 @@ import {AddPetComponent} from "./pet/add-pet/add-pet.component";
     ErrorHandlerModule,
     NgbModule,
     ReactiveFormsModule,
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
