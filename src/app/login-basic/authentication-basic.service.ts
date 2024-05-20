@@ -50,6 +50,7 @@ export class AuthenticationBasicService {
 
   isRole(role: string): boolean {
     const user: User = this.getCurrentUser();
-    return user && user.authorities[0] && user.authorities[0].authority === 'ROLE_' + role.toUpperCase();
+    return user && user.authorities[0] && user.authorities[0].authority === 'ROLE_' +
+      role.replace(' ', '_').toUpperCase();
   }
 }

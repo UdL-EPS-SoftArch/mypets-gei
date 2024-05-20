@@ -32,7 +32,8 @@
             id="deleteBtn"
             type="button"
             class="btn m-1 btn-outline-danger"
-          >
+            [routerLink]="['/shelter', extractNumberFromUri(shelter.uri) ,'delete']"
+            >
             Delete
           </button>
         </div>

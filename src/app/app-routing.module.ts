@@ -10,10 +10,12 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserDeleteComponent } from './user/user-delete/user-delete.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
 import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
+import { ShelterDeleteComponent } from './shelter/shelter-delete/shelter-delete.component';
 import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
+import { ShelterVolunteerGuard } from "./guards/volunteer.role.guard";
 
 const routes: Routes = [
   { path: 'users/create', component: UserRegisterComponent},
@@ -23,8 +25,9 @@ const routes: Routes = [
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters', component: ShelterListComponent },
   { path: 'shelters/create', component: ShelterCreateComponent },
+  { path: `shelter/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
-  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]},
+  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [ShelterVolunteerGuard]},
   { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
   { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete', canActivate: [LoggedInGuard]},
   { path: 'pets-grid', component: PetsGridComponent},
