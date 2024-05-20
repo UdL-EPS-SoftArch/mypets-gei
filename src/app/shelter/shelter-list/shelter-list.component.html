@@ -1,0 +1,46 @@
+<p class="lead">Shelters</p>
+<button
+  id="editBtn"
+  type="button"
+  class="btn m-1 btn-outline-primary"
+  (click)="addFakeShelter()"
+>
+  Add new Shelter
+</button>
+@for (shelter of shelters; track shelter) {
+  <div class="card mb-1">
+    <div class="card-block row m-1 col-12">
+      <div class="card-body row align-items-center">
+        <div class="col-6 mt-1">
+          <h6 class="card-subtitle text-muted">Shelter Name</h6>
+          <p class="card-text">{{ shelter.name }}</p>
+        </div>
+        <div class="col-6 mt-1">
+          <p class="card-text">Email: {{ shelter.email }}</p>
+          <p class="card-text">Mobile: {{ shelter.mobile }}</p>
+          <p class="card-text">Rating: {{ shelter.rating }}</p>
+          <p class="card-text">Uri: {{ shelter.uri }}</p>
+        </div>
+        <div class="col-6 mt-1">
+          <button
+            id="editBtn"
+            type="button"
+            class="btn m-1 btn-outline-success"
+          >
+            Edit
+          </button>
+          <button
+            id="deleteBtn"
+            type="button"
+            class="btn m-1 btn-outline-danger"
+            [routerLink]="['/shelter', extractNumberFromUri(shelter.uri) ,'delete']"
+            >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  } @empty {
+    <p>No shelters :</p>
+  }
