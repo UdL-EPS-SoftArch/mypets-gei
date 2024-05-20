@@ -2,14 +2,14 @@ import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client'
 
 @HateoasResource('shelters')
 export class Shelter extends Resource {
-  id: number
+  uri?: string
   name: string
   email: string
   mobile: string
-  createdAt: Date
-  updatedAt: Date
-  isActive: boolean
-  rating: number
+  createdAt: Date = new Date()
+  updatedAt: Date = new Date()
+  isActive: boolean = true
+  rating: number = 0
   locatedAt: any
 
   constructor(values: object = {}) {

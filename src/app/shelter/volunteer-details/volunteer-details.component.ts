@@ -11,7 +11,7 @@ import { ShelterVolunteer } from '../shelterVolunteer';
     templateUrl: './volunteer-details.component.html'
   })
   export class ShelterVolunteersDetailsComponent implements OnInit {
-  
+
     constructor(
       public route: ActivatedRoute,
       public router: Router,
@@ -19,14 +19,14 @@ import { ShelterVolunteer } from '../shelterVolunteer';
     }
 
     public shelterVolunteer: ShelterVolunteer = new ShelterVolunteer();
-    
+
     ngOnInit(): void {
       const volunteerId = this.route.snapshot.params.vId;
       this.shelterVolunteerService.getResource(volunteerId).subscribe(
-        (user: ShelterVolunteer) => this.shelterVolunteer = user );
+        (user: ShelterVolunteer) => this.shelterVolunteer = new ShelterVolunteer(user) );
     }
-  
+
     changePage(): void {
-      
+
     }
   }
