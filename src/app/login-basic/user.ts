@@ -1,3 +1,4 @@
+import { FavouritedPets } from '../pet/favourited-pets';
 import { Authority } from './authority';
 import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
 
@@ -11,6 +12,7 @@ export class User extends Resource {
   passwordReset = false;
   uri: string;
   locked: boolean;
+  favouritedPets: FavouritedPets[] = [];
 
   constructor(values: object = {}) {
     super();

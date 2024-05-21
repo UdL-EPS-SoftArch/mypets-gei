@@ -29,6 +29,7 @@ import {ShelterVolunteersAddComponent} from './shelter/volunteer-add/volunteer-a
 import {UserDisableComponent} from './user/user-disable/user-disable.component';
 import {MedicalRecordListComponent} from './medical-record/medical-list/medical-record-list.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
+import {PetFavouriteComponent} from './pet/pet-favourite/pet-favourite.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {AddPetComponent} from "./pet/add-pet/add-pet.component";
     ErrorHandlerModule,
     NgbModule,
     ReactiveFormsModule,
+    PetFavouriteComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
