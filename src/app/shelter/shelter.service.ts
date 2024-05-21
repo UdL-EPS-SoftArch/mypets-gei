@@ -4,7 +4,7 @@ import {
   ResourceCollection,
 } from '@lagoshny/ngx-hateoas-client'
 import { Observable } from 'rxjs'
-import { Shelter } from './shelter-data'
+import { Shelter } from './shelter'
 
 @Injectable({
   providedIn: 'root',

@@ -13,4 +13,13 @@ export class UserService extends HateoasResourceOperation<User> {
   public findByIdContaining(query: string): Observable<ResourceCollection<User>> {
     return this.searchCollection('findByIdContaining', { params: { text: query } });
   }
+
+
+  disable(userId: string): Observable<User> {
+    return this.patchResourceById(userId, { body: {locked: true}  })
+  }
+
+  enable(userId: string): Observable<User> {
+    return this.patchResourceById(userId, { body: {locked: false}  })
+  }
 }

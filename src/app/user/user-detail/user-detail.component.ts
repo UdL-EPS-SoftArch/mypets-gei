@@ -20,11 +20,23 @@ export class UserDetailComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.userService.getResource(id).subscribe(
       user => {
-        this.user = user;
+        this.user = new User(user);
       });
   }
 
   getCurrentUser(): User {
     return this.authenticationService.getCurrentUser();
+  }
+
+  enable(): void {
+    this.userService.enable(this.user.username).subscribe({
+      next: (user: User) => {
+        alert('User Enabled');
+        window.location.reload();
+      },
+      error: (error) => {
+        alert('Error enabling user');
+      }
+    });
   }
 }

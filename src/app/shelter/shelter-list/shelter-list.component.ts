@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { Shelter } from '../shelter-data'
+import { Shelter } from '../shelter'
 import { ShelterService } from '../shelter.service'
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client'
-import { Router } from '@angular/router'
+import { Router, RouterModule } from '@angular/router'
 
 @Component({
   selector: 'app-shelter-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './shelter-list.component.html',
   styleUrl: './shelter-list.component.css',
 })
