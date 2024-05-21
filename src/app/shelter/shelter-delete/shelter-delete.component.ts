@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Shelter } from '../shelter-data';
+import { Shelter } from '../shelter';
 import { ShelterService } from '../shelter.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';

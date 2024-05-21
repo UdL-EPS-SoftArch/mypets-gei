@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
-import { Shelter } from '../shelter-data'
+import { Shelter } from '../shelter'
 import { ShelterService } from '../shelter.service'
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client'
 import { Router, RouterModule } from '@angular/router'
