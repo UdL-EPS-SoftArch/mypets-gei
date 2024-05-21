@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Medical Record</title>
+  <!-- Add Angular Material Styles -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@angular/material@13.2.3/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+</head>
+<body>
+<h1>Add Medical Record</h1>
+<form #medicalRecordForm="ngForm">
+  <div class="form-group">
+    <label for="issue">Issue:</label>
+    <input type="text" id="issue" name="issue" [(ngModel)]="issue" required>
+  </div>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="description" required></textarea>
+  </div>
+  <div class="date-field">
+    <label for="day">Day:</label>
+    <input type="number" id="day" name="day" [(ngModel)]="day" required min="1" max="31" style="width: 70px;">
+  </div>
+  <div class="date-field">
+    <label for="month">Month:</label>
+    <input type="number" id="month" name="month" [(ngModel)]="month" required min="1" max="12" style="width: 70px;">
+  </div>
+  <div class="date-field">
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="year" [(ngModel)]="year" required min="1" style="width: 100px;">
+  </div>
+  <div class="form-group">
+    <label for="pet">Pet ID:</label>
+    <input type="number" id="pet" name="pet" [(ngModel)]="petId" required style="width: 100px;">
+  </div>
+  <button type="button" (click)="addMedicalRecord(issue, description, createDate(day, month, year), petId)" style="margin-top: 20px;">Add</button>
+</form>
+</body>
+</html>

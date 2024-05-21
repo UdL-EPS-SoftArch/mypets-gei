@@ -17,12 +17,15 @@ import { ShelterEditComponent } from './shelter/shelter-edit/shelter-edit.compon
 import { ShelterDeleteComponent } from './shelter/shelter-delete/shelter-delete.component';
 import { CertificateAddComponent } from './shelter/certificate-add/certificate-add.component';
 import { UserDisableComponent } from './user/user-disable/user-disable.component';
+import {MedicalRecordListComponent} from "./medical-record/medical-list/medical-record-list.component";
+import {MedicalRecordAddComponent} from "./medical-record/medical-add/medical-record-add.component";
 import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
 import { ShelterVolunteerGuard } from "./guards/volunteer.role.guard";
 import { CertificateValidateComponent } from './shelter/certificate-validate/certificate-validate.component';
+import {MedicalRecordEditComponent} from "./medical-record/medical-edit/medical-record-edit.component";
 
 const routes: Routes = [
   { path: 'shelter/certificates/validate', component: CertificateValidateComponent, canActivate: [LoggedInGuard]},
@@ -40,6 +43,10 @@ const routes: Routes = [
   { path: 'shelters/create', component: ShelterCreateComponent, canActivate: [LoggedInGuard] },
   { path: 'shelters/:id/edit', component: ShelterEditComponent, canActivate: [LoggedInGuard] },
   { path: `shelter/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
+  { path: 'medical-records', component: MedicalRecordListComponent },
+  { path: 'medical-records/add', component: MedicalRecordAddComponent },
+  { path: 'medical-records/:petId', component: MedicalRecordListComponent },
+  { path: 'medical-records/:recordId/:petId/edit', component: MedicalRecordEditComponent },
   { path: 'about', component: AboutComponent},
   { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [ShelterVolunteerGuard]},
   { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
