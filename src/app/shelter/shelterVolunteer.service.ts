@@ -3,7 +3,7 @@ import { Observable, of, from } from 'rxjs';
 import { map, tap, mergeMap, toArray, filter } from 'rxjs/operators';
 import { HateoasResourceOperation, PagedResourceCollection, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { ShelterVolunteer } from './shelterVolunteer';
-import { Shelter } from './shelter-data';
+import { Shelter } from './shelter';
 
 @Injectable({ providedIn: 'root' })
 export class ShelterVolunteerService extends HateoasResourceOperation<ShelterVolunteer> {

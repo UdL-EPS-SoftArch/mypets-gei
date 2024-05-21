@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { Shelter } from '../shelter-data'
+import { Shelter } from '../shelter'
 import { ShelterService } from '../shelter.service'
 import { Router } from '@angular/router'
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'

@@ -1,6 +1,6 @@
 import { HateoasResource, Resource } from '@lagoshny/ngx-hateoas-client';
 import { User } from '../login-basic/user';
-import { Shelter } from './shelter-data';
+import { Shelter } from './shelter';
 
 @HateoasResource('shelterVolunteers')
 export class ShelterVolunteer extends User {
