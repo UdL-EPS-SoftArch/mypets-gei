@@ -39,7 +39,7 @@ export class MedicalRecordService extends HateoasResourceOperation<MedicalRecord
     );
   }
 
-  getMedicalRecord(id: string): Observable<any> {
+  getMedicalRecord(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`).pipe(
       catchError(() => {
         console.error('Error fetching medical record');
@@ -57,7 +57,7 @@ export class MedicalRecordService extends HateoasResourceOperation<MedicalRecord
     );
   }
 
-  updateMedicalRecord(id: string, medicalRecord: MedicalRecord): Observable<any> {
+  updateMedicalRecord(id: number, medicalRecord: MedicalRecord): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, medicalRecord).pipe(
       catchError(() => {
         console.error(`Error updating medical record with id ${id}`);
