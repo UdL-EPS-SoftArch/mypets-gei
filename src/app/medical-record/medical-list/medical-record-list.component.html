@@ -1,3 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Records</title>
+  <!-- Add Angular Material Styles -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@angular/material@13.2.3/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .record {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .label {
+      font-weight: bold;
+    }
+    button {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .no-records {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
 <div class="container">
   <h2>Medical Records</h2>
   <div *ngIf="medicalRecords.length > 0; else noRecords">
@@ -12,7 +55,9 @@
     </div>
   </div>
   <ng-template #noRecords>
-    <p>No medical records found.</p>
+    <p class="no-records">No medical records found.</p>
   </ng-template>
-  <button (click)="addMedicalRecord()">Add Medical Record</button>
+  <button (click)="addMedicalRecord()" style="margin-top: 20px;">Add Medical Record</button>
 </div>
+</body>
+</html>
