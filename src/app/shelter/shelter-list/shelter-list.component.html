@@ -1,13 +1,13 @@
 <p class="lead">Shelters</p>
 <button
-  id="editBtn"
+  id="createBtn"
   type="button"
   class="btn m-1 btn-outline-primary"
-  (click)="addFakeShelter()"
+  (click)="navigateToCreate()"
 >
-  Add new Shelter
+  Create new Shelter
 </button>
-@for (shelter of shelters; track shelter.id) {
+@for (shelter of shelters; track shelter) {
   <div class="card mb-1">
     <div class="card-block row m-1 col-12">
       <div class="card-body row align-items-center">
@@ -32,13 +32,16 @@
             id="deleteBtn"
             type="button"
             class="btn m-1 btn-outline-danger"
-          >
+            [routerLink]="[shelter.uri ,'delete']"
+            >
             Delete
           </button>
         </div>
       </div>
     </div>
   </div>
-  } @empty {
-    <p>No shelters :(</p>
-  }
+} @empty {
+  <div class="empty d-flex align-items-center justify-content-center">
+    <p class="text-center">No shelters 😞</p>
+  </div>
+}

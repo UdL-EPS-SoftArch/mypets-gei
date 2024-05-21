@@ -12,11 +12,14 @@ import { ShelterVolunteersListComponent } from './shelter/volunteer-list/volunte
 import { ShelterVolunteersDetailsComponent } from './shelter/volunteer-details/volunteer-details.component';
 import { ShelterVolunteersAddComponent } from './shelter/volunteer-add/volunteer-add.component';
 import { ShelterListComponent } from './shelter/shelter-list/shelter-list.component';
+import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
+import { ShelterDeleteComponent } from './shelter/shelter-delete/shelter-delete.component';
 import { CertificateAddComponent } from './shelter/certificate-add/certificate-add.component';
 import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
+import { ShelterVolunteerGuard } from "./guards/volunteer.role.guard";
 import { CertificateValidateComponent } from './shelter/certificate-validate/certificate-validate.component';
 
 const routes: Routes = [
@@ -31,8 +34,10 @@ const routes: Routes = [
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},
   { path: 'shelters', component: ShelterListComponent },
+  { path: 'shelters/create', component: ShelterCreateComponent },
+  { path: `shelter/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
   { path: 'about', component: AboutComponent},
-  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [LoggedInGuard]},
+  { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [ShelterVolunteerGuard]},
   { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
   { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete', canActivate: [LoggedInGuard]},
   { path: 'pets-grid', component: PetsGridComponent},

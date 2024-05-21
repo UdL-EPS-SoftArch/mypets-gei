@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, inject } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -33,9 +33,8 @@ export class CertificateAddComponent implements OnInit {
     });
   }
 
-  
+  @Input() protected shelterId: string;
   private modalService = inject(NgbModal);
-  protected shelterId: string = this.route.snapshot.params.id;
   protected shelterName: string = 'None';
   protected expirationDateObj: any = undefined
   protected expirationDate: Date = undefined;
