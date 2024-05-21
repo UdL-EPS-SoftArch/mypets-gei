@@ -12,7 +12,7 @@ import {
   UniqueMobileValidator,
 } from '../shared/validators'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Shelter } from '../shelter-data'
+import { Shelter } from '../shelter'
 import { CommonModule } from '@angular/common'
 
 @Component({
