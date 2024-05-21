@@ -1,0 +1,90 @@
+<form [formGroup]="shelterForm" (ngSubmit)="onSubmit()">
+  <!-- Name input -->
+  <div class="form-group mb-3">
+    <label class="control-label">Name*</label>
+    <input
+      id="name"
+      formControlName="name"
+      type="text"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid': name.invalid && (name.dirty || name.touched),
+        'is-valid': !name.invalid
+      }"
+    />
+    @if (name.invalid && (name.dirty || name.touched)) {
+      @if (name.errors?.required) {
+        <small class="invalid-feedback">Name is required</small>
+      } @else if (name.errors?.minlength) {
+        <small class="invalid-feedback">
+          Name must be at least 3 characters long
+        </small>
+      }
+    }
+  </div>
+
+  <!-- Email input -->
+  <div class="form-group mb-3">
+    <label class="control-label">Email*</label>
+    <input
+      id="email"
+      formControlName="email"
+      type="text"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid': email.invalid && (email.dirty || email.touched),
+        'is-valid': !email.invalid
+      }"
+    />
+    @if (email.invalid && (email.dirty || email.touched)) {
+      @if (email.errors?.required) {
+        <small class="invalid-feedback">Email is required</small>
+      } @else if (email.errors?.email) {
+        <small class="invalid-feedback"> Invalid email format. </small>
+      } @else if (email.errors?.emailTaken) {
+        <small class="invalid-feedback"
+          >This email is already registered
+        </small>
+      }
+    }
+  </div>
+
+  <!-- Mobile input -->
+  <div class="form-group mb-3">
+    <label class="control-label">Phone number*</label>
+    <input
+      id="mobile"
+      formControlName="mobile"
+      type="text"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid': mobile.invalid && (mobile.dirty || mobile.touched),
+        'is-valid': !mobile.invalid
+      }"
+    />
+    @if (mobile.invalid && (mobile.dirty || mobile.touched)) {
+      @if (mobile.errors?.required) {
+        <small class="invalid-feedback">A phone number is required</small>
+      } @else if (mobile.errors?.pattern) {
+        <small class="invalid-feedback">
+          The phone number must be numeric and can include a plus sign (+)
+        </small>
+      } @else if (mobile.errors?.mobileTaken) {
+        <small class="invalid-feedback"
+          >This phone number is already registered</small
+        >
+      }
+    }
+  </div>
+
+  <!-- TODO: Add location form -->
+
+  <!-- Submit button -->
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="shelterForm.invalid || shelterForm.pending"
+  >
+    Submit
+  </button>
+</form>

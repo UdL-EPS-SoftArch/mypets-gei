@@ -1,33 +1,27 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthenticationBasicService } from '../login-basic/authentication-basic.service';
+import { ErrorMessageService } from '../error-handler/error-message.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ShelterVolunteerGuard implements CanActivate {
+export class ShelterVolunteerGuard {
 
-  constructor(
-    private authentication: AuthenticationBasicService,
-    private router: Router
-  ) {}
+  constructor(private authentication: AuthenticationBasicService,
+              private errorMessageService: ErrorMessageService) {
+  }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(): boolean {
     if (!this.authentication.isLoggedIn()) {
-      this.router.navigate(['/login']);
+      this.errorMessageService.showErrorMessage(
+        'You should be logged in as a shelter volunteer to perform this action');
       return false;
     }
-
-    const userRoles = this.authentication.getCurrentUser().getRoles();
-    if (userRoles.includes('volunteer')) {
-      return true;
-    } else {
-      this.router.navigate(['/unauthorized']);
+    if (!this.authentication.getCurrentUser().getRoles().includes('shelter volunteer')) {
+      this.errorMessageService.showErrorMessage(
+        'You should be a shelter volunteer to perform this action');
       return false;
     }
+    return true;
   }
 }

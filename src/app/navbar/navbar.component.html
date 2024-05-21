@@ -11,12 +11,12 @@
         <a class="nav-link" [routerLink]="['/about']">About</a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link" [routerLink]="['/medical-records']">Medical Records</a>
+        <a class="nav-link" [routerLink]="['/shelters']">Shelters</a>
       </li>
       <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link" [routerLink]="['/pets-grid']">Pets</a>
+        <a class="nav-link" [routerLink]="['/medical-records']">Medical Records</a>
       </li>
-      <li class="nav-item" *ngIf="isRole('user')" ngbDropdown>
+      <li class="nav-item" *ngIf="isRole('admin')" ngbDropdown>
         <a class="nav-link dropdown-toggle" id="playerDropdown" role="button"
            aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Users</a>
         <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>
@@ -24,13 +24,19 @@
              [routerLink]="['/users']"><span class="fas fa-user-circle"></span> List</a>
         </div>
       </li>
-      <li class="nav-item" *ngIf="isRole('SHELTER_VOLUNTEER')" ngbDropdown>
+      <li class="nav-item" ngbDropdown>
         <a class="nav-link dropdown-toggle" role="button"
            aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>Pets</a>
         <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>
-          <a *ngIf="isRole('SHELTER_VOLUNTEER')" [routerLink]="['/add-pet']" class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" >
+          <a class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
+             [routerLink]="['/pets-grid']"><span class="fas fa-paw"></span> List</a>
+          <a *ngIf="isRole('shelter volunteer')" class="dropdown-item" [routerLinkActive]="'active'"
+             [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/pet-grid/add-pet']">
             <span class="fas fa-paw"></span> Add</a>
         </div>
+      </li>
+      <li class="nav-item" *ngIf="isRole('ADMIN')">
+        <a class="nav-link" [routerLink]="['/shelter/certificates/validate']">Validate shelter certificates</a>
       </li>
     </ul>
     <ul class="navbar-nav ms-auto me-3" app-login-navbar></ul>
