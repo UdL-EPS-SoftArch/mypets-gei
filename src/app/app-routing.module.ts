@@ -15,6 +15,7 @@ import { ShelterListComponent } from './shelter/shelter-list/shelter-list.compon
 import { ShelterCreateComponent } from './shelter/shelter-create/shelter-create.component';
 import { ShelterDeleteComponent } from './shelter/shelter-delete/shelter-delete.component';
 import { CertificateAddComponent } from './shelter/certificate-add/certificate-add.component';
+import { UserDisableComponent } from './user/user-disable/user-disable.component';
 import { AddPetComponent } from "./pet/add-pet/add-pet.component";
 import { PetsGridComponent } from './pet/pet-grid/pets-grid.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'shelters/:id/volunteers', component: ShelterVolunteersListComponent, canActivate: [LoggedInGuard]},
   { path: 'users/create', component: UserRegisterComponent},
   { path: 'users/:id/delete', component: UserDeleteComponent, canActivate: [LoggedInGuard]},
+  { path: 'users/:id/disable', component: UserDisableComponent, canActivate: [LoggedInGuard]},
   { path: 'users/:id/edit', component: UserEditComponent, canActivate: [LoggedInGuard]},
   { path: 'users/:id', component: UserDetailComponent, canActivate: [LoggedInGuard]},
   { path: 'users', component: UserListComponent, canActivate: [LoggedInGuard]},

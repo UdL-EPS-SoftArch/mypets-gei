@@ -10,6 +10,7 @@ export class User extends Resource {
   password = '';
   passwordReset = false;
   uri: string;
+  locked: boolean;
 
   constructor(values: object = {}) {
     super();

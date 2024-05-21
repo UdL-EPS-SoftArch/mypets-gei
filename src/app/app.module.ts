@@ -26,6 +26,7 @@ import {UserService} from './user/user.service';
 import {VolunteerKickComponent} from './shelter/volunteer-kick/volunteer-kick.component';
 import {ShelterVolunteersListComponent} from './shelter/volunteer-list/volunteer-list.component';
 import {ShelterVolunteersAddComponent} from './shelter/volunteer-add/volunteer-add.component';
+import {UserDisableComponent} from './user/user-disable/user-disable.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 
 @NgModule({
@@ -43,6 +44,7 @@ import {AddPetComponent} from "./pet/add-pet/add-pet.component";
     VolunteerKickComponent,
     ShelterVolunteersListComponent,
     ShelterVolunteersAddComponent,
+    UserDisableComponent,
     AddPetComponent
   ],
   imports: [
