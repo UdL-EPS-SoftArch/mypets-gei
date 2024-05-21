@@ -23,7 +23,10 @@ import {HttpErrorInterceptor} from './error-handler/http-error-interceptor';
 import {AuthenticationBasicService} from './login-basic/authentication-basic.service';
 import {LoggedInGuard} from './login-basic/loggedin.guard';
 import {UserService} from './user/user.service';
-import { UserDisableComponent } from './user/user-disable/user-disable.component';
+import {VolunteerKickComponent} from './shelter/volunteer-kick/volunteer-kick.component';
+import {ShelterVolunteersListComponent} from './shelter/volunteer-list/volunteer-list.component';
+import {ShelterVolunteersAddComponent} from './shelter/volunteer-add/volunteer-add.component';
+import {UserDisableComponent} from './user/user-disable/user-disable.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 
 @NgModule({
@@ -38,6 +41,9 @@ import {AddPetComponent} from "./pet/add-pet/add-pet.component";
     UserEditComponent,
     UserDeleteComponent,
     UserSearchComponent,
+    VolunteerKickComponent,
+    ShelterVolunteersListComponent,
+    ShelterVolunteersAddComponent,
     UserDisableComponent,
     AddPetComponent
   ],
@@ -54,7 +60,6 @@ import {AddPetComponent} from "./pet/add-pet/add-pet.component";
     ErrorHandlerModule,
     NgbModule,
     ReactiveFormsModule,
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

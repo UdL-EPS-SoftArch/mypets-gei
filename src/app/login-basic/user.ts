@@ -18,6 +18,6 @@ export class User extends Resource {
   }
 
   getRoles(): string[] {
-    return this.authorities.map(a => a.authority.split('_')[1].toLowerCase());
+    return this.authorities.map(a => a.authority.split('_').slice(1).join(' ').toLowerCase());
   }
 }
