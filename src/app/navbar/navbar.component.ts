@@ -23,4 +23,8 @@ export class NavbarComponent implements OnInit {
   isRole(role: string): boolean {
     return this.authenticationService.isRole(role);
   }
+  hasRequiredRoles(): boolean {
+    const roles = this.authenticationService.getCurrentUser().getRoles();
+    return this.isRole('admin') || this.isRole('shelter volunteer');
+  }
 }
