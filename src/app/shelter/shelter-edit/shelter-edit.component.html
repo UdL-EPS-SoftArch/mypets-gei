@@ -96,13 +96,7 @@
     />
   </div>
 
-  <button
-    type="button"
-    class="form-group btn btn-outline-success mb-5"
-    (click)="editCertificate()"
-  >
-    Shelter Certificate
-  </button>
+  <app-certificate-add [shelterId]="shelterId"></app-certificate-add>
 
   <div>
     <!-- Updated at -->
@@ -131,3 +125,5 @@
     </div>
   </div>
 </form>
+<br><br>
+<app-volunteer-list [shelterId]="shelterId"></app-volunteer-list>
