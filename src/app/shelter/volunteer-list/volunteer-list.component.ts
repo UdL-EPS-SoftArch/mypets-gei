@@ -1,20 +1,25 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../login-basic/user';
 import { PagedResourceCollection, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { ShelterVolunteerService } from '../shelterVolunteer.service';
 import { ActivatedRoute } from '@angular/router';
 import { ShelterVolunteer } from '../shelterVolunteer';
-
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserSearchComponent } from 'src/app/user/user-search/user-search.component';
+import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-volunteer-list',
-  templateUrl: './volunteer-list.component.html'
+  templateUrl: './volunteer-list.component.html',
+  standalone: true,
+  imports: [NgbPaginationModule, UserSearchComponent, NgFor]
 })
 export class ShelterVolunteersListComponent implements OnInit {
   public users: ShelterVolunteer[] = [];
   public pageSize = 5;
   public page = 1;
   public totalVolunteers = 0;
+  @Input() shelterId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,8 +28,7 @@ export class ShelterVolunteersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var shelterId = Number(this.route.snapshot.paramMap.get('id'));
-    this.shelterVolunteerService.getVolunteersByShelterId(shelterId).subscribe(
+    this.shelterVolunteerService.getVolunteersByShelterId(this.shelterId).subscribe(
       (volunteers: ShelterVolunteer[]) => {
         console.log('Received volunteers:', volunteers);
         this.users = volunteers;
