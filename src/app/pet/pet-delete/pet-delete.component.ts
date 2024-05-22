@@ -30,4 +30,7 @@ export class PetDeleteComponent implements OnInit{
       this.router.navigateByUrl("/pets-grid");
     });
   }
+  cancelClicked(): void {
+    this.router.navigateByUrl("/pets-grid");
+  }
 }
