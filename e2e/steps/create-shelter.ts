@@ -11,7 +11,7 @@ Given('I log in as {string} with password {string}', (username, password) => {
     cy.get('#password').type(password).blur();
     cy.get('button').contains('Submit').click();
 });
-Then('I\'m logged in as admin {string}', (username) => {
+Then('I\'m logged in as user {string}', (username) => {
     cy.get('#currentUser')
       .invoke('text')
       .should('contains', username);
@@ -30,6 +30,9 @@ When('I click the {string} button', (label) => {
 });
 Given ('I am in shelters page', () => {
     cy.visit('http://localhost:4200/shelters');
+});
+Then ('I don\'t see {string} button', (label) => {
+    cy.get('button').contains(label).should('not.exist');
 });
 Then('Shelter with phone number {string} is created', (phone) => {
     // List all available shelters
