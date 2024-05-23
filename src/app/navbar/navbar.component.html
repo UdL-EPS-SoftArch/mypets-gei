@@ -30,7 +30,7 @@
         <div class="dropdown-menu" aria-labelledby="playDropdown" ngbDropdownMenu>
           <a class="dropdown-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }"
              [routerLink]="['/pets-grid']"><span class="fas fa-paw"></span> List</a>
-          <a *ngIf="isRole('shelter volunteer')" class="dropdown-item" [routerLinkActive]="'active'"
+          <a *ngIf="hasRequiredRoles()" class="dropdown-item" [routerLinkActive]="'active'"
              [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/pet-grid/add-pet']">
             <span class="fas fa-paw"></span> Add</a>
         </div>

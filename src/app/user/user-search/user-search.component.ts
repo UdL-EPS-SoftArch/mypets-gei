@@ -4,10 +4,14 @@ import { User } from '../../login-basic/user';
 import { Observable, of, OperatorFunction } from 'rxjs';
 import { catchError, debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { ResourceCollection } from '@lagoshny/ngx-hateoas-client';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-user-search',
-  templateUrl: './user-search.component.html'
+  templateUrl: './user-search.component.html',
+  standalone: true,
+  imports: [NgbModule, NgIf]
 })
 
 export class UserSearchComponent {

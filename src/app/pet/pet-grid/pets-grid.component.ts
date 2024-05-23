@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { PetComponent } from '../pet/pet.component';
 import { Pet } from '../pet';
 import { PetService } from '../pet.service';
+import {AuthenticationBasicService} from "../../login-basic/authentication-basic.service";
 @Component({
   selector: 'app-pets-grid',
   standalone: true,
@@ -20,20 +21,26 @@ export class PetsGridComponent implements OnInit{
   public pageSize = 5;
   public page = 1;
   public filteredPetsList: Pet[] = [];
+
   public filteredNameList: Pet[] = [];
   public filteredAgeList: Pet[] = [];
   public filteredColorList: Pet[] = [];
   constructor(
+
+  constructor(private authenticationService: AuthenticationBasicService,
+
     public petService: PetService,
     public router: Router,
   ) {}
 
-   filterResultsByName(name: string) {
+  filterResultsByName(name: string) {
     if (name === "") {
+
       this.filteredNameList = this.petsList;
     } else{
       this.filteredNameList = this.petsList.filter(pet => {
         return pet.name.toLowerCase().includes(name.toLowerCase());
+
       });
     }
     this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
@@ -64,20 +71,24 @@ export class PetsGridComponent implements OnInit{
 
 
   ngOnInit(): void {
-    console.log("Hello");
     this.petService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
       (page: PagedResourceCollection<Pet>) => {
         this.petsList = page.resources;
+
         this.filteredAgeList = this.petsList
         this.filteredColorList = this.petsList
         this.filteredNameList = this.petsList
 
         console.log(this.petsList);
-        this.filteredPetsList = this.petsList;
+
 
       });
   }
   navigateToAddPet() {
     this.router.navigate(['/pet-grid/add-pet']);
   }
+
+    isRole(role: string): boolean {
+        return this.authenticationService.isRole(role);
+    }
 }

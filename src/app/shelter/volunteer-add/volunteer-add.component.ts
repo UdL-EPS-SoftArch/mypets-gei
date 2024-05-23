@@ -24,7 +24,7 @@ import { ShelterService } from '../shelter.service';
     public shelterId = Number(this.route.snapshot.params.id);
 
     cancelClicked(): void {
-      this.router.navigate(['shelters', this.shelterId, 'volunteers']);
+      this.router.navigate(['shelters', this.shelterId, 'edit']);
     }
 
     addVolunteer(): void {
