@@ -50,7 +50,17 @@ export class PetsGridComponent implements OnInit{
     this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
 
   }  
+  filterResultsByAge(age: string) {
+    if (age === "") {
+      this.filteredAgeList = this.petsList;
+    }else{
+      this.filteredAgeList = this.petsList.filter(pet => {
+        return pet.age.toLowerCase().includes(age.toLowerCase());
+      });
+    }
+    this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
 
+  }
 
 
   ngOnInit(): void {
