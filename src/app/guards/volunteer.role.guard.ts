@@ -17,9 +17,9 @@ export class ShelterVolunteerGuard {
         'You should be logged in as a shelter volunteer to perform this action');
       return false;
     }
-    if (!this.authentication.getCurrentUser().getRoles().includes('shelter volunteer')) {
+    if (!this.authentication.getCurrentUser().getRoles().includes('admin') && !this.authentication.getCurrentUser().getRoles().includes('shelter volunteer')) {
       this.errorMessageService.showErrorMessage(
-        'You should be a shelter volunteer to perform this action');
+        'You should be a shelter volunteer or admin to perform this action');
       return false;
     }
     return true;
