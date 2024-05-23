@@ -1,16 +1,17 @@
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../../login-basic/user';
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserSearchComponent } from '../user-search/user-search.component';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   standalone: true,
-  imports: [NgbPaginationModule, UserSearchComponent],
+  imports: [NgbPaginationModule, UserSearchComponent, NgFor, RouterLink],
 })
 export class UserListComponent implements OnInit {
   public users: User[] = [];
