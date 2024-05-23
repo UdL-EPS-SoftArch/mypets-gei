@@ -25,7 +25,7 @@ export class PetsGridComponent implements OnInit{
     public router: Router,
   ) {}
 
-   filterResultsByName(name: string) {
+  filterResultsByName(name: string) {
     if (name === "") {
       this.filteredPetsList = this.petsList;
     } else {
