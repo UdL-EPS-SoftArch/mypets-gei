@@ -5,14 +5,14 @@
   <p>Species: {{ pet.breed }}</p>
   <p>Breed: {{ pet.breed }}</p>
   <p>Shelter: {{ pet.description }}</p>
-  <p>Adopted: {{ pet.isAdopted ? 'Yes' : 'No' }}</p>
+  <p>Adopted: {{ pet.adopted ? 'Yes' : 'No' }}</p>
   <p>Color: {{ pet.color }}</p>
   <p>Size: {{ pet.size }}</p>
   <p>Weight: {{ pet.weight }} kg</p>
   <p>Age: {{ pet.age }}</p>
   <p>Description: {{ pet.description }}</p>
   <div class="card-footer text-right">
-    <button id="editBtn" type="button" class="btn m-1 btn-outline-success">Edit Pet</button>
+    <button id="editBtn" type="button" [routerLink]="['edit']" class="btn m-1 btn-outline-success">Edit Pet</button>
     <button id="deleteBtn" type="button" [routerLink]="['delete']" class="btn m-1 btn-outline-danger">Delete</button>
     <button id="medicalBtn" type="button" [routerLink]="['/medical-records', petId]" class="btn m-1 btn-outline-primary">Medical Record</button>
   </div>
