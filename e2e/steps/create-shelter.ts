@@ -46,3 +46,14 @@ Then('Shelter with phone number {string} is created', (phone) => {
         cy.get('div.card.mb-1').contains(phone).should('exist');
     });
 });
+
+Then('I see input field feedback message {string}', (message) => {
+    cy.get('.invalid-feedback')
+      .should('be.visible')
+      .invoke('text')
+      .should('contains', message);
+});
+Then('The {string} button is disabled', (label) => {
+    cy.get('button').contains(label)
+    .should('be.disabled');
+});

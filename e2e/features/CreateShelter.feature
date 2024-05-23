@@ -27,3 +27,80 @@ Scenario: Create shelter as Volunteer
     Then I'm logged in as user "volunteer"
     Given I am in shelters page
     Then I don't see "Create new Shelter" button
+
+Scenario: Create shelter with invalid mail format
+    Given I'm in the homepage
+    Given I log in as "admin" with password "password"
+    Then I'm logged in as user "admin"
+    Given I am in shelters page
+    When I click the "Create new Shelter" button
+    And I fill the form with
+      | FIELD    | VALUE            |
+      | name     | shelter          |
+      | email    | shelter          |
+      | mobile   | 123456789        |
+    Then The "Submit" button is disabled
+    And I see input field feedback message "Invalid email format"
+
+Scenario: Create shelter with empty name
+    Given I'm in the homepage
+    Given I log in as "admin" with password "password"
+    Then I'm logged in as user "admin"
+    Given I am in shelters page
+    When I click the "Create new Shelter" button
+    And I fill the form with
+      | FIELD    | VALUE            |
+      | email    | shelter@demo.app |
+      | mobile   | 123456789        |
+    Then The "Submit" button is disabled
+    
+Scenario: Create shelter with empty email
+    Given I'm in the homepage
+    Given I log in as "admin" with password "password"
+    Then I'm logged in as user "admin"
+    Given I am in shelters page
+    When I click the "Create new Shelter" button
+    And I fill the form with
+      | FIELD    | VALUE            |
+      | name     | shelter          |
+      | mobile   | 123456789        |
+    Then The "Submit" button is disabled
+
+Scenario: Create shelter with empty mobile
+    Given I'm in the homepage
+    Given I log in as "admin" with password "password"
+    Then I'm logged in as user "admin"
+    Given I am in shelters page
+    When I click the "Create new Shelter" button
+    And I fill the form with
+      | FIELD    | VALUE            |
+      | name     | shelter          |
+      | email    | shelter@demo1.app|
+    Then The "Submit" button is disabled
+
+Scenario: Register user with an existing email
+    Given I'm in the homepage
+    Given I log in as "admin" with password "password"
+    Then I'm logged in as user "admin"
+    Given I am in shelters page
+    When I click the "Create new Shelter" button
+    And I fill the form with
+      | FIELD    | VALUE            |
+      | name     | shelter          |
+      | email    | shelter@demo.app |
+      | mobile   | 123456789        |
+    Then I see input field feedback message "This email is already registered"
+    Then The "Submit" button is disabled
+Scenario: Register user with an existing mobile
+    Given I'm in the homepage
+    Given I log in as "admin" with password "password"
+    Then I'm logged in as user "admin"
+    Given I am in shelters page
+    When I click the "Create new Shelter" button
+    And I fill the form with
+      | FIELD    | VALUE            |
+      | name     | shelter          |
+      | email    | shelter1@demo.app |
+      | mobile   | 123456789        |
+    Then I see input field feedback message "This phone number is already registered"
+    Then The "Submit" button is disabled
