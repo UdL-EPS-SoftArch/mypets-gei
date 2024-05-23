@@ -8,7 +8,10 @@
     <input type="text" placeholder="Filter by color" #color>
     <button class="primary" type="button" (click)="filterResultsByColor(color.value)">Search</button>
     </form>
-
+  <form>
+    <input type="text" placeholder="Filter by age" #age>
+    <button class="primary" type="button" (click)="filterResultsByAge(age.value)">Search</button>
+  </form>
   <button id="editBtn" type="button" [routerLink]="['/pet-grid/add-pet']"  class="btn m-1 btn-outline-success">Add new pet</button>
 
 </section>

@@ -20,6 +20,7 @@ export class PetsGridComponent implements OnInit{
   public pageSize = 5;
   public page = 1;
   public filteredPetsList: Pet[] = [];
+  
   constructor(
     public petService: PetService,
     public router: Router,
@@ -52,7 +53,22 @@ export class PetsGridComponent implements OnInit{
         return pet.color.toLowerCase().includes(color.toLowerCase());
       });
     }
+  }  
+  filterResultsByAge(age: string) {
+    if (age === "") {
+      this.filteredPetsList = this.petsList;
+    }else if(this.filteredPetsList.length==0){
+      this.filteredPetsList = this.petsList.filter(pet => {
+        return pet.age.toLowerCase().includes(age.toLowerCase());
+      });
+    }
+    else {
+      this.filteredPetsList = this.filteredPetsList.filter(pet => {
+        return pet.age.toLowerCase().includes(age.toLowerCase());
+      });
+    }
   }
+
 
   ngOnInit(): void {
     console.log("Hello");
