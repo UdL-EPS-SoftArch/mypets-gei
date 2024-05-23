@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PetService } from '../pet.service';
 import { Pet } from '../pet';
 import { PetFavouriteComponent } from '../pet-favourite/pet-favourite.component';
+import {AuthenticationBasicService} from "../../login-basic/authentication-basic.service";
 
 @Component({
   selector: 'app-pet-details',
@@ -17,6 +18,7 @@ export class PetDetailsComponent implements OnInit {
   petId: number | null = null;
 
   constructor(private petsService: PetService,
+              private authenticationService: AuthenticationBasicService,
               private route: ActivatedRoute
   ) { }
   ngOnInit(): void {
@@ -31,5 +33,9 @@ export class PetDetailsComponent implements OnInit {
           this.pet = response;
         }
       });
+  }
+
+  isRole(role: string): boolean {
+    return this.authenticationService.isRole(role);
   }
 }
