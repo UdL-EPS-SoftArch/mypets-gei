@@ -1,11 +1,16 @@
 <h2>Pets page</h2>
 <section>
   <form>
-    <input type="text" placeholder="Filter by name" #filter>
-    <button class="primary" type="button" (click)="filterResultsByName(filter.value)">Search</button>
-    <button id="editBtn" type="button" [routerLink]="['/pet-grid/add-pet']"  class="btn m-1 btn-outline-success">Add new pet</button>
-
+    <input type="text" placeholder="Filter by name" #name>
+    <button class="primary" type="button" (click)="filterResultsByName(name.value)">Search</button>
   </form>
+  <form>
+    <input type="text" placeholder="Filter by color" #color>
+    <button class="primary" type="button" (click)="filterResultsByColor(color.value)">Search</button>
+    </form>
+
+  <button id="editBtn" type="button" [routerLink]="['/pet-grid/add-pet']"  class="btn m-1 btn-outline-success">Add new pet</button>
+
 </section>
 <section class="results">
   <app-pet *ngFor="let pet of filteredPetsList" [pet]="pet"></app-pet>

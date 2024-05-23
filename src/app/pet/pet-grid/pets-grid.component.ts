@@ -28,9 +28,28 @@ export class PetsGridComponent implements OnInit{
    filterResultsByName(name: string) {
     if (name === "") {
       this.filteredPetsList = this.petsList;
-    } else {
+    } else if (this.filteredPetsList.length==0){
       this.filteredPetsList = this.petsList.filter(pet => {
         return pet.name.toLowerCase().includes(name.toLowerCase());
+      });
+    }
+    else {
+      this.filteredPetsList = this.filteredPetsList.filter(pet => {
+        return pet.name.toLowerCase().includes(name.toLowerCase());
+      });
+    }
+  }
+  filterResultsByColor(color: string) {
+    if (color === "") {
+      this.filteredPetsList = this.petsList;
+    }else if(this.filteredPetsList.length==0){
+      this.filteredPetsList = this.petsList.filter(pet => {
+        return pet.color.toLowerCase().includes(color.toLowerCase());
+      });
+    }
+    else {
+      this.filteredPetsList = this.filteredPetsList.filter(pet => {
+        return pet.color.toLowerCase().includes(color.toLowerCase());
       });
     }
   }
