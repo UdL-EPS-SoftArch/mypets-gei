@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'shelters', component: ShelterListComponent },
   { path: 'shelters/create', component: ShelterCreateComponent, canActivate: [LoggedInGuard] },
   { path: 'shelters/:id/edit', component: ShelterEditComponent, canActivate: [LoggedInGuard] },
-  { path: `shelter/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
+  { path: `shelters/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
   { path: 'medical-records', component: MedicalRecordListComponent },
   { path: 'medical-records/add', component: MedicalRecordAddComponent },
   { path: 'medical-records/:petId', component: MedicalRecordListComponent },
