@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { PetComponent } from '../pet/pet.component';
 import { Pet } from '../pet';
 import { PetService } from '../pet.service';
+import {AuthenticationBasicService} from "../../login-basic/authentication-basic.service";
 @Component({
   selector: 'app-pets-grid',
   standalone: true,
@@ -20,7 +21,7 @@ export class PetsGridComponent implements OnInit{
   public pageSize = 5;
   public page = 1;
   public filteredPetsList: Pet[] = [];
-  constructor(
+  constructor(private authenticationService: AuthenticationBasicService,
     public petService: PetService,
     public router: Router,
   ) {}
@@ -48,4 +49,8 @@ export class PetsGridComponent implements OnInit{
   navigateToAddPet() {
     this.router.navigate(['/pet-grid/add-pet']);
   }
+
+    isRole(role: string): boolean {
+        return this.authenticationService.isRole(role);
+    }
 }

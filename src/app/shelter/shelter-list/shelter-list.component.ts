@@ -4,6 +4,7 @@ import { Shelter } from '../shelter'
 import { ShelterService } from '../shelter.service'
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client'
 import { Router, RouterModule } from '@angular/router'
+import {AuthenticationBasicService} from "../../login-basic/authentication-basic.service";
 
 @Component({
   selector: 'app-shelter-list',
@@ -16,6 +17,7 @@ export class ShelterListComponent implements OnInit {
   public shelters: Shelter[]
 
   constructor(
+    private authenticationService: AuthenticationBasicService,
     private shelterService: ShelterService,
     private router: Router,
   ) {}
@@ -38,5 +40,9 @@ export class ShelterListComponent implements OnInit {
 
   navigateToEdit(uri: string) {
     this.router.navigate([uri + '/edit'])
+  }
+
+  isRole(role: string): boolean {
+    return this.authenticationService.isRole(role);
   }
 }
