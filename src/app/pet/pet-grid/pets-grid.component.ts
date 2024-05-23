@@ -20,7 +20,9 @@ export class PetsGridComponent implements OnInit{
   public pageSize = 5;
   public page = 1;
   public filteredPetsList: Pet[] = [];
-  
+  public filteredNameList: Pet[] = [];
+  public filteredAgeList: Pet[] = [];
+  public filteredColorList: Pet[] = [];
   constructor(
     public petService: PetService,
     public router: Router,
@@ -28,46 +30,27 @@ export class PetsGridComponent implements OnInit{
 
    filterResultsByName(name: string) {
     if (name === "") {
-      this.filteredPetsList = this.petsList;
-    } else if (this.filteredPetsList.length==0){
-      this.filteredPetsList = this.petsList.filter(pet => {
+      this.filteredNameList = this.petsList;
+    } else{
+      this.filteredNameList = this.petsList.filter(pet => {
         return pet.name.toLowerCase().includes(name.toLowerCase());
       });
     }
-    else {
-      this.filteredPetsList = this.filteredPetsList.filter(pet => {
-        return pet.name.toLowerCase().includes(name.toLowerCase());
-      });
-    }
+    this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
   }
   filterResultsByColor(color: string) {
+    
     if (color === "") {
-      this.filteredPetsList = this.petsList;
-    }else if(this.filteredPetsList.length==0){
-      this.filteredPetsList = this.petsList.filter(pet => {
+      this.filteredColorList = this.petsList;
+    }else{
+      this.filteredColorList = this.petsList.filter(pet => {
         return pet.color.toLowerCase().includes(color.toLowerCase());
       });
     }
-    else {
-      this.filteredPetsList = this.filteredPetsList.filter(pet => {
-        return pet.color.toLowerCase().includes(color.toLowerCase());
-      });
-    }
+    this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
+
   }  
-  filterResultsByAge(age: string) {
-    if (age === "") {
-      this.filteredPetsList = this.petsList;
-    }else if(this.filteredPetsList.length==0){
-      this.filteredPetsList = this.petsList.filter(pet => {
-        return pet.age.toLowerCase().includes(age.toLowerCase());
-      });
-    }
-    else {
-      this.filteredPetsList = this.filteredPetsList.filter(pet => {
-        return pet.age.toLowerCase().includes(age.toLowerCase());
-      });
-    }
-  }
+
 
 
   ngOnInit(): void {
@@ -75,6 +58,10 @@ export class PetsGridComponent implements OnInit{
     this.petService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
       (page: PagedResourceCollection<Pet>) => {
         this.petsList = page.resources;
+        this.filteredAgeList = this.petsList
+        this.filteredColorList = this.petsList
+        this.filteredNameList = this.petsList
+
         console.log(this.petsList);
         this.filteredPetsList = this.petsList;
 
