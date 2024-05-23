@@ -50,14 +50,14 @@
       <p><span class="label">Issue:</span> {{ record.issue }}</p>
       <p><span class="label">Description:</span> {{ record.description }}</p>
       <p><span class="label">Date:</span> {{ record.date }}</p>
-      <button (click)="editRecord(record.id)">Edit</button>
-      <button (click)="deleteRecord(record.id)">Delete</button>
+      <button *ngIf="!isRole('user') && !isRole('client')" (click)="editRecord(record.id)">Edit</button>
+      <button *ngIf="!isRole('user') && !isRole('client')" (click)="deleteRecord(record.id)">Delete</button>
     </div>
   </div>
   <ng-template #noRecords>
     <p class="no-records">No medical records found.</p>
   </ng-template>
-  <button (click)="addMedicalRecord()" style="margin-top: 20px;">Add Medical Record</button>
+  <button *ngIf="!isRole('user') && !isRole('client')" (click)="addMedicalRecord()" style="margin-top: 20px;">Add Medical Record</button>
 </div>
 </body>
 </html>

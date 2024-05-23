@@ -1,9 +1,9 @@
 <h2>Pets page</h2>
 <section>
   <form>
-    <input type="text" placeholder="Filter by name" #filter>
+    <input type="text" (input)="filterResultsByName(filter.value)" placeholder="Filter by name" #filter>
     <button class="primary" type="button" (click)="filterResultsByName(filter.value)">Search</button>
-    <button id="editBtn" type="button" [routerLink]="['/pet-grid/add-pet']"  class="btn m-1 btn-outline-success">Add new pet</button>
+    <button *ngIf="!isRole('user') && !isRole('client')" id="editBtn" type="button" [routerLink]="['/pet-grid/add-pet']"  class="btn m-1 btn-outline-success">Add new pet</button>
 
   </form>
 </section>

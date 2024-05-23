@@ -5,6 +5,7 @@ import {MedicalRecordService} from "../medical-record.service";
 import {Pet} from "../../pet/pet";
 import {CommonModule} from "@angular/common";
 import {Subscription} from "cypress/types/net-stubbing";
+import {AuthenticationBasicService} from "../../login-basic/authentication-basic.service";
 
 @Component({
   selector: 'app-medical-record-list',
@@ -20,7 +21,7 @@ export class MedicalRecordListComponent implements OnInit {
   medicalRecords: MedicalRecord[] = [];
   petId: any;
 
-  constructor(
+  constructor(private authenticationService: AuthenticationBasicService,
     private medicalRecordService: MedicalRecordService,
     private router: Router,
     private route: ActivatedRoute,
@@ -103,5 +104,9 @@ export class MedicalRecordListComponent implements OnInit {
 
   addMedicalRecord() {
     this.router.navigate(['/medical-records/add']);
+  }
+
+  isRole(role: string): boolean {
+    return this.authenticationService.isRole(role);
   }
 }
