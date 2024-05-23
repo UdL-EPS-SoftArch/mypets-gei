@@ -14,19 +14,22 @@ import {
 import { ActivatedRoute, Router } from '@angular/router'
 import { Shelter } from '../shelter'
 import { CommonModule } from '@angular/common'
+import { ShelterVolunteersListComponent } from '../volunteer-list/volunteer-list.component'
+import { CertificateAddComponent } from '../certificate-add/certificate-add.component'
 
 @Component({
   selector: 'app-shelter-edit',
   templateUrl: './shelter-edit.component.html',
   styleUrl: './shelter-edit.component.css',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ShelterVolunteersListComponent, CertificateAddComponent],
 })
 export class ShelterEditComponent implements OnInit {
   public shelter: Shelter
   shelterForm: FormGroup
   createdAt: string
   lastUpdate: string
+  shelterId: string
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +42,7 @@ export class ShelterEditComponent implements OnInit {
 
   ngOnInit() {
     this.shelter = new Shelter()
-    const shelterId = this.activatedRoute.snapshot.paramMap.get('id')
+    this.shelterId = this.activatedRoute.snapshot.paramMap.get('id')
 
     this.shelterForm = this.formBuilder.group({
       name: new FormControl('', {
@@ -56,7 +59,7 @@ export class ShelterEditComponent implements OnInit {
       location: {},
     })
 
-    this.shelterService.getResource(shelterId).subscribe((_shelter) => {
+    this.shelterService.getResource(this.shelterId).subscribe((_shelter) => {
       this.shelter = _shelter
       this.createdAt = new Date(_shelter.createdAt).toLocaleString()
       this.lastUpdate = new Date(_shelter.updatedAt).toLocaleString()
@@ -110,10 +113,6 @@ export class ShelterEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['shelters'])
-  }
-
-  editCertificate() {
-    //todo
   }
 
   get name() {

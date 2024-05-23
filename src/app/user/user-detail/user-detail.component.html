@@ -22,8 +22,8 @@
       <button id="editBtn" type="button" *ngIf="getCurrentUser().username === user.username" [routerLink]="['edit']"
               class="btn m-1 btn-outline-success">Edit
       </button>
-      <button type="button" class="btn btn-outline-success" (click)="enable()">Enable</button>
-      <button type="button" class="btn btn-outline-danger" [routerLink]="['disable']">Disable</button>
+      <button type="button" class="btn btn-outline-success" [disabled]="!user.locked" (click)="enable()">Enable</button>
+      <button type="button" class="btn btn-outline-danger" [disabled]="user.locked" [routerLink]="['disable']">Disable</button>
       <button id="deleteBtn" type="button" *ngIf="getCurrentUser().username === user.username" [routerLink]="['delete']"
               class="btn m-1 btn-danger">Delete
       </button>

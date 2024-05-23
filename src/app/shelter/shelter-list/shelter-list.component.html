@@ -1,5 +1,6 @@
 <p class="lead">Shelters</p>
 <button
+  *ngIf="isRole('admin')"
   id="createBtn"
   type="button"
   class="btn m-1 btn-outline-primary"
@@ -21,7 +22,7 @@
           <p class="card-text">Rating: {{ shelter.rating }}</p>
         </div>
         <div class="col-6 mt-1">
-          <button
+          <button *ngIf="!isRole('user') && !isRole('client')"
             id="editBtn"
             type="button"
             class="btn m-1 btn-outline-success"
@@ -30,6 +31,7 @@
             Edit
           </button>
           <button
+            *ngIf="isRole('admin')"
             id="deleteBtn"
             type="button"
             class="btn m-1 btn-outline-danger"

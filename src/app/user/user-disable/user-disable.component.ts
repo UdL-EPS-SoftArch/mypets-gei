@@ -27,7 +27,7 @@ export class UserDisableComponent implements OnInit {
     this.userService.disable(this.user.username).subscribe({
       next: (user: User) => {
         alert('User Disabled');
-        window.location.reload();
+        window.location.href = '/users/' + this.id;
       },
       error: (error) => {
         alert('Error disabling user');

@@ -28,6 +28,7 @@ import { CertificateValidateComponent } from './shelter/certificate-validate/cer
 import {MedicalRecordEditComponent} from "./medical-record/medical-edit/medical-record-edit.component";
 import { PetEditComponent } from './pet/pet-edit/pet-edit.component';
 
+
 const routes: Routes = [
   { path: 'shelter/certificates/validate', component: CertificateValidateComponent, canActivate: [LoggedInGuard]},
   { path: 'shelter/:id/certificate/add', component: CertificateAddComponent, canActivate: [LoggedInGuard]},
