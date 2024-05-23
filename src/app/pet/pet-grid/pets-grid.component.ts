@@ -30,17 +30,15 @@ export class PetsGridComponent implements OnInit{
       this.filteredPetsList = this.petsList;
     } else {
       this.filteredPetsList = this.petsList.filter(pet => {
-        return pet.name.toLowerCase().includes(name.toLowerCase());
+        return pet.name.toLowerCase().trim().includes(name.toLowerCase().trim());
       });
     }
   }
 
   ngOnInit(): void {
-    console.log("Hello");
     this.petService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
       (page: PagedResourceCollection<Pet>) => {
         this.petsList = page.resources;
-        console.log(this.petsList);
         this.filteredPetsList = this.petsList;
 
       });
