@@ -31,6 +31,15 @@ When('I click the {string} button', (label) => {
 Given ('I am in shelters page', () => {
     cy.visit('http://localhost:4200/shelters');
 });
-Then ('Shelter with phone number {string} is created', (phone) => {
-    cy.get('#shelters').contains(phone);
+Then('Shelter with phone number {string} is created', (phone) => {
+    // List all available shelters
+    cy.get('div.card.mb-1').then($shelters => {
+        // Log all the shelters to the console
+        cy.wrap($shelters).each(($shelter, index) => {
+            cy.log(`Shelter ${index + 1}: ${$shelter.text()}`);
+        });
+
+        // Verify if the shelter with the given phone number exists
+        cy.get('div.card.mb-1').contains(phone).should('exist');
+    });
 });

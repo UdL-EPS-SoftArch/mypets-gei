@@ -18,4 +18,4 @@ Scenario: Create shelter as Admin
       | email    | shelter@demo.app |
       | mobile   | 123456789        |
     And I click the "Submit" button
-    Then Shelter with phone number "phone" is created
+    Then Shelter with phone number "123456789" is created
