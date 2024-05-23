@@ -3,10 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../../login-basic/user';
 import { PagedResourceCollection } from '@lagoshny/ngx-hateoas-client';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserSearchComponent } from '../user-search/user-search.component';
 
 @Component({
   selector: 'app-user-list',
-  templateUrl: './user-list.component.html'
+  templateUrl: './user-list.component.html',
+  standalone: true,
+  imports: [NgbPaginationModule, UserSearchComponent],
 })
 export class UserListComponent implements OnInit {
   public users: User[] = [];
