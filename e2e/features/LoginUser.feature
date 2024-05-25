@@ -27,4 +27,14 @@ Feature: Login User
       | password | password      |
     And I click the "Submit" button
     Then I see error message "Username or password incorrect"
-    
+
+  Scenario: Login with incorrect password
+    Given I'm in the homepage
+    And I'm not logged in
+    When I click the "Login" menu
+    And I fill the form with
+      | FIELD    | VALUE         |
+      | username | user          |
+      | password | no_password   |
+    And I click the "Submit" button
+    Then I see error message "Username or password incorrect"
