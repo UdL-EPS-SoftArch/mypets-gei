@@ -52,3 +52,13 @@ Feature: Login User
       | FIELD    | VALUE         |
       | username | user          |
     Then The "Submit" button is disabled
+
+
+  Scenario: Login user with username email
+    Given I'm in the homepage
+    And I'm not logged in
+    When I click the "Login" menu
+    And I fill the form with
+      | FIELD    | VALUE         |
+      | password | password      |
+    Then The "Submit" button is disabled
