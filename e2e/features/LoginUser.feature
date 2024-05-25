@@ -4,7 +4,7 @@ Feature: Login User
   I want to login myself with an account
 
   Background: 
-  Given there is a registered user with username "user" and password "password"
+  Given There is a registered user with username "user" and password "password"
 
   Scenario: Login existing user
     Given I'm in the homepage
