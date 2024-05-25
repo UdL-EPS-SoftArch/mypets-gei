@@ -43,3 +43,12 @@ Feature: Login User
     Given I'm in the homepage
     And I log in as "user" with password "password"
     Then The "Login" menu is not present
+
+  Scenario: Login user with empty password
+    Given I'm in the homepage
+    And I'm not logged in
+    When I click the "Login" menu
+    And I fill the form with
+      | FIELD    | VALUE         |
+      | username | user          |
+    Then The "Submit" button is disabled
