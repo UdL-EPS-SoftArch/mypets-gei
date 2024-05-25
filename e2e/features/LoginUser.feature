@@ -16,3 +16,15 @@ Feature: Login User
       | password | password      |
     And I click the "Submit" button
     Then I'm logged in as user "user"
+
+  Scenario: Login with not existing username
+    Given I'm in the homepage
+    And I'm not logged in
+    When I click the "Login" menu
+    And I fill the form with
+      | FIELD    | VALUE         |
+      | username | no_user       |
+      | password | password      |
+    And I click the "Submit" button
+    Then I see error message "Username or password incorrect"
+    
