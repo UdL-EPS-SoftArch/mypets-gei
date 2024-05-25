@@ -38,3 +38,8 @@ Feature: Login User
       | password | no_password   |
     And I click the "Submit" button
     Then I see error message "Username or password incorrect"
+
+  Scenario: Login user when already authenticated
+    Given I'm in the homepage
+    And I log in as "user" with password "password"
+    Then The "Login" menu is not present
