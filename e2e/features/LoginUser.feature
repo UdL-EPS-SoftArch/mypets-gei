@@ -54,11 +54,21 @@ Feature: Login User
     Then The "Submit" button is disabled
 
 
-  Scenario: Login user with username email
+  Scenario: Login user with empty username
     Given I'm in the homepage
     And I'm not logged in
     When I click the "Login" menu
     And I fill the form with
       | FIELD    | VALUE         |
       | password | password      |
+    Then The "Submit" button is disabled
+    
+  Scenario: Login user with password shorter than 8 characters
+    Given I'm in the homepage
+    And I'm not logged in
+    When I click the "Login" menu
+    And I fill the form with
+      | FIELD    | VALUE         |
+      | username | user          |
+      | password | pass          |
     Then The "Submit" button is disabled
