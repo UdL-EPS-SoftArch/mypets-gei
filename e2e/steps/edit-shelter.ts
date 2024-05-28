@@ -14,12 +14,10 @@ Given("I'm not logged in", () => {
 })
 
 Given('I log in as {string} with password {string}', (username, password) => {
-  // cy.intercept('GET', 'http://localhost:8080/identity').as('getIdentity')
   cy.get('.nav-link').contains('Login').click()
   cy.get('#username').type(username).blur()
   cy.get('#password').type(password).blur()
   cy.get('button').contains('Submit').click()
-  // cy.wait('@getIdentity')
   cy.get('.nav-link').contains(username)
 })
 
@@ -42,13 +40,13 @@ Given(
 )
 
 When('I fill the form with', (table: DataTable) => {
-  table.rows().forEach((pair: string[]) =>
-    cy
-      .get('#' + pair[0])
-      .clear()
-      .type(pair[1])
-      .blur(),
-  )
+  table.rows().forEach((pair: string[]) => {
+    const element = cy.get('#' + pair[0]).clear()
+    if (pair[1].length > 0) {
+      element.type(pair[1])
+    }
+    element.blur()
+  })
 })
 
 Then('I see input field feedback message {string}', (message) => {
@@ -58,26 +56,18 @@ Then('I see input field feedback message {string}', (message) => {
     .should('contains', message)
 })
 
-Then('Shelter with phone number {string} is created', (phone) => {
-  // List all available shelters
-  cy.get('div.card.mb-1').then(($shelters) => {
-    cy.wrap($shelters).each(($shelter, index) => {
-      cy.log(`Shelter ${index + 1}: ${$shelter.text()}`)
-    })
+Then('The button {string} is not present', (label) => {
+  cy.get('button').contains(label).should('not.exist')
+})
 
-    // Verify if the shelter with the given phone number exists
-    cy.get('div.card.mb-1').contains(phone).should('exist')
-  })
+Then('The {string} button is disabled', (label) => {
+  cy.get('button').contains(label).should('be.disabled')
+})
+
+Then('Shelter with phone number {string} is created', (phone) => {
+  cy.get('div.card.mb-1').contains(phone).should('exist')
 })
 
 Then('Shelter with name {string} is updated', (name) => {
-  // List all available shelters
-  cy.get('div.card.mb-1').then(($shelters) => {
-    cy.wrap($shelters).each(($shelter, index) => {
-      cy.log(`Shelter ${index + 1}: ${$shelter.text()}`)
-    })
-
-    // Verify if the shelter with the given name exists
-    cy.get('div.card.mb-1').contains(name).should('exist')
-  })
+  cy.get('div.card.mb-1').contains(name).should('exist')
 })
