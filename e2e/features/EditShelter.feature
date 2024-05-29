@@ -65,6 +65,29 @@ Feature: Edit Shelter
     Then I see input field feedback message "Name is required"
     And The "Submit" button is disabled
 
+  Scenario: Edit Shelter with invalid email
+    Given I'm in the homepage
+    And I log in as "admin" with password "password"
+    And I click the "Shelters" menu
+    When I click the "Edit" button of Shelter with phone number "2"
+    And I fill the form with
+      | FIELD    | VALUE         |
+      | email    |               |
+    Then I see input field feedback message "Email is required"
+    And The "Submit" button is disabled
+
+  Scenario: Edit Shelter with invalid phone
+    Given I'm in the homepage
+    And I log in as "admin" with password "password"
+    And I click the "Shelters" menu
+    When I click the "Edit" button of Shelter with phone number "2"
+    And I fill the form with
+      | FIELD    | VALUE         |
+      | mobile   |               |
+    Then I see input field feedback message "A phone number is required"
+    And The "Submit" button is disabled
+
+
 
   Scenario: Edit Shelter with repeated email
     Given I'm in the homepage
