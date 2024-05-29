@@ -97,8 +97,8 @@ Feature: Edit Shelter
     And I fill the form with
       | FIELD    | VALUE             |
       | email    | shelter1@demo.app |
-    Then I see input field feedback message "This email is already registered"
-    And The "Submit" button is disabled
+    Then The "Submit" button is disabled
+    And I see input field feedback message "This email is already registered"
 
 
   Scenario: Edit Shelter with repeated phone
@@ -109,5 +109,5 @@ Feature: Edit Shelter
     And I fill the form with
       | FIELD    | VALUE    |
       | mobile   | 2        |
-    Then I see input field feedback message "This phone number is already registered"
-    And The "Submit" button is disabled
+    Then The "Submit" button is disabled
+    And I see input field feedback message "This phone number is already registered"

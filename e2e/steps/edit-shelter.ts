@@ -40,12 +40,12 @@ Given(
 )
 
 When('I fill the form with', (table: DataTable) => {
-  table.rows().forEach((pair: string[]) => {
-    const element = cy.get('#' + pair[0]).clear()
-    if (pair[1].length > 0) {
-      element.type(pair[1])
+  table.rows().forEach(([key, value]: string[]) => {
+    cy.get('#' + key).clear()
+    if (value.length > 0) {
+      cy.get('#' + key).type(value)
     }
-    element.blur()
+    cy.get('#' + key).blur()
   })
 })
 
