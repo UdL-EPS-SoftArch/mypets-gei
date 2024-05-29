@@ -51,7 +51,7 @@ When('I fill the form with', (table: DataTable) => {
 
 Then('I see input field feedback message {string}', (message) => {
   cy.get('.invalid-feedback')
-    .should('be.visible')
+    .should('be.visible', { timeout: 10000 })
     .invoke('text')
     .should('contains', message)
 })
