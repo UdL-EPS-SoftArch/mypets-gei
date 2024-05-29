@@ -31,18 +31,15 @@ export class PetsGridComponent implements OnInit{
 
   filterResultsByName(name: string) {
     if (name === "") {
-
       this.filteredNameList = this.petsList;
     } else{
       this.filteredNameList = this.petsList.filter(pet => {
         return pet.name.toLowerCase().includes(name.toLowerCase());
-
       });
     }
     this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
   }
   filterResultsByColor(color: string) {
-
     if (color === "") {
       this.filteredColorList = this.petsList;
     }else{
@@ -62,13 +59,13 @@ export class PetsGridComponent implements OnInit{
       });
     }
     this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
-
   }
 
   ngOnInit(): void {
     this.petService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
       (page: PagedResourceCollection<Pet>) => {
         this.petsList = page.resources;
+        this.filteredPetsList = this.petsList
         this.filteredAgeList = this.petsList
         this.filteredColorList = this.petsList
         this.filteredNameList = this.petsList
