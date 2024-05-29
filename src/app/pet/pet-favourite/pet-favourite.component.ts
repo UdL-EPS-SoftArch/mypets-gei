@@ -7,6 +7,7 @@ import { AuthenticationBasicService } from 'src/app/login-basic/authentication-b
 import { HttpClient } from '@angular/common/http';
 import { FavouritedPets } from '../favourited-pets';
 import { FavouritedPetsService } from '../favourited-pets.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-pet-favourite',
@@ -22,7 +23,7 @@ export class PetFavouriteComponent implements OnInit {
   isNowFavourited: Boolean = false;
   user: User = new User();
   pet:Pet = new Pet();
-  baseUrl: String = "http://localhost:8080";
+  baseUrl: String = environment.API;
   petId:number;
 
   constructor(private authService: AuthenticationBasicService,
@@ -31,7 +32,7 @@ export class PetFavouriteComponent implements OnInit {
   ngOnInit(): void {
     // Get id of pet on display
     this.petId = Number(this.route.snapshot.paramMap.get('id'));
-    
+
     // Get current user data
     this.user = this.authService.getCurrentUser();
 
@@ -98,7 +99,7 @@ export class PetFavouriteComponent implements OnInit {
               this.retrieveFavourites();
           });
         }
-      });   
+      });
     } else { //was not favourited, now it is
       // Create new FavouritePets object
       const newPair = {userId: this.user.username, petId: this.petId};
@@ -112,7 +113,7 @@ export class PetFavouriteComponent implements OnInit {
       });
     }
   }
-  
+
   retrieveFavourites(): void{
     // Obtain all entries from all users
     this.http.get<any>(`${this.baseUrl}/favouritedPetses`).subscribe(
