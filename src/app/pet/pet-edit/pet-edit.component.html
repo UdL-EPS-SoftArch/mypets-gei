@@ -1,0 +1,137 @@
+<form id="pet-form" (ngSubmit)="onSubmit()" #form="ngForm">
+  <fieldset>
+    <!-- Pet name -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="name">Name</label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.name"
+      />
+    </div>
+
+    <!-- Pet Breed -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="breed">Breed</label>
+      <input
+        id="breed"
+        name="breed"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.breed"
+      />
+    </div>
+
+    <!-- Pet Shelter -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="description">Shelter</label>
+      <input
+        id="description"
+        name="description"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.description"
+      />
+    </div>
+
+    <!-- Pet Adopted -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="isAdopted">Adopted</label>
+      <select
+        id="isAdopted"
+        name="isAdopted"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.adopted"
+      >
+        <option [ngValue]="null" disabled selected>
+          Select adoption status
+        </option>
+        <option [ngValue]="true">Yes</option>
+        <option [ngValue]="false">No</option>
+      </select>
+    </div>
+
+    <!-- Pet Color -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="color">Color</label>
+      <input
+        id="color"
+        name="color"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.color"
+      />
+    </div>
+
+    <!-- Pet Size -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="size">Size</label>
+      <input
+        id="size"
+        name="size"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.size"
+      />
+    </div>
+
+    <!-- Pet Weight -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="weight">Weight</label>
+      <input
+        id="weight"
+        name="weight"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.weight"
+      />
+    </div>
+
+    <!-- Pet Age -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="age">Age</label>
+      <input
+        id="age"
+        name="age"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.age"
+      />
+    </div>
+
+    <!-- Pet Description -->
+    <div class="form-group mb-3">
+      <label class="control-label" for="description">Description</label>
+      <input
+        id="description"
+        name="description"
+        type="text"
+        class="form-control"
+        [(ngModel)]="pet.description"
+      />
+    </div>
+
+    <!-- Button -->
+    <div class="form-group fa-pull-right">
+      <button
+        id="userDetail"
+        type="button"
+        [routerLink]="['/pets/' + this.pet.id]"
+        class="btn btn-outline-primary"
+      >
+        Back
+      </button>
+      <button
+        id="submit"
+        type="submit"
+        [disabled]="!form.form.valid"
+        class="btn btn-success ms-3"
+      >
+        Submit
+      </button>
+    </div>
+  </fieldset>
+</form>
