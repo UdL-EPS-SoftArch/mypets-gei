@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { PetComponent } from '../pet/pet.component';
 import { Pet } from '../pet';
 import { PetService } from '../pet.service';
-import {AuthenticationBasicService} from "../../login-basic/authentication-basic.service";
+import { AuthenticationBasicService } from "../../login-basic/authentication-basic.service";
 @Component({
   selector: 'app-pets-grid',
   standalone: true,
@@ -16,19 +16,15 @@ import {AuthenticationBasicService} from "../../login-basic/authentication-basic
 })
 
 export class PetsGridComponent implements OnInit{
-
   public petsList: Pet[] = [];
   public pageSize = 5;
   public page = 1;
   public filteredPetsList: Pet[] = [];
-
   public filteredNameList: Pet[] = [];
   public filteredAgeList: Pet[] = [];
   public filteredColorList: Pet[] = [];
-  constructor(
 
   constructor(private authenticationService: AuthenticationBasicService,
-
     public petService: PetService,
     public router: Router,
   ) {}
@@ -46,7 +42,7 @@ export class PetsGridComponent implements OnInit{
     this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
   }
   filterResultsByColor(color: string) {
-    
+
     if (color === "") {
       this.filteredColorList = this.petsList;
     }else{
@@ -56,7 +52,7 @@ export class PetsGridComponent implements OnInit{
     }
     this.filteredPetsList = this.filteredNameList.filter(pet => this.filteredColorList.includes(pet)).filter(pet => this.filteredAgeList.includes(pet))
 
-  }  
+  }
   filterResultsByAge(age: string) {
     if (age === "") {
       this.filteredAgeList = this.petsList;
@@ -69,26 +65,20 @@ export class PetsGridComponent implements OnInit{
 
   }
 
-
   ngOnInit(): void {
     this.petService.getPage({ pageParams:  { size: this.pageSize }, sort: { name: 'ASC' } }).subscribe(
       (page: PagedResourceCollection<Pet>) => {
         this.petsList = page.resources;
-
         this.filteredAgeList = this.petsList
         this.filteredColorList = this.petsList
         this.filteredNameList = this.petsList
-
-        console.log(this.petsList);
-
-
       });
   }
   navigateToAddPet() {
     this.router.navigate(['/pet-grid/add-pet']);
   }
 
-    isRole(role: string): boolean {
-        return this.authenticationService.isRole(role);
-    }
+  isRole(role: string): boolean {
+    return this.authenticationService.isRole(role);
+  }
 }
