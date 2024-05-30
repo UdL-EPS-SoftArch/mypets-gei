@@ -37,11 +37,8 @@ export class ShelterDeleteComponent implements OnInit {
   }
 
   deleteShelter(): void {
-    this.shelterService.deleteResource(this.shelter).subscribe({
-      next: () => {
-        this.shelter = new Shelter()
-        this.cancelClicked()
-      },
+    this.shelterService.deleteResource(this.shelter).subscribe(() => {
+        this.router.navigateByUrl("/shelters");
     })
   }
 }
