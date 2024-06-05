@@ -1,12 +1,12 @@
 <div class="panel panel-warning">
     <div class="panel-heading">
-      <div class="panel-title">Please, confirm kick of {{volunteer.username}} from {{shelter.name}}:  </div>
+      <div class="panel-title">Please, confirm kick of volunteer {{volunteer.username}} from {{shelter.name}}:  </div>
     </div>
     <div class="panel-body">
       <div class="text-center">
         <button id="deleteBtn" type="button" (click)="kick()"
                 class="btn btn-outline-danger m-1">Kick</button>
-        <button id="listBtn" type="button" [routerLink]="['/shelterVolunteers', volunteer.username]"
+        <button id="listBtn" type="button" (click)="cancel()"
                 class="btn btn-outline-primary m-1">Cancel</button>
     </div>
   </div>

@@ -22,13 +22,15 @@ export class VolunteerKickComponent implements OnInit{
   kick(): void{
     this.volunteerService.deleteResource(this.volunteer).subscribe(
       () => {
-        this.router.navigate(['/shelters'+this.shelter.name]);
+        this.router.navigate([ this.shelter.uri,'edit']);
       });
   }
 
-  
+  cancel(): void{
+    this.router.navigate([ this.shelter.uri,'edit']);
+  }
   ngOnInit(): void {
-    this.volunteer_id = this.route.snapshot.paramMap.get('volunteer');
+    this.volunteer_id = this.route.snapshot.paramMap.get('volunteer_id');
     this.volunteerService.getResource(this.volunteer_id).subscribe(
       volunteer => {
         this.volunteer = volunteer
