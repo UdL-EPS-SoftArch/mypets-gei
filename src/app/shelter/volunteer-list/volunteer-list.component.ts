@@ -7,12 +7,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ShelterVolunteer } from '../shelterVolunteer';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserSearchComponent } from 'src/app/user/user-search/user-search.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { AuthenticationBasicService } from 'src/app/login-basic/authentication-basic.service';
 @Component({
   selector: 'app-volunteer-list',
   templateUrl: './volunteer-list.component.html',
   standalone: true,
-  imports: [NgbPaginationModule, UserSearchComponent, NgFor]
+  imports: [NgbPaginationModule, UserSearchComponent, NgFor,NgIf]
 })
 export class ShelterVolunteersListComponent implements OnInit {
   public users: ShelterVolunteer[] = [];
@@ -22,6 +23,7 @@ export class ShelterVolunteersListComponent implements OnInit {
   @Input() shelterId: number;
 
   constructor(
+    private authenticationService: AuthenticationBasicService,
     private route: ActivatedRoute,
     public router: Router,
     private shelterVolunteerService: ShelterVolunteerService) {
@@ -38,6 +40,9 @@ export class ShelterVolunteersListComponent implements OnInit {
         console.error('Error retrieving volunteers:', error);
       }
     );
+  }
+    getCurrentUser(): User {
+    return this.authenticationService.getCurrentUser();
   }
 
   changePage(): void {
@@ -56,7 +61,9 @@ export class ShelterVolunteersListComponent implements OnInit {
     const currentUrl = this.router.url;
     this.router.navigate(['shelters', this.shelterId, 'volunteers', user.username]);
   }
-
+  kickVolunteer(user: any): void {
+    this.router.navigate(['shelters','kick', user.username]);
+  }
   addVolunteer(): void {
     const currentUrl = this.router.url;
     this.router.navigate(['shelters', this.shelterId, 'volunteers', 'add']);
