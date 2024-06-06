@@ -36,3 +36,11 @@ When('I click the {string} button from the volunteer {string}', (button, volunte
 
 });
 
+And('I do not see the {string} button from the volunteer {string}', (button, volunteer) => {
+  cy.contains('.card-body',volunteer)
+  .within(() => {
+      // Step 3: Click the edit button within that div
+      cy.get('button').contains(button).should('not.exist');;
+    });
+
+});
