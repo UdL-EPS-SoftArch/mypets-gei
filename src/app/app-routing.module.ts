@@ -26,6 +26,8 @@ import { PetDeleteComponent } from './pet/pet-delete/pet-delete.component';
 import { ShelterVolunteerGuard } from "./guards/volunteer.role.guard";
 import { CertificateValidateComponent } from './shelter/certificate-validate/certificate-validate.component';
 import {MedicalRecordEditComponent} from "./medical-record/medical-edit/medical-record-edit.component";
+import { PetEditComponent } from './pet/pet-edit/pet-edit.component';
+
 
 const routes: Routes = [
   { path: 'shelter/certificates/validate', component: CertificateValidateComponent, canActivate: [LoggedInGuard]},
@@ -42,7 +44,7 @@ const routes: Routes = [
   { path: 'shelters', component: ShelterListComponent },
   { path: 'shelters/create', component: ShelterCreateComponent, canActivate: [LoggedInGuard] },
   { path: 'shelters/:id/edit', component: ShelterEditComponent, canActivate: [LoggedInGuard] },
-  { path: `shelter/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
+  { path: `shelters/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
   { path: 'medical-records', component: MedicalRecordListComponent },
   { path: 'medical-records/add', component: MedicalRecordAddComponent },
   { path: 'medical-records/:petId', component: MedicalRecordListComponent },
@@ -50,6 +52,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent},
   { path: 'pet-grid/add-pet', component: AddPetComponent, canActivate: [ShelterVolunteerGuard]},
   { path: 'pet-details/:id', component:PetDetailsComponent,title:'Pet Details'},
+  { path: 'pet-details/:id/edit', component:PetEditComponent, title:'Edit Pet'},
   { path: 'pet-details/:id/delete', component:PetDeleteComponent,title:'Pet Delete', canActivate: [LoggedInGuard]},
   { path: 'pets-grid', component: PetsGridComponent},
   { path: '404', component: NotFoundComponent},

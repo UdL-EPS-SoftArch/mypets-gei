@@ -22,7 +22,8 @@ export class AddPetComponent {
       description: 'This is a fake pet.',
       breed: 'Fake',
       // Replace shelterId with the actual ID of the shelter
-      img: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600'
+      img: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600',
+      isAdopted: false
     });
   }
 
