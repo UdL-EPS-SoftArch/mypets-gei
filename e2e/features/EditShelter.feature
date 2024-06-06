@@ -124,3 +124,10 @@ Feature: Edit Shelter
       | mobile   | 2        |
     Then The "Submit" button is disabled
     And I see input field feedback message "This phone number is already registered"
+
+
+  Scenario: Edit non existing shelter
+    Given I'm in the homepage
+    And I'm logged in as "admin" with password "password"
+    And I'm in the shelter edit page with id 999
+    Then I see an error message alert

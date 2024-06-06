@@ -9,6 +9,10 @@ Given("I'm in the shelters list page", () => {
   cy.visit('http://localhost:4200/shelters')
 })
 
+Given("I'm in the shelter edit page with id {int}", (id) => {
+  cy.visit('http://localhost:4200/shelters/' + id + '/edit')
+})
+
 Given("I'm not logged in", () => {
   cy.get('.nav-link').contains('Login')
 })
@@ -64,7 +68,7 @@ Then('I see input field feedback message {string}', (message) => {
 })
 
 Then('I see an error message alert', () => {
-  cy.get('.alert-danger').should('not.exist')
+  cy.get('.alert-danger').should('exist')
 })
 
 Then('The button {string} is not present', (label) => {
