@@ -31,6 +31,12 @@ Feature: Edit Shelter
     And I click the "Shelters" menu
     Then The button "Edit" is not present
 
+  Scenario: Edit Shelter as User
+    Given I'm in the homepage
+    And I'm logged in as "demo" with password "password"
+    And I click the "Shelters" menu
+    Then The button "Edit" is not present
+
   Scenario: Edit Shelter as Volunteer
     Given I'm in the homepage
     And I'm logged in as "volunteer" with password "password"
