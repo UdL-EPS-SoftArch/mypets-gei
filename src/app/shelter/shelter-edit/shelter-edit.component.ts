@@ -16,13 +16,19 @@ import { Shelter } from '../shelter'
 import { CommonModule } from '@angular/common'
 import { ShelterVolunteersListComponent } from '../volunteer-list/volunteer-list.component'
 import { CertificateAddComponent } from '../certificate-add/certificate-add.component'
+import { catchError, of } from 'rxjs'
 
 @Component({
   selector: 'app-shelter-edit',
   templateUrl: './shelter-edit.component.html',
   styleUrl: './shelter-edit.component.css',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ShelterVolunteersListComponent, CertificateAddComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ShelterVolunteersListComponent,
+    CertificateAddComponent,
+  ],
 })
 export class ShelterEditComponent implements OnInit {
   public shelter: Shelter
@@ -30,6 +36,8 @@ export class ShelterEditComponent implements OnInit {
   createdAt: string
   lastUpdate: string
   shelterId: string
+  isLoading: boolean
+  errorFetchMsg: string
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,8 +49,27 @@ export class ShelterEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading = true
     this.shelter = new Shelter()
     this.shelterId = this.activatedRoute.snapshot.paramMap.get('id')
+
+    this.shelterService
+      .getResource(this.shelterId)
+      .pipe(
+        catchError((error) => {
+          this.errorFetchMsg = error.message
+          return of(null)
+        }),
+      )
+      .subscribe((_shelter) => {
+        if (_shelter) {
+          this.shelter = _shelter
+          this.createdAt = new Date(_shelter.createdAt).toLocaleString()
+          this.lastUpdate = new Date(_shelter.updatedAt).toLocaleString()
+          this.setUpValidators()
+        }
+        this.isLoading = false
+      })
 
     this.shelterForm = this.formBuilder.group({
       name: new FormControl('', {
@@ -57,13 +84,6 @@ export class ShelterEditComponent implements OnInit {
         updateOn: 'blur',
       }),
       location: {},
-    })
-
-    this.shelterService.getResource(this.shelterId).subscribe((_shelter) => {
-      this.shelter = _shelter
-      this.createdAt = new Date(_shelter.createdAt).toLocaleString()
-      this.lastUpdate = new Date(_shelter.updatedAt).toLocaleString()
-      this.setUpValidators()
     })
   }
 
