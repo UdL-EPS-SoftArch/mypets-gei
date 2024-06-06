@@ -4,14 +4,16 @@ Feature: Kick Volunteer From Shelter
   I want to kick volunteers from the shelter
 
 
-  Scenario: Login existing user
+  Scenario: Volunteer kicks volunteer from the same shelter
     Given I'm in the homepage
-    And There is a registered user with username "volunteer_kick2" and password "password"
-    And There is a registered user with username "volunteer_kick1" and password "password"
-    Given I log in as "volunteer_kick1" with password "password"
-    And There is a created shelter with name "shelter_kick" and email "shelter_kick@sample.app" and mobile "999999999"
-    
-    And I am in shelters edit page
-    And I click the "Kick" button from the volunteer "volunteer_kick2"
-    Then I am in shelters edit page
-    And There isn't any volunteer "volunteer_kick2"
+    And There is a registered volunteer with username "volunteerkick2" and password "password" in shelter "shelter"
+    And There is a registered volunteer with username "volunteerkick1" and password "password" in shelter "shelter"
+    #And There is a created shelter with  email "shelter@demo.app"
+    Given I log in as "volunteer1" with password "password"
+    Then I'm logged in as user "volunteer1"
+    And I am in shelters "shelter1" edit page
+    When I click the "Kick" button from the volunteer "volunteer2"
+    And I click the "Kick" button
+    Then I do not see "volunteer2"
+
+
