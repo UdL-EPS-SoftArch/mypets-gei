@@ -4,8 +4,8 @@
     </div>
     <div class="panel-body">
       <div class="text-center">
-        <button id="deleteBtn" type="button" (click)="deleteShelter()"
-                class="btn btn-outline-danger m-1">Delete</button>
+        <button id="deleteBtn" type="button" (click)="deleteShelter()" [disabled]="!shelter.name"
+                class="btn btn-outline-danger m-1">Confirm</button>
         <button id="listBtn" type="button"
                 class="btn btn-outline-primary m-1" (click)="cancelClicked()">Cancel</button>
       </div>

@@ -4,7 +4,7 @@ import { HateoasResource, Resource } from "@lagoshny/ngx-hateoas-client";
 export class Pet extends Resource {
     id: number;
     name: string;
-    isAdopted: boolean;
+    adopted: boolean;
     color: string;
     size: string;
     weight: number;
