@@ -5,7 +5,7 @@ Feature: Edit Shelter
 
   Scenario: Create Mock Shelters
     Given I'm in the homepage
-    And I log in as "admin" with password "password"
+    And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Create new Shelter" button
     And I fill the form with
@@ -33,11 +33,11 @@ Feature: Edit Shelter
 
   Scenario: Edit Shelter as Volunteer
     Given I'm in the homepage
-    And I log in as "volunteer" with password "password"
+    And I'm logged in as "volunteer" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "1"
     And I wait for the spinner to disappear
-    And I fill the form with
+    And I fill the shelter form with
       | FIELD    | VALUE            |
       | name     | volunteerShelter |
     And I click the "Submit" button
@@ -45,11 +45,11 @@ Feature: Edit Shelter
 
   Scenario: Edit Shelter as admin
     Given I'm in the homepage
-    And I log in as "admin" with password "password"
+    And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
     And I wait for the spinner to disappear
-    And I fill the form with
+    And I fill the shelter form with
       | FIELD    | VALUE         |
       | name     | adminShelter  |
     And I click the "Submit" button
@@ -58,11 +58,11 @@ Feature: Edit Shelter
 
   Scenario: Edit Shelter with invalid name
     Given I'm in the homepage
-    And I log in as "admin" with password "password"
+    And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
     And I wait for the spinner to disappear
-    And I fill the form with
+    And I fill the shelter form with
       | FIELD    | VALUE         |
       | name     |               |
     Then I see input field feedback message "Name is required"
@@ -70,11 +70,11 @@ Feature: Edit Shelter
 
   Scenario: Edit Shelter with invalid email
     Given I'm in the homepage
-    And I log in as "admin" with password "password"
+    And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
     And I wait for the spinner to disappear
-    And I fill the form with
+    And I fill the shelter form with
       | FIELD    | VALUE         |
       | email    |               |
     Then I see input field feedback message "Email is required"
@@ -82,11 +82,11 @@ Feature: Edit Shelter
 
   Scenario: Edit Shelter with invalid phone
     Given I'm in the homepage
-    And I log in as "admin" with password "password"
+    And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
     And I wait for the spinner to disappear
-    And I fill the form with
+    And I fill the shelter form with
       | FIELD    | VALUE         |
       | mobile   |               |
     Then I see input field feedback message "A phone number is required"
@@ -96,11 +96,11 @@ Feature: Edit Shelter
 
   Scenario: Edit Shelter with repeated email
     Given I'm in the homepage
-    And I log in as "admin" with password "password"
+    And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
     And I wait for the spinner to disappear
-    And I fill the form with
+    And I fill the shelter form with
       | FIELD    | VALUE             |
       | email    | shelter1@demo.app |
     Then The "Submit" button is disabled
@@ -109,11 +109,11 @@ Feature: Edit Shelter
 
   Scenario: Edit Shelter with repeated phone
     Given I'm in the homepage
-    And I log in as "admin" with password "password"
+    And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "1"
     And I wait for the spinner to disappear
-    And I fill the form with
+    And I fill the shelter form with
       | FIELD    | VALUE    |
       | mobile   | 2        |
     Then The "Submit" button is disabled

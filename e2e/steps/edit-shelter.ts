@@ -13,13 +13,16 @@ Given("I'm not logged in", () => {
   cy.get('.nav-link').contains('Login')
 })
 
-Given('I log in as {string} with password {string}', (username, password) => {
-  cy.get('.nav-link').contains('Login').click()
-  cy.get('#username').type(username).blur()
-  cy.get('#password').type(password).blur()
-  cy.get('button').contains('Submit').click()
-  cy.get('.nav-link').contains(username)
-})
+Given(
+  "I'm logged in as {string} with password {string}",
+  (username, password) => {
+    cy.get('.nav-link').contains('Login').click()
+    cy.get('#username').type(username).blur()
+    cy.get('#password').type(password).blur()
+    cy.get('button').contains('Submit').click()
+    cy.get('.nav-link').contains(username)
+  },
+)
 
 Given('I click the {string} menu', (option) => {
   cy.get('.nav-link').contains(option).click()
@@ -43,7 +46,7 @@ When('I wait for the spinner to disappear', () => {
   cy.get('.spinner-border', { timeout: 10000 }).should('not.exist')
 })
 
-When('I fill the form with', (table: DataTable) => {
+When('I fill the shelter form with', (table: DataTable) => {
   table.rows().forEach(([key, value]: string[]) => {
     cy.get('#' + key).clear()
     if (value.length > 0) {
