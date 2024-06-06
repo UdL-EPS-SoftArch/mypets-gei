@@ -36,6 +36,7 @@ Feature: Edit Shelter
     And I log in as "volunteer" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "1"
+    And I wait for the spinner to disappear
     And I fill the form with
       | FIELD    | VALUE            |
       | name     | volunteerShelter |
@@ -47,6 +48,7 @@ Feature: Edit Shelter
     And I log in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
+    And I wait for the spinner to disappear
     And I fill the form with
       | FIELD    | VALUE         |
       | name     | adminShelter  |
@@ -59,6 +61,7 @@ Feature: Edit Shelter
     And I log in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
+    And I wait for the spinner to disappear
     And I fill the form with
       | FIELD    | VALUE         |
       | name     |               |
@@ -70,6 +73,7 @@ Feature: Edit Shelter
     And I log in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
+    And I wait for the spinner to disappear
     And I fill the form with
       | FIELD    | VALUE         |
       | email    |               |
@@ -81,6 +85,7 @@ Feature: Edit Shelter
     And I log in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
+    And I wait for the spinner to disappear
     And I fill the form with
       | FIELD    | VALUE         |
       | mobile   |               |
@@ -94,6 +99,7 @@ Feature: Edit Shelter
     And I log in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "2"
+    And I wait for the spinner to disappear
     And I fill the form with
       | FIELD    | VALUE             |
       | email    | shelter1@demo.app |
@@ -106,6 +112,7 @@ Feature: Edit Shelter
     And I log in as "admin" with password "password"
     And I click the "Shelters" menu
     When I click the "Edit" button of Shelter with phone number "1"
+    And I wait for the spinner to disappear
     And I fill the form with
       | FIELD    | VALUE    |
       | mobile   | 2        |

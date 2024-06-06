@@ -39,6 +39,10 @@ Given(
   },
 )
 
+When('I wait for the spinner to disappear', () => {
+  cy.get('.spinner-border', { timeout: 10000 }).should('not.exist')
+})
+
 When('I fill the form with', (table: DataTable) => {
   table.rows().forEach(([key, value]: string[]) => {
     cy.get('#' + key).clear()
@@ -54,6 +58,10 @@ Then('I see input field feedback message {string}', (message) => {
     .should('be.visible', { timeout: 10000 })
     .invoke('text')
     .should('contains', message)
+})
+
+Then('I see an error message alert', () => {
+  cy.get('.alert-danger').should('not.exist')
 })
 
 Then('The button {string} is not present', (label) => {
