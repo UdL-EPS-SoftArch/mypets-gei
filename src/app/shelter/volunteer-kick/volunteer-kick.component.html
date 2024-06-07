@@ -3,7 +3,7 @@
       <div class="panel-title">Please, confirm kick of volunteer {{volunteer.username}} from {{shelter.name}}:  </div>
     </div>
     <div class="panel-body">
-      <div class="text-center">
+      <div *ngIf="volunteer.username.length!==0" class="text-center">
         <button id="deleteBtn" type="button" (click)="kick()"
                 class="btn btn-outline-danger m-1">Kick</button>
         <button id="listBtn" type="button" (click)="cancel()"
