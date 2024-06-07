@@ -22,7 +22,8 @@
           <p class="card-text">Rating: {{ shelter.rating }}</p>
         </div>
         <div class="col-6 mt-1">
-          <button *ngIf="!isRole('user') && !isRole('client')"
+          <button
+            *ngIf="isRole('admin') || isRole('shelter volunteer')"
             id="editBtn"
             type="button"
             class="btn m-1 btn-outline-success"
@@ -35,8 +36,8 @@
             id="deleteBtn"
             type="button"
             class="btn m-1 btn-outline-danger"
-            [routerLink]="[shelter.uri ,'delete']"
-            >
+            [routerLink]="[shelter.uri, 'delete']"
+          >
             Delete
           </button>
         </div>
