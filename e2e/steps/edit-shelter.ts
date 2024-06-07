@@ -39,7 +39,7 @@ Given('I click the {string} button', (label) => {
 Given(
   'I click the {string} button of Shelter with phone number {string}',
   (label, phone) => {
-    cy.get('div.card.mb-1:contains(' + phone + ')')
+    cy.get('div.card.mb-1:contains(Mobile: '+ phone + ')')
       .closest('.card.mb-1')
       .find('button:contains(' + label + ')')
       .click()
