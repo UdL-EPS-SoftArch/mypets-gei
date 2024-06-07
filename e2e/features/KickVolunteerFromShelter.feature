@@ -14,8 +14,8 @@ Feature: Kick Volunteer From Shelter
     And I am in shelters "shelter1" edit page
     When I click the "Kick" button from the volunteer "volunteer2"
     And I click the Kick button
-    #And Refresh
-    #Then I do not see "volunteer2"
+    And Refresh
+    Then I do not see "volunteer2"
 
   Scenario: Volunteer can't kick himself
     Given I'm in the homepage
