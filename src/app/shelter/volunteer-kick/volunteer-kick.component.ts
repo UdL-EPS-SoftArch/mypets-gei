@@ -24,30 +24,24 @@ export class VolunteerKickComponent implements OnInit{
 }
 
   kick(): void{
-    console.log("helo")
-   
     this.volunteerService.deleteResource(this.volunteer).subscribe(
       () => {
-        console.log("bye")
         this.router.navigate([ "shelters",this.shelter_id,'edit']);
       });
-
   }
 
   cancel(): void{
     this.router.navigate([ "shelters",this.shelter_id,'edit']);
   }
   ngOnInit(): void {
-    console.log("leng="+this.volunteer.username.length)
     this.volunteer_id = this.route.snapshot.paramMap.get('volunteer_id');
     this.shelter_id = this.route.snapshot.paramMap.get('id');
     this.volunteerService.getResource(this.volunteer_id).subscribe(
       volunteer => {
         this.volunteer = volunteer
-        console.log("AST "+volunteer.username)
-       // this.volunteer.getRelation<Shelter>("userShelter").subscribe(
-       //   shelter => this.shelter = shelter
-       // )
+       this.volunteer.getRelation<Shelter>("userShelter").subscribe(
+          shelter => this.shelter = shelter
+       )
       });
     
       
