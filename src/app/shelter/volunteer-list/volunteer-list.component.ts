@@ -62,7 +62,7 @@ export class ShelterVolunteersListComponent implements OnInit {
     this.router.navigate(['shelters', this.shelterId, 'volunteers', user.username]);
   }
   kickVolunteer(user: any): void {
-    this.router.navigate(['shelters','kick', user.username]);
+    this.router.navigate(['shelters',this.shelterId,'kick', user.username]);
   }
   addVolunteer(): void {
     const currentUrl = this.router.url;
