@@ -26,13 +26,22 @@ Given ('I am in shelters {string} edit page', (shelter) => {
 
 });
 
-
+And('Refresh',()=> {
+  cy.reload()
+});
 When('I click the {string} button from the volunteer {string}', (button, volunteer) => {
   cy.contains('.card-body',volunteer)
   .within(() => {
       // Step 3: Click the edit button within that div
       cy.get('button').contains(button).click();
     });
+
+});
+And('I click the Kick button', (button) => {
+  cy.intercept('DELETE', '**/shelterVolunteers/*').as('deleteVolunteer');
+  cy.get('button').contains('Kick').click();
+  cy.wait('@deleteVolunteer').its('response.statusCode').should('eq', 200);
+
 
 });
 
