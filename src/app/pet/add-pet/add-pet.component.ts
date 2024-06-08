@@ -47,4 +47,15 @@ export class AddPetComponent {
           this.router.navigateByUrl("/pets-grid");
         });
   }
+
+  areFieldsEmpty() {
+    return !this.pet.name ||
+      !this.pet.color ||
+      !this.pet.size ||
+      !this.pet.weight ||
+      !this.pet.age ||
+      !this.pet.breed ||
+      !this.pet.description ||
+      !this.pet.img;
+  }
 }
