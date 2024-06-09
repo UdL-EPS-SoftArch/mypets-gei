@@ -9,20 +9,20 @@ Feature: Edit Shelter
     And I click the "Shelters" menu
     When I click the "Create new Shelter" button
     And I fill the form with
-      | FIELD    | VALUE             |
-      | name     | Shelter           |
-      | email    | shelter1@demo.app |
-      | mobile   | 1                 |
+      | FIELD    | VALUE                |
+      | name     | EditShelter          |
+      | email    | editShelter@demo.app |
+      | mobile   | 1                    |
     And I click the "Submit" button
     And I click the "Create new Shelter" button
     And I fill the form with
-      | FIELD    | VALUE             |
-      | name     | Shelter2          |
-      | email    | shelter2@demo.app |
-      | mobile   | 2                 |
+      | FIELD    | VALUE                 |
+      | name     | EditShelter2          |
+      | email    | editShelter2@demo.app |
+      | mobile   | 2                     |
     And I click the "Submit" button
-    Then Shelter with phone number "1" is created
-    And Shelter with phone number "2" is created
+    Then Shelter with email "editShelter@demo.app" is created
+    And Shelter with email "editShelter2@demo.app" is created
 
 
   Scenario: Edit Shelter not logged in
@@ -41,32 +41,32 @@ Feature: Edit Shelter
     Given I'm in the homepage
     And I'm logged in as "volunteer" with password "password"
     And I click the "Shelters" menu
-    When I click the "Edit" button of Shelter with phone number "1"
+    When I click the "Edit" button of Shelter with email "editShelter@demo.app"
     And I wait for the spinner to disappear
     And I fill the shelter form with
-      | FIELD    | VALUE            |
-      | name     | volunteerShelter |
+      | FIELD    | VALUE                |
+      | name     | editVolunteerShelter |
     And I click the "Submit" button
-    Then Shelter with name "volunteerShelter" is updated
+    Then Shelter with name "editVolunteerShelter" is updated
 
   Scenario: Edit Shelter as admin
     Given I'm in the homepage
     And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
-    When I click the "Edit" button of Shelter with phone number "2"
+    When I click the "Edit" button of Shelter with email "editShelter2@demo.app"
     And I wait for the spinner to disappear
     And I fill the shelter form with
-      | FIELD    | VALUE         |
-      | name     | adminShelter  |
+      | FIELD    | VALUE             |
+      | name     | editAdminShelter  |
     And I click the "Submit" button
-    Then Shelter with name "adminShelter" is updated
+    Then Shelter with name "editAdminShelter" is updated
 
 
   Scenario: Edit Shelter with invalid name
     Given I'm in the homepage
     And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
-    When I click the "Edit" button of Shelter with phone number "2"
+    When I click the "Edit" button of Shelter with email "editShelter2@demo.app"
     And I wait for the spinner to disappear
     And I fill the shelter form with
       | FIELD    | VALUE         |
@@ -78,7 +78,7 @@ Feature: Edit Shelter
     Given I'm in the homepage
     And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
-    When I click the "Edit" button of Shelter with phone number "2"
+    When I click the "Edit" button of Shelter with email "editShelter2@demo.app"
     And I wait for the spinner to disappear
     And I fill the shelter form with
       | FIELD    | VALUE         |
@@ -90,7 +90,7 @@ Feature: Edit Shelter
     Given I'm in the homepage
     And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
-    When I click the "Edit" button of Shelter with phone number "2"
+    When I click the "Edit" button of Shelter with email "editShelter2@demo.app"
     And I wait for the spinner to disappear
     And I fill the shelter form with
       | FIELD    | VALUE         |
@@ -104,11 +104,11 @@ Feature: Edit Shelter
     Given I'm in the homepage
     And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
-    When I click the "Edit" button of Shelter with phone number "2"
+    When I click the "Edit" button of Shelter with email "editShelter2@demo.app"
     And I wait for the spinner to disappear
     And I fill the shelter form with
-      | FIELD    | VALUE             |
-      | email    | shelter1@demo.app |
+      | FIELD    | VALUE                |
+      | email    | editShelter@demo.app |
     Then The "Submit" button is disabled
     And I see input field feedback message "This email is already registered"
 
@@ -117,7 +117,7 @@ Feature: Edit Shelter
     Given I'm in the homepage
     And I'm logged in as "admin" with password "password"
     And I click the "Shelters" menu
-    When I click the "Edit" button of Shelter with phone number "1"
+    When I click the "Edit" button of Shelter with email "editShelter@demo.app"
     And I wait for the spinner to disappear
     And I fill the shelter form with
       | FIELD    | VALUE    |
