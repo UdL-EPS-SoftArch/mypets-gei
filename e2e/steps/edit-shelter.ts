@@ -39,10 +39,8 @@ Given('I click the {string} button', (label) => {
 Given(
   'I click the {string} button of Shelter with phone number {string}',
   (label, phone) => {
-    cy.get('div.card.mb-1:contains(' + phone + ')')
-      .closest('.card.mb-1')
-      .find('button:contains(' + label + ')')
-      .click()
+    cy.get('div.card.mb-1').contains(phone).parents('.card.mb-1')
+      .find('button').contains(label).click()
   },
 )
 
@@ -64,10 +62,10 @@ Then('I see input field feedback message {string}', (message) => {
   cy.get('.invalid-feedback')
     .should('be.visible', { timeout: 10000 })
     .invoke('text')
-    .should('contains', message)
+    .should('contain', message)
 })
 
-Then('I see an error message alert', () => {
+Then('I see an error message alert', ()=> {
   cy.get('.alert-danger').should('exist')
 })
 
@@ -86,3 +84,4 @@ Then('Shelter with phone number {string} is created', (phone) => {
 Then('Shelter with name {string} is updated', (name) => {
   cy.get('div.card.mb-1').contains(name).should('exist')
 })
+
