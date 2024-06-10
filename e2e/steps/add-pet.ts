@@ -1,4 +1,4 @@
-import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
+import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
 import { DataTable } from '@cucumber/cucumber';
 
 Given('I\'m in the homepage', () => {
@@ -15,7 +15,7 @@ Given('I log in as {string} with password {string}', (username, password) => {
 Then('I\'m logged in as user {string}', (username) => {
   cy.get('#currentUser')
     .invoke('text')
-    .should('contains', username);
+    .should('contain', username);
 });
 
 Given('There is a registered admin with name {string} and password {string} and email {string}', (username, password, email) => {
