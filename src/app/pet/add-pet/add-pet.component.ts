@@ -35,6 +35,12 @@ export class AddPetComponent {
     if (!this.pet.name || !this.pet.color || !this.pet.size || !this.pet.weight || !this.pet.age ||
       !this.pet.breed || !this.pet.description) {
       alert('Please fill out all fields!');
+      return;
+    }
+    const imagePattern = /^(http:\/\/|https:\/\/).*\/.*\.(jpg|jpeg|png|gif|bmp|webp|svg)(\?.*)?$/i;
+    if(!imagePattern.test(this.pet.img)) {
+      alert("Please enter a valid image URL");
+      return;
     }
     this.petService.createResource({ body: this.pet }).subscribe(
         (response) => {
