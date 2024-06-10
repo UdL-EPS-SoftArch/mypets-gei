@@ -11,21 +11,7 @@ import { PetService } from '../pet.service';
 export class AddPetComponent {
   pet: Pet = new Pet(); // Create a new instance of Pet
 
-  constructor(private petService: PetService, private router: Router) {
-    // For testing purposes only...
-    this.pet = new Pet({
-      name: 'Fake Pet 4',
-      color: 'Black',
-      size: 'Medium',
-      weight: 10,
-      age: '1 year',
-      description: 'This is a fake pet.',
-      breed: 'Fake',
-      // Replace shelterId with the actual ID of the shelter
-      img: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600',
-      isAdopted: false
-    });
-  }
+  constructor(private petService: PetService, private router: Router) {}
 
   cancelClicked() {
     this.router.navigateByUrl("/pets-grid");
@@ -43,9 +29,9 @@ export class AddPetComponent {
       return;
     }
     this.petService.createResource({ body: this.pet }).subscribe(
-        (response) => {
-          this.router.navigateByUrl("/pets-grid");
-        });
+      (response) => {
+        this.router.navigateByUrl("/pets-grid");
+      });
   }
 
   areFieldsEmpty(): boolean {

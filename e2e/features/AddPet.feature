@@ -14,11 +14,11 @@ Feature: Add Pet
       | name        | New Pet                                                               |
       | color       | Brown                                                                 |
       | size        | Medium                                                                |
-      | weight      | 12                                                                    |
+      | weight      | 12                                                                     |
       | age         | 2 years                                                               |
       | breed       | Labrador                                                              |
       | description | A friendly dog                                                        |
-      | img         | https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg|
+      | img         | https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg |
     And I click the "Add" button
     Then Pet with name "New Pet" is created
 
@@ -32,8 +32,8 @@ Feature: Add Pet
       | FIELD       | VALUE |
       | name        | New Pet |
       | color       | Brown |
-    And I click the "Add" button
-    Then I see an alert with message "Please fill out all fields!"
+    Then I attempt to click the "Add" button
+    And I verify the "Add" button is disabled
 
   Scenario: Add pet with invalid image URL
     Given I'm in the homepage
