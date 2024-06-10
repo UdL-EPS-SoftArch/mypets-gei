@@ -32,18 +32,12 @@ When('I click the {string} button', (label) => {
 
 When('I fill the form with', (table: DataTable) => {
   table.rows().forEach((pair: string[]) => {
-    cy.get('input[placeholder="Enter pet ' + pair[0] + ' here"]').type(pair[1]).blur();
+    cy.get(`input[placeholder="Enter pet ${pair[0]} here"]`).type(pair[1]).blur();
   });
 });
 
 Then('Pet with name {string} is created', (name) => {
-  cy.get('div.card.mb-1').then($pets => {
-    cy.wrap($pets).each(($pet, index) => {
-      cy.log(`Pet ${index + 1}: ${$pet.text()}`);
-    });
-
-    cy.get('div.card.mb-1').contains(name).should('exist');
-  });
+  cy.get('div.card.mb-1').should('contain', name);
 });
 
 Then('I see an alert with message {string}', (message) => {

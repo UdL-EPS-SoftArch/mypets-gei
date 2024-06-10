@@ -8,7 +8,7 @@ Feature: Add Pet
     Given I log in as "admin" with password "password"
     Then I'm logged in as user "admin"
     Given I am in pets page
-    When I click the "Add Pet" button
+    When I click the "Add" button
     And I fill the form with
       | FIELD       | VALUE                                                                 |
       | name        | New Pet                                                               |
@@ -27,7 +27,7 @@ Feature: Add Pet
     Given I log in as "admin" with password "password"
     Then I'm logged in as user "admin"
     Given I am in pets page
-    When I click the "Add Pet" button
+    When I click the "Add" button
     And I fill the form with
       | FIELD       | VALUE |
       | name        | New Pet |
@@ -40,7 +40,7 @@ Feature: Add Pet
     Given I log in as "admin" with password "password"
     Then I'm logged in as user "admin"
     Given I am in pets page
-    When I click the "Add Pet" button
+    When I click the "Add" button
     And I fill the form with
       | FIELD       | VALUE                                    |
       | name        | New Pet                                  |
