@@ -17,9 +17,9 @@ Scenario: Delete shelter as Admin
     And I log in as "admin" with password "password"
     And I am logged in as user "admin"
     And I am in shelters page
-    When I click the "Delete" button
+    When I click the last "Delete" button
     And I click the "Confirm" button
-    Then I do not see shelter
+    Then I do not see the shelter with name "shelter"
 
 Scenario: Delete shelter as volunteer
     Given I am in the homepage
