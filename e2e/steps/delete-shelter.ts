@@ -25,14 +25,17 @@ Then('I am logged in as user {string}', (username) => {
       .invoke('text')
       .should('contains', username);
 });
-When('I click the {string} button', (label) => {
-    cy.get('button').contains(label).click();
+When('I click the last {string} button', (label) => {
+    cy.get('button').contains(label).last().click();
 });
 Then('I do not see {string}', (label) => {
     cy.contains(label).should('not.exist');
 });
 Then('I do not see shelter', (phone) => {
     cy.contains('p.text-center','No shelters').should('be.visible');
+});
+Then('I do not see the shelter with name {string}', (name) => {
+  cy.contains('.shelter-name',name).should('not.exist');
 });
 When('I click the {string} button', (label) => {
     cy.get('button').contains(label).click();

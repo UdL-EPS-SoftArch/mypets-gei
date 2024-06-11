@@ -36,15 +36,17 @@ Given('I click the {string} button', (label) => {
   cy.get('button').contains(label).click()
 })
 
-Given(
-  'I click the {string} button of Shelter with phone number {string}',
-  (label, phone) => {
-    cy.get('div.card.mb-1:contains(Mobile: '+ phone + ')')
-      .closest('.card.mb-1')
-      .find('button:contains(' + label + ')')
-      .click()
-  },
-)
+Given('I click the {string} button of Shelter with phone number {string}', (label, phone) => {
+  cy.get('div.card.mb-1').contains(phone).parents('.card.mb-1')
+      .find('button').contains(label).click()
+})
+
+Given('I click the {string} button of Shelter with email {string}', (label, email) => {
+  cy.get('div.card.mb-1:contains(' + email + ')')
+    .closest('.card.mb-1')
+    .find('button:contains(' + label + ')')
+    .click()
+})
 
 When('I wait for the spinner to disappear', () => {
   cy.get('.spinner-border', { timeout: 10000 }).should('not.exist')
@@ -64,10 +66,10 @@ Then('I see input field feedback message {string}', (message) => {
   cy.get('.invalid-feedback')
     .should('be.visible', { timeout: 10000 })
     .invoke('text')
-    .should('contains', message)
+    .should('contain', message)
 })
 
-Then('I see an error message alert', () => {
+Then('I see an error message alert', ()=> {
   cy.get('.alert-danger').should('exist')
 })
 
@@ -79,10 +81,11 @@ Then('The {string} button is disabled', (label) => {
   cy.get('button').contains(label).should('be.disabled')
 })
 
-Then('Shelter with phone number {string} is created', (phone) => {
-  cy.get('div.card.mb-1').contains(phone).should('exist')
+Then('Shelter with email {string} is created', (email) => {
+  cy.get('div.card.mb-1').contains(email).should('exist')
 })
 
 Then('Shelter with name {string} is updated', (name) => {
   cy.get('div.card.mb-1').contains(name).should('exist')
 })
+
