@@ -1,35 +1,35 @@
 <div class="all">
   <div class="mb-3">
     <label class="form-label">Pet name</label>
-    <input type="text" class="form-control" placeholder="Enter pet name here" [(ngModel)]="pet.name">
+    <input type="text" class="form-control" data-cy="pet-name" placeholder="Enter pet name here" [(ngModel)]="pet.name">
   </div>
   <div class="mb-3">
     <label class="form-label">Color</label>
-    <input type="text" class="form-control" placeholder="Enter pet color here" [(ngModel)]="pet.color">
+    <input type="text" class="form-control" data-cy="pet-color" placeholder="Enter pet color here" [(ngModel)]="pet.color">
   </div>
   <div class="mb-3">
     <label class="form-label">Size</label>
-    <input type="text" class="form-control" placeholder="Enter pet size here" [(ngModel)]="pet.size">
+    <input type="text" class="form-control" data-cy="pet-size" placeholder="Enter pet size here" [(ngModel)]="pet.size">
   </div>
   <div class="mb-3">
     <label class="form-label">Weight</label>
-    <input type="text" class="form-control" placeholder="Enter pet weight here" [(ngModel)]="pet.weight">
+    <input type="text" class="form-control" data-cy="pet-weight" placeholder="Enter pet weight here" [(ngModel)]="pet.weight">
   </div>
   <div class="mb-3">
     <label class="form-label">Age</label>
-    <input type="text" class="form-control" placeholder="Enter pet age here" [(ngModel)]="pet.age">
+    <input type="text" class="form-control" data-cy="pet-age" placeholder="Enter pet age here" [(ngModel)]="pet.age">
   </div>
   <div class="mb-3">
     <label class="form-label">Breed</label>
-    <input type="text" class="form-control" placeholder="Enter pet breed here" [(ngModel)]="pet.breed">
+    <input type="text" class="form-control" data-cy="pet-breed" placeholder="Enter pet breed here" [(ngModel)]="pet.breed">
   </div>
   <div class="mb-3">
     <label class="form-label">Description</label>
-    <input type="text" class="form-control" placeholder="Enter pet description here" [(ngModel)]="pet.description">
+    <input type="text" class="form-control" data-cy="pet-description" placeholder="Enter pet description here" [(ngModel)]="pet.description">
   </div>
   <div class="mb-3">
-    <label class="form-label">Description</label>
-    <input type="text" class="form-control" placeholder="Enter pet description here" [(ngModel)]="pet.img">
+    <label class="form-label">Image URL</label>
+    <input type="text" class="form-control" data-cy="pet-img" placeholder="Enter pet img here" [(ngModel)]="pet.img">
   </div>
   <button type="button" [disabled]="areFieldsEmpty()" class="btn btn-primary" (click)="addPet()">Add</button>
   <button type="button" class="btn btn-secondary" (click)="cancelClicked()">Cancel</button>
