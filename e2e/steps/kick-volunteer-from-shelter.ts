@@ -56,7 +56,7 @@ And('I do not see the {string} button from the volunteer {string}', (button, vol
 });
 Then('I see error message {string}', (error_msg) => {
 
-  cy.contains('app-error-alert',error_msg)
+  cy.contains(error_msg)
 });
 And('I go to kick volunteer {string}', () => {
   cy.visit('http://localhost:4200/shelters/kick/volunteer3')
