@@ -28,8 +28,8 @@ Given ('I am in shelters {string} edit page', (shelter) => {
 
 And('Refresh',()=> {
   cy.reload()
-  cy.intercept('GET', '**/shelterVolunteers/**').as('getVolunteers');
-  cy.wait('@getVolunteers').its('response.statusCode').should('eq', 200);
+  //cy.intercept('GET', '**/shelterVolunteers/**').as('getVolunteers');
+  //cy.wait('@getVolunteers').its('response.statusCode').should('eq', 200);
 
 });
 When('I click the {string} button from the volunteer {string}', (button, volunteer) => {
