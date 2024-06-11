@@ -30,7 +30,7 @@ Feature: Kick Volunteer From Shelter
     Then I'm logged in as user "volunteer1"
     And I go to kick volunteer "volunteer3"
     #Removed in case edit button is not visible
-    #And I am in shelters "shelter1" edit page
-    #When I click the "Kick" button from the volunteer "volunteer3"
+    And I am in shelters "shelter2" edit page
+    When I click the "Kick" button from the volunteer "volunteer3"
     And I click the Kick button
     Then I see error message "The volunteers must be in the same shelter"
