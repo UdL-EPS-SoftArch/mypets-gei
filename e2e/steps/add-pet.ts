@@ -33,7 +33,7 @@ When('I click the {string} button', (label) => {
   cy.get('button').contains(label).click();
 });
 
-When('I fill the form with', (table: DataTable) => {
+When('I fill the pet form with', (table: DataTable) => {
   fillPetForm(table);
 });
 

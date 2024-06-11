@@ -9,7 +9,7 @@ Feature: Add Pet
     Then I'm logged in as user "admin"
     Given I am in pets page
     When I click the "Add" button
-    And I fill the form with
+    And I fill the pet form with
       | FIELD       | VALUE                                                                 |
       | name        | New Pet                                                               |
       | color       | Brown                                                                 |
@@ -28,7 +28,7 @@ Feature: Add Pet
     Then I'm logged in as user "admin"
     Given I am in pets page
     When I click the "Add" button
-    And I fill the form with
+    And I fill the pet form with
       | FIELD       | VALUE |
       | name        | New Pet |
       | color       | Brown |
@@ -41,7 +41,7 @@ Feature: Add Pet
     Then I'm logged in as user "admin"
     Given I am in pets page
     When I click the "Add" button
-    And I fill the form with
+    And I fill the pet form with
       | FIELD       | VALUE                                    |
       | name        | New Pet                                  |
       | color       | Brown                                    |
