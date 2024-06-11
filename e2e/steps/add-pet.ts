@@ -10,7 +10,8 @@ function loginAsUser(username: string, password: string) {
 
 function fillPetForm(table: DataTable) {
   table.rows().forEach((pair: string[]) => {
-    cy.get(`input[placeholder="Enter pet ${pair[0]} here"]`).type(pair[1]).blur();
+    const cyAttr = `pet-${pair[0].toLowerCase()}`;
+    cy.get(`input[data-cy="${cyAttr}"]`).should('exist').and('be.visible').clear().type(pair[1]).blur();
   });
 }
 
