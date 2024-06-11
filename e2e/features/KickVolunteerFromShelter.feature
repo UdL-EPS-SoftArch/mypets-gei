@@ -28,7 +28,7 @@ Feature: Kick Volunteer From Shelter
     Given I'm in the homepage
     Given I log in as "volunteer1" with password "password"
     Then I'm logged in as user "volunteer1"
-    And I go to kick volunteer "volunteer3"
+    #And I go to kick volunteer "volunteer3"
     #Removed in case edit button is not visible
     And I am in shelters "shelter2" edit page
     When I click the "Kick" button from the volunteer "volunteer3"
