@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../login-basic/user';
 import { Pet } from '../pet';
 import { AuthenticationBasicService } from 'src/app/login-basic/authentication-basic.service';
@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-pet-favourite',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule],
   templateUrl: './pet-favourite.component.html',
   styleUrl: './pet-favourite.component.scss'
 })
@@ -26,8 +26,10 @@ export class PetFavouriteComponent implements OnInit {
   baseUrl: String = environment.API;
   petId:number;
 
-  constructor(private authService: AuthenticationBasicService,
-    private http:HttpClient){}
+  constructor(
+    private authService: AuthenticationBasicService,
+    private http:HttpClient,
+    private router: Router,){}
 
   ngOnInit(): void {
     // Get id of pet on display
@@ -36,8 +38,8 @@ export class PetFavouriteComponent implements OnInit {
     // Get current user data
     this.user = this.authService.getCurrentUser();
 
-    // Fill user.favouritedPets from info on the backend
-    // Instead of using retrieveFavourites, we'll do it directly since we need to wait for the update to take effect
+    // Fill user.favouritedPets from info on the backend. Instead of using retrieveFavourites,
+    // we'll do it directly since we need the result of the update to take effect.
     this.http.get<any>(`${this.baseUrl}/favouritedPetses`).subscribe(
       res => {
         const favPets:FavouritedPets[] = res._embedded.favouritedPetses;
@@ -85,12 +87,9 @@ export class PetFavouriteComponent implements OnInit {
       // Find entry to delete
       this.favPetsService.findByUserIdAndPetId(this.user.username, String(this.petId)).subscribe({
         next: (foundEntries)=>{
-          //console.log("Found "+foundEntries.resources.length+" entries. Should be 1."); //its always 1, but old entry :C
           // Obtain entry in itself.
-          const foundEntry = foundEntries.resources[(foundEntries.resources.length-1)];
-          console.log("foundEntry: {\n\tuserId: "+foundEntry.userId+",\n\tpetId: "+foundEntry.petId+",\n\turi: "+foundEntry.uri+",\n}");
-          //potser es tema de caché, pero està trobant les entrades antigues que s'acaben de borrar :/
-          //provant amb deleteResource asecas tampoc funciona, foundEntry segueix sent la vella ://
+          const foundEntry = foundEntries.resources[0];
+          console.log("foundEntry: {\n\tuserId: "+foundEntry.userId+",\n\tpetId: "+foundEntry.petId+",\n\tpetInstance: "+foundEntry.uri.split("/")[2]+",\n}");
           // Request deletion to backend
           this.favPetsService.deleteResource(foundEntry).subscribe(
             res=>{
@@ -131,7 +130,17 @@ export class PetFavouriteComponent implements OnInit {
             }
         });
         console.log("Updated favourite pets for user "+this.user.username+".");
+        console.log(this.user.username+" now has "+this.user.favouritedPets.length+" pets marked as favourite!");
+        // For testing purposes, sleep and then reload to see console logs: 
+        //this.sleep(5000).then(()=>{window.location.reload();})
+        // Update page so findById recharges
+        window.location.reload();
       }
     );
   }
+
+  // Aditional method for testing purposes
+  //sleep(ms:number) {
+  //  return new Promise(resolve => setTimeout(resolve, ms));
+  //}
 }
