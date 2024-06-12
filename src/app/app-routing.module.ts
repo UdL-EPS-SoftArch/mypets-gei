@@ -27,6 +27,7 @@ import { ShelterVolunteerGuard } from "./guards/volunteer.role.guard";
 import { CertificateValidateComponent } from './shelter/certificate-validate/certificate-validate.component';
 import {MedicalRecordEditComponent} from "./medical-record/medical-edit/medical-record-edit.component";
 import { PetEditComponent } from './pet/pet-edit/pet-edit.component';
+import {VolunteerKickComponent} from './shelter/volunteer-kick/volunteer-kick.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'shelters/create', component: ShelterCreateComponent, canActivate: [LoggedInGuard] },
   { path: 'shelters/:id/edit', component: ShelterEditComponent, canActivate: [LoggedInGuard] },
   { path: `shelters/:id/delete`, component: ShelterDeleteComponent, canActivate: [LoggedInGuard]},
+  { path: `shelters/kick/:volunteer_id`, component: VolunteerKickComponent, canActivate: [LoggedInGuard]},
   { path: 'medical-records', component: MedicalRecordListComponent },
   { path: 'medical-records/add', component: MedicalRecordAddComponent },
   { path: 'medical-records/:petId', component: MedicalRecordListComponent },

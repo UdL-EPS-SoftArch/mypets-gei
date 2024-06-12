@@ -41,7 +41,6 @@ import {PetFavouriteComponent} from './pet/pet-favourite/pet-favourite.component
     UserRegisterComponent,
     UserEditComponent,
     UserDeleteComponent,
-    VolunteerKickComponent,
     ShelterVolunteersAddComponent,
     UserDisableComponent,
     AddPetComponent
