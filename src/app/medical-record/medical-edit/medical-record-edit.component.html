@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Medical Record</title>
+  <title>Edit Medical Record</title>
   <!-- Add Angular Material Styles -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@angular/material@13.2.3/prebuilt-themes/indigo-pink.css" rel="stylesheet">
 </head>
 <body>
-<h1>Add Medical Record</h1>
+<h1>Edit Medical Record</h1>
 <form #medicalRecordForm="ngForm">
   <div class="form-group">
     <label for="description">Issue:</label>
@@ -35,7 +35,7 @@
     <label for="pet">Pet ID:</label>
     <input type="number" id="pet" name="pet" [(ngModel)]="petId" required  readonly  class="readonly-input" style="width: 100px;">
   </div>
-  <button type="button" (click)="editMedicalRecord(issue, description, day, month, year, petId)" style="margin-top: 20px;">Edit</button>
+  <button type="button" (click)="editMedicalRecord(issue, description, day, month, year)" style="margin-top: 20px;">Edit</button>
 </form>
 </body>
 </html>

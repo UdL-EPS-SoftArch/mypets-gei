@@ -18,95 +18,44 @@ import {AuthenticationBasicService} from "../../login-basic/authentication-basic
   styleUrls: ['./medical-record-list.component.css']
 })
 export class MedicalRecordListComponent implements OnInit {
-  medicalRecords: MedicalRecord[] = [];
-  petId: any;
+    medicalRecords: MedicalRecord[] = [];
 
-  constructor(private authenticationService: AuthenticationBasicService,
-    private medicalRecordService: MedicalRecordService,
-    private router: Router,
-    private route: ActivatedRoute,
-) { }
+    constructor(private authenticationService: AuthenticationBasicService,
+                private medicalRecordService: MedicalRecordService,
+                private router: Router) { }
 
-
-  ngOnInit(): void {
-
-
-    this.route.params.subscribe(params => {
-      console.log(params) //log the entire params object
-      console.log(params['petId']) //log the value of id
-
-      this.petId = params['petId'];
-    });
-
-
-
-
-    if (this.petId) {
-      this.fetchPet(this.petId);
-      console.log("petId", this.petId);
-    } else {
-      this.fetchMedicalRecords();
-      console.log("NO petId");
+    ngOnInit(): void {
+        this.fetchMedicalRecords();
     }
-  }
 
-  fetchPet(petId: number) {
-    this.medicalRecordService.getMedicalRecordsByPetId(petId).subscribe({
-      next: (records) => {
-        if (Array.isArray(records)) {
-          records.forEach(record => {
-            let lastIndex = record.uri.lastIndexOf('/');
-            record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
-          })
-          this.medicalRecords = records;
-        } else {
-          console.error('Data returned is not an array:', records);
-        }
-      },
-      error: (error) => {
-        console.error('Failed to fetch medical records:', error);
-        this.medicalRecords = []; // Reset or handle as needed
-      }
-    });
-  }
+    fetchMedicalRecords() {
+        this.medicalRecordService.getMedicalRecords().subscribe({
+            next: (records) => {
+                this.medicalRecords = records;
+            },
+            error: (error) => {
+                console.error('Failed to fetch medical records:', error);
+                this.medicalRecords = []; // Reset or handle as needed
+            }
+        });
+    }
 
-  fetchMedicalRecords() {
-    this.medicalRecordService.getMedicalRecords().subscribe({
-      next: (records) => {
-        if (Array.isArray(records)) {
-          records.forEach(record => {
-            let lastIndex = record.uri.lastIndexOf('/');
-            record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
-          })
-          this.medicalRecords = records;
-        } else {
-          console.error('Data returned is not an array:', records);
-        }
-      },
-      error: (error) => {
-        console.error('Failed to fetch medical records:', error);
-        this.medicalRecords = []; // Reset or handle as needed
-      }
-    });
-  }
+    editRecord(record: MedicalRecord) {
+        console.log('Editing record:', record);
+        // Add navigation logic to edit the selected medical record
+    }
 
+    deleteRecord(recordId: string) {
+        this.medicalRecordService.deleteMedicalRecord(recordId).subscribe(() => {
+            this.fetchMedicalRecords(); // Refresh the list after deletion
+        });
+    }
 
-  editRecord(recordId: string) {
+    addMedicalRecord() {
+        this.router.navigate(['/medical-records/add']);
+    }
 
-    this.router.navigate([`/medical-records/${recordId}/${this.petId}/edit`, {}]);
-  }
-
-  deleteRecord(recordId: string) {
-    this.medicalRecordService.deleteMedicalRecord(recordId).subscribe(() => {
-      this.fetchMedicalRecords();
-    });
-  }
-
-  addMedicalRecord() {
-    this.router.navigate(['/medical-records/add']);
-  }
-
-  isRole(role: string): boolean {
-    return this.authenticationService.isRole(role);
-  }
+    isRole(role: string): boolean {
+        return this.authenticationService.isRole(role);
+    }
 }

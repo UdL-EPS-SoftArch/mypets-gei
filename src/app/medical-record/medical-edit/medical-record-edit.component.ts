@@ -51,14 +51,14 @@ export class MedicalRecordEditComponent implements OnInit {
 
     });
   }
-  editMedicalRecord(issue: string, description: string, day: number, month: number, year: number, petId: number ) {
-
+  editMedicalRecord(issue: string, description: string, day: number, month: number, year: number) {
+    console.log(this.petId, " - Id");
     let medicalRecord = new MedicalRecord(
       {
         issue: issue,
         description: description,
         date: new Date(year, month, day),
-        pet: `/pets/${petId}`
+        pet: `/pets/${this.petId}`
       }
     );
     this.medicalRecordService.updateMedicalRecord(this.recordId, medicalRecord).subscribe({
@@ -76,8 +76,6 @@ export class MedicalRecordEditComponent implements OnInit {
     this.month = date.getUTCMonth() + 1; // getUTCMonth() returns month index starting from 0
     this.year = date.getUTCFullYear();
   }
-
-
 
 
 }

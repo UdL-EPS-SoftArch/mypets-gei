@@ -50,7 +50,7 @@
       <p><span class="label">Issue:</span> {{ record.issue }}</p>
       <p><span class="label">Description:</span> {{ record.description }}</p>
       <p><span class="label">Date:</span> {{ record.date }}</p>
-      <button *ngIf="!isRole('user') && !isRole('client')" (click)="editRecord(record.id)">Edit</button>
+      <button *ngIf="!isRole('user') && !isRole('client')" (click)="editRecord(record)">Edit</button>
       <button *ngIf="!isRole('user') && !isRole('client')" (click)="deleteRecord(record.id)">Delete</button>
     </div>
   </div>
