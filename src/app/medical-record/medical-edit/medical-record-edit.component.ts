@@ -69,7 +69,6 @@ export class MedicalRecordEditComponent implements OnInit {
         const navigationExtras: NavigationExtras = {
           queryParams: { reload: reloadTimestamp }
         };
-
         this.router.navigate(['/medical-records/', this.petId]);
 
       },
