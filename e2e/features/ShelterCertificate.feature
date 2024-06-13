@@ -7,6 +7,6 @@ Feature: Shelter Certificate
     Given I'm in the homepage
     And I'm logged in as "admin" with password "password"
     When I click the "Validate shelter certificates" menu
-    I can view the list of shelter certificates
+    Then I can view the list of shelter certificates
 
   
