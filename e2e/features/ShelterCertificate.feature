@@ -19,3 +19,9 @@ Feature: Shelter Certificate
     And I fill the certificate date with a valid one
     And I click the "Add" button
     Then The popup closes
+
+Scenario: Validate a shelter certificates
+    And The first shelter certificate is "Not validated"
+    When I click the "Validate" button
+    Then The first shelter certificate is "Validated"
+
