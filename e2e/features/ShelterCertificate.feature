@@ -25,3 +25,7 @@ Scenario: Validate a shelter certificates
     When I click the "Validate" button
     Then The first shelter certificate is "Validated"
 
+  Scenario: Invalidate a shelter certificate
+    And The first shelter certificate is "Validated"
+    When I click the "Invalidate" button
+    Then The first shelter certificate is "Not validated"
