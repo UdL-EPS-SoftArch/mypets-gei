@@ -10,5 +10,12 @@ Feature: Shelter Certificate
 
   Scenario: View the shelter certificates
     Then I can view the list of shelter certificates
-
   
+  Scenario: Add shelter certificate
+    And I click the "Shelters" menu
+    When I click the "Edit" button of Shelter with email "editShelter2@demo.app"
+    And I wait for the spinner to disappear
+    And I click the "Add certificate" button
+    And I fill the certificate date with a valid one
+    And I click the "Add" button
+    Then The popup closes
