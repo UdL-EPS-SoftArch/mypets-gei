@@ -56,6 +56,7 @@ export class MedicalRecordListComponent implements OnInit {
 
     if (this.petId) {
       this.fetchPetName(this.petId);
+      this.fetchMedicalRecords();
       this.fetchPet(this.petId);
       console.log("petId", this.petId);
     } else {
