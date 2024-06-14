@@ -1,4 +1,4 @@
-import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
+import { Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 Given("I'm in the homepage", () => {
   cy.visit('/');
@@ -25,3 +25,22 @@ Given('I am on the {string} page', (page) => {
 Then('I should see a list of users', () => {
   cy.get('.user-list').should('be.visible');
 });
+
+Then('I click on the {string} text', (text) => {
+    cy.contains('a', text).click();
+  });
+  
+  When('I click on "Disable" button', () => {
+    cy.get('button').contains("Disable").should('be.enabled').click();
+  });
+
+  Then('I click on the "Disable" button', (username) => {
+    cy.get('button').contains("Disable").click();
+  });
+  
+  Then('I should see a message {string}', (message) => {
+    cy.on('window:alert', (alertText) => {
+        expect(alertText).to.equal(message);
+      });
+  });
+  
