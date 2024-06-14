@@ -69,8 +69,7 @@ export class MedicalRecordEditComponent implements OnInit {
         const navigationExtras: NavigationExtras = {
           queryParams: { reload: reloadTimestamp }
         };
-        this.router.navigate(['/medical-records/', this.petId]);
-
+        this.router.navigate(['/medical-records', this.petId], navigationExtras);
       },
       error: (error) => console.error('Error updating medical record:', error)
 

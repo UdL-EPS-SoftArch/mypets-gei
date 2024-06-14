@@ -30,12 +30,10 @@ export class MedicalRecordListComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
 
-    // Subscribe to router events to detect NavigationEnd
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       if (this.router.url.startsWith('/medical-records')) {
-        // Call a custom method to refresh data
         this.initializeComponent();
       }
     });
@@ -54,25 +52,30 @@ export class MedicalRecordListComponent implements OnInit {
       this.petId = params['petId'];
     });
 
-    if (this.petId) {
-      this.fetchPetName(this.petId);
-      this.fetchMedicalRecords();
-      this.fetchPet(this.petId);
-      console.log("petId", this.petId);
-    } else {
-      this.fetchMedicalRecords();
-      console.log("NO petId");
-    }
+    this.route.queryParams.subscribe(queryParams => {
+      console.log(queryParams); // log query params for debugging
+      if (queryParams['reload']) {
+        console.log('Reload triggered by queryParams change');
+      }
+
+      if (this.petId) {
+        this.fetchPetName(this.petId);
+        this.fetchMedicalRecordsByPetId(this.petId);
+      } else {
+        this.fetchAllMedicalRecords();
+      }
+    });
   }
 
-  fetchPet(petId: number) {
+
+  fetchMedicalRecordsByPetId(petId: number) {
     this.medicalRecordService.getMedicalRecordsByPetId(petId).subscribe({
       next: (records) => {
         if (Array.isArray(records)) {
           records.forEach(record => {
             let lastIndex = record.uri.lastIndexOf('/');
             record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
-          })
+          });
           this.medicalRecords = records;
         } else {
           console.error('Data returned is not an array:', records);
@@ -85,14 +88,14 @@ export class MedicalRecordListComponent implements OnInit {
     });
   }
 
-  fetchMedicalRecords() {
+  fetchAllMedicalRecords() {
     this.medicalRecordService.getMedicalRecords().subscribe({
       next: (records) => {
         if (Array.isArray(records)) {
           records.forEach(record => {
             let lastIndex = record.uri.lastIndexOf('/');
             record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
-          })
+          });
           this.medicalRecords = records;
         } else {
           console.error('Data returned is not an array:', records);
@@ -127,7 +130,7 @@ export class MedicalRecordListComponent implements OnInit {
 
   deleteRecord(recordId: string) {
     this.medicalRecordService.deleteMedicalRecord(recordId).subscribe(() => {
-      this.fetchMedicalRecords();
+      this.initializeComponent(); // Ensure correct data is loaded after deletion
     });
   }
 
