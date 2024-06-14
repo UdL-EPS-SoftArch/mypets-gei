@@ -6,7 +6,7 @@ Feature: Disable User
     Scenario: View Users List
         Given I'm in the homepage
         And I'm logged in as "admin" with password "password"
-        And I click the "admin" menu
-        And I click the "User List" button
+        And I click the "Users" menu
+        Then I click the "List" menu
         Then I am redirected to the "/users" page
         And I can view the list of users
