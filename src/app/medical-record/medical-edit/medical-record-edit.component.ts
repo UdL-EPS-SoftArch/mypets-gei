@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MedicalRecordService} from "../medical-record.service";
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {FormGroup, FormBuilder, Validators, FormsModule} from '@angular/forms';
 import {MedicalRecord} from "../medical-record";
 
@@ -64,6 +64,12 @@ export class MedicalRecordEditComponent implements OnInit {
     this.medicalRecordService.updateMedicalRecord(this.recordId, medicalRecord).subscribe({
       next: (response) => {
         console.log('Medical Record updated:', response);
+
+        const reloadTimestamp = new Date().getTime();
+        const navigationExtras: NavigationExtras = {
+          queryParams: { reload: reloadTimestamp }
+        };
+        this.router.navigate(['/medical-records', this.petId], navigationExtras);
       },
       error: (error) => console.error('Error updating medical record:', error)
 

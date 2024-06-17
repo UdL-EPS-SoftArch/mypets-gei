@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import { HateoasResourceOperation, ResourceCollection } from '@lagoshny/ngx-hateoas-client';
 import { Pet } from './pet';
 
@@ -20,7 +20,11 @@ export class PetService extends HateoasResourceOperation<Pet> {
     return this.getCollection();
   }
 
-  getPetByUrl(petUrl: string): Observable<Pet> {
+  public getPetById(petId: number): Observable<Pet> {
+    return this.getResource(petId);
+  }
+
+  public getPetByUrl(petUrl: string): Observable<Pet> {
     return this.http.get<Pet>(petUrl);
   }
 }

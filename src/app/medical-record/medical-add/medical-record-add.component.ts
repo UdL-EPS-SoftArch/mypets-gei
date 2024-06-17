@@ -5,6 +5,7 @@ import {MedicalRecordService} from "../medical-record.service";
 import {Pet} from "../../pet/pet";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {PetService} from "../../pet/pet.service";
 
 @Component({
   selector: 'app-medical-record-add',
@@ -28,6 +29,7 @@ export class MedicalRecordAddComponent implements OnInit {
   year: any;
 
   constructor(
+    private petService: PetService,
     private medicalRecordService: MedicalRecordService,
     private router: Router
   ) { }
@@ -40,25 +42,33 @@ export class MedicalRecordAddComponent implements OnInit {
     return new Date(year, month, day);
   }
 
-  addMedicalRecord( issue: string, description: string, date: Date, petId: number) {
-    let medicalRecord = new MedicalRecord(
-      {
-        issue: issue,
-        description: description,
-        date: date,
-        pet: `/pets/${petId}`
-      }
-    );
+  addMedicalRecord(issue: string, description: string, date: Date, petId: number) {
+    // Check if petId exists
+    this.petService.getPetById(petId).subscribe({
+      next: (pet: Pet) => {
+        if (pet) {
+          let medicalRecord = new MedicalRecord({
+            issue: issue,
+            description: description,
+            date: date,
+            pet: `/pets/${petId}`
+          });
 
-    this.medicalRecordService.createMedicalRecord(medicalRecord).subscribe({
-      next: (response) => {
-        console.log('Medical Record created:', response);
+          this.medicalRecordService.createMedicalRecord(medicalRecord).subscribe({
+            next: (response) => {
+              alert('Medical Record created:');
+                this.router.navigate(['/medical-records/', this.petId]);
+            },
+            error: (error) => console.error('Error creating medical record:', error)
+          });
+
+          this.router.navigate(['/medical-records']);
+        } else {
+          alert(`Pet with ID ${petId} does not exist.`);
+        }
       },
-      error: (error) => console.error('Error creating medical record:', error)
+      error: (error) => alert(`Pet with ID ${petId} does not exist.`)
     });
-
-    this.router.navigate(['/medical-records']);
-
   }
 
 }

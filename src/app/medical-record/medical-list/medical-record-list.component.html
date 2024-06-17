@@ -42,7 +42,8 @@
 </head>
 <body>
 <div class="container">
-  <h2>Medical Records</h2>
+  <h2 *ngIf="!petId">Medical Records</h2>
+  <h3 *ngIf="petId">Medical Records for {{petName}}</h3>
   <div *ngIf="medicalRecords.length > 0; else noRecords">
     <div *ngFor="let record of medicalRecords" class="record">
       <p><span class="label">URI:</span> {{ record.uri }}</p>
