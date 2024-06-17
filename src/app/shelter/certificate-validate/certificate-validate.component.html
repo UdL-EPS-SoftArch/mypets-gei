@@ -15,7 +15,7 @@
 					{{ certificate._links.shelterServed.href.split('/').slice(-2, -1)[0] }}
 				</td>
 				<td>{{ certificate.expirationDate | date }}</td>
-				<td>{{ certificate.validated ? 'Validated ✅' : 'Not validated ❌' }}</td>
+				<td id="status">{{ certificate.validated ? 'Validated ✅' : 'Not validated ❌' }}</td>
                 <button *ngIf="!certificate.validated" class="btn btn-primary" (click)="validateCertificate(certificate.uri)">Validate</button>
                 <button *ngIf="certificate.validated" class="btn btn-danger" (click)="invalidateCertificate(certificate.uri)">Invalidate</button>
 			</tr>
