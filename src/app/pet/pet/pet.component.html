@@ -1,8 +1,13 @@
-<section >
-    <img class="listing-photo" [src]="pet.img">
-    <h2 >{{pet.name}}</h2>
-    <p >{{pet.description}}</p>
-    <p >{{pet.breed}}</p>
-    <a [routerLink]="['/pet-details', petId]">View details</a>
-
+<section class="pet-card">
+    <img class="listing-photo" [src]="pet.img" alt="{{ pet.name }}">
+    <div class="pet-details">
+      <h2>{{pet.name}}</h2>
+      <p><strong>Description: </strong>{{pet.description}}</p>
+      <p ><strong>Breed:</strong> {{pet.breed}}</p>
+      <div class="pet-actions">
+        <button mat-button color="primary" (click)="adoptPet()">Adopt</button>
+        <button mat-button color="accent" (click)="favoritePet()">Favorite</button>
+        <a mat-button [routerLink]="['/pet-details', petId]">View details</a>
+      </div>
+    </div>
 </section>
