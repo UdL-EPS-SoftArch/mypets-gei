@@ -5,8 +5,6 @@
       <p><strong>Description: </strong>{{pet.description}}</p>
       <p ><strong>Breed:</strong> {{pet.breed}}</p>
       <div class="pet-actions">
-        <button mat-button color="primary" (click)="adoptPet()">Adopt</button>
-        <button mat-button color="accent" (click)="favoritePet()">Favorite</button>
         <a mat-button [routerLink]="['/pet-details', petId]">View details</a>
       </div>
     </div>
