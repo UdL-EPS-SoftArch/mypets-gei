@@ -8,7 +8,7 @@ import { Pet } from '../pet';
   standalone: true,
   imports: [CommonModule,RouterModule],
   templateUrl: './pet.component.html',
-  styleUrl: './pet.component.css'
+  styleUrls: ['./pet.component.css']
 })
 export class PetComponent implements OnInit {
   @Input() pet!: Pet;
