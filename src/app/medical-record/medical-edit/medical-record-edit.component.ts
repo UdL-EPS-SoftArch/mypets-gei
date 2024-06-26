@@ -45,7 +45,7 @@ export class MedicalRecordEditComponent implements OnInit {
         this.medicalRecordForm.patchValue({
           issue: this.issue,
           description: this.description,
-          date: new Date(this.medicalRecord.date),
+          date: new Date(this.medicalRecord.date), // Ensure to parse date correctly
           petId: this.petId
         });
       },
@@ -62,10 +62,15 @@ export class MedicalRecordEditComponent implements OnInit {
 
     const { issue, description, date, petId } = this.medicalRecordForm.value;
 
+    // Extract day, month, and year from date
+    const day = date.getDate();
+    const month = date.getMonth(); // JavaScript's month is zero-based
+    const year = date.getFullYear();
+
     let medicalRecord = new MedicalRecord({
       issue: issue,
       description: description,
-      date: date,
+      date: new Date(year, month, day), // Correctly construct date object
       pet: `/pets/${petId}`
     });
 
