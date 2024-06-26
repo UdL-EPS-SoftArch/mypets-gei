@@ -38,6 +38,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MedicalRecordEditComponent} from "./medical-record/medical-edit/medical-record-edit.component";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ShelterVolunteersAddComponent,
     UserDisableComponent,
     AddPetComponent,
+      MedicalRecordEditComponent,
       MedicalRecordAddComponent
   ],
     imports: [
@@ -80,6 +82,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatDatepickerModule,
         MatNativeDateModule,
         MatFormFieldModule,
+
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

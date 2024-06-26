@@ -1,41 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Medical Record</title>
-  <!-- Add Angular Material Styles -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/@angular/material@13.2.3/prebuilt-themes/indigo-pink.css" rel="stylesheet">
-</head>
-<body>
 <h1>Edit Medical Record</h1>
-<form #medicalRecordForm="ngForm">
+<form [formGroup]="medicalRecordForm" (ngSubmit)="editMedicalRecord()">
   <div class="form-group">
-    <label for="description">Issue:</label>
-    <textarea id="issue" name="issue" [(ngModel)]="issue" required></textarea>
+    <label for="issue">Issue:</label>
+    <textarea id="issue" formControlName="issue"></textarea>
+    <div *ngIf="medicalRecordForm.get('issue').invalid && medicalRecordForm.get('issue').touched">
+      Issue is required.
+    </div>
   </div>
   <div class="form-group">
     <label for="description">Description:</label>
-    <textarea id="description" name="description" [(ngModel)]="description" required></textarea>
-  </div>
-  <div class="date-field">
-    <label for="day">Day:</label>
-    <input type="number" id="day" name="day" [(ngModel)]="day" required min="1" max="31" style="width: 70px;">
-  </div>
-  <div class="date-field">
-    <label for="month">Month:</label>
-    <input type="number" id="month" name="month" [(ngModel)]="month" required min="1" max="12" style="width: 70px;">
-  </div>
-  <div class="date-field">
-    <label for="year">Year:</label>
-    <input type="number" id="year" name="year" [(ngModel)]="year" required min="1" style="width: 100px;">
+    <textarea id="description" formControlName="description"></textarea>
+    <div *ngIf="medicalRecordForm.get('description').invalid && medicalRecordForm.get('description').touched">
+      Description is required.
+    </div>
   </div>
   <div class="form-group">
-    <label for="pet">Pet ID:</label>
-    <input type="number" id="pet" name="pet" [(ngModel)]="petId" required  readonly  class="readonly-input" style="width: 100px;">
+    <label>Date:</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div *ngIf="medicalRecordForm.get('date').invalid && medicalRecordForm.get('date').touched">
+      Date is required.
+    </div>
   </div>
-  <button type="button" (click)="editMedicalRecord(issue, description, day, month, year)" style="margin-top: 20px;">Edit</button>
+  <div class="form-group">
+    <label for="petId">Pet ID:</label>
+    <input id="petId" type="number" formControlName="petId" readonly class="readonly-input">
+    <div *ngIf="medicalRecordForm.get('petId').invalid && medicalRecordForm.get('petId').touched">
+      Pet ID is required.
+    </div>
+  </div>
+  <button type="submit" [disabled]="medicalRecordForm.invalid">Edit</button>
 </form>
-</body>
-</html>
