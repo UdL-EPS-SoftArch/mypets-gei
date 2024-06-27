@@ -37,8 +37,7 @@
       </li>
       <li class="nav-item" *ngIf="isRole('ADMIN')">
         <a class="nav-link" [routerLink]="['/shelter/certificates/validate']">Validate shelter certificates</a>
-        <a class="nav-link" [routerLink]="['/users']">Users</a>
-      </li>
+      </li> <a class="nav-link" [routerLink]="['/users']">Users</a>
     </ul>
     <ul class="navbar-nav ms-auto me-3" app-login-navbar></ul>
   </div>
