@@ -10,6 +10,7 @@ import { NgFor } from '@angular/common';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.css'],
   standalone: true,
   imports: [NgbPaginationModule, UserSearchComponent, NgFor, RouterLink],
 })

@@ -66,6 +66,16 @@ export class MedicalRecordListComponent implements OnInit {
       }
     });
   }
+  processMedicalRecord(record: MedicalRecord) {
+    let lastIndex = record.uri.lastIndexOf('/');
+    record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
+
+    // Adjusting the day by adding +1
+    const date = new Date(record.date);
+    date.setDate(date.getDate() + 1); // Adding +1 to the day
+    record.date = date.toISOString(); // Converting back to ISO string for consistency
+  }
+
 
 
   fetchMedicalRecordsByPetId(petId: number) {
@@ -73,8 +83,7 @@ export class MedicalRecordListComponent implements OnInit {
       next: (records) => {
         if (Array.isArray(records)) {
           records.forEach(record => {
-            let lastIndex = record.uri.lastIndexOf('/');
-            record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
+            this.processMedicalRecord(record);
           });
           this.medicalRecords = records;
         } else {
@@ -91,8 +100,10 @@ export class MedicalRecordListComponent implements OnInit {
   fetchAllMedicalRecords() {
     this.medicalRecordService.getMedicalRecords().subscribe({
       next: (records) => {
+
         if (Array.isArray(records)) {
           records.forEach(record => {
+            this.processMedicalRecord(record);
             let lastIndex = record.uri.lastIndexOf('/');
             record.id = lastIndex > -1 ? record.uri.substring(lastIndex + 1) : '';
           });

@@ -1,74 +1,72 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {MedicalRecord} from "../medical-record";
-import {MedicalRecordService} from "../medical-record.service";
-import {Pet} from "../../pet/pet";
-import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {PetService} from "../../pet/pet.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MedicalRecord } from '../medical-record';
+import { MedicalRecordService } from '../medical-record.service';
+import { Pet } from '../../pet/pet';
+import { PetService } from '../../pet/pet.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import form builder and validators
+import { MatDatepickerInputEvent } from '@angular/material/datepicker'; // Import datepicker input event
 
 @Component({
-  selector: 'app-medical-record-add',
-  templateUrl: './medical-record-add.component.html',
-  standalone: true,
-  imports: [
-    RouterLink,
-    CommonModule,
-    FormsModule,
-  ],
-  styleUrls: ['./medical-record-add.component.css']
+    selector: 'app-medical-record-add',
+    templateUrl: './medical-record-add.component.html',
+    styleUrls: ['./medical-record-add.component.css']
 })
 export class MedicalRecordAddComponent implements OnInit {
-  medicalRecords: MedicalRecord[] = [];
-  issue: any;
-  description: any;
-  date: any;
-  petId: any;
-  day: any;
-  month: any;
-  year: any;
+    medicalRecordForm: FormGroup; // Form group for medical record form
+    petId: number;
 
-  constructor(
-    private petService: PetService,
-    private medicalRecordService: MedicalRecordService,
-    private router: Router
-  ) { }
+    constructor(
+        private formBuilder: FormBuilder, // Inject form builder
+        private petService: PetService,
+        private medicalRecordService: MedicalRecordService,
+        private router: Router
+    ) { }
 
-  ngOnInit(): void {
-    return;
-  }
+    ngOnInit(): void {
+        // Initialize the form with validators
+        this.medicalRecordForm = this.formBuilder.group({
+            issue: ['', Validators.required],
+            description: ['', Validators.required],
+            date: [null, Validators.required], // Date field for datepicker
+            petId: ['', Validators.required]
+        });
+    }
 
-  createDate(day: number, month: number, year: number) {
-    return new Date(year, month, day);
-  }
+    // Function to handle datepicker input change
+    dateChanged(event: MatDatepickerInputEvent<Date>) {
+        this.medicalRecordForm.get('date').setValue(event.value);
+    }
 
-  addMedicalRecord(issue: string, description: string, date: Date, petId: number) {
-    // Check if petId exists
-    this.petService.getPetById(petId).subscribe({
-      next: (pet: Pet) => {
-        if (pet) {
-          let medicalRecord = new MedicalRecord({
-            issue: issue,
-            description: description,
-            date: date,
-            pet: `/pets/${petId}`
-          });
+    addMedicalRecord() {
+        if (this.medicalRecordForm.valid) {
+            const { issue, description, date, petId } = this.medicalRecordForm.value;
 
-          this.medicalRecordService.createMedicalRecord(medicalRecord).subscribe({
-            next: (response) => {
-              alert('Medical Record created:');
-                this.router.navigate(['/medical-records/', this.petId]);
-            },
-            error: (error) => console.error('Error creating medical record:', error)
-          });
+            this.petService.getPetById(petId).subscribe({
+                next: (pet: Pet) => {
+                    if (pet) {
+                        let medicalRecord = new MedicalRecord({
+                            issue: issue,
+                            description: description,
+                            date: date,
+                            pet: `/pets/${petId}`
+                        });
 
-          this.router.navigate(['/medical-records']);
+                        this.medicalRecordService.createMedicalRecord(medicalRecord).subscribe({
+                            next: (response) => {
+                                alert('Medical Record created:');
+                                this.router.navigate(['/medical-records']);
+                            },
+                            error: (error) => console.error('Error creating medical record:', error)
+                        });
+                    } else {
+                        alert(`Pet with ID ${petId} does not exist.`);
+                    }
+                },
+                error: (error) => alert(`Pet with ID ${petId} does not exist.`)
+            });
         } else {
-          alert(`Pet with ID ${petId} does not exist.`);
+            alert('Please fill in all required fields.');
         }
-      },
-      error: (error) => alert(`Pet with ID ${petId} does not exist.`)
-    });
-  }
-
+    }
 }

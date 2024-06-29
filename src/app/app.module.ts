@@ -30,6 +30,15 @@ import {UserDisableComponent} from './user/user-disable/user-disable.component';
 import {MedicalRecordListComponent} from './medical-record/medical-list/medical-record-list.component';
 import {AddPetComponent} from "./pet/add-pet/add-pet.component";
 import {PetFavouriteComponent} from './pet/pet-favourite/pet-favourite.component';
+import {MedicalRecordAddComponent} from "./medical-record/medical-add/medical-record-add.component";
+import {MatFormField} from "@angular/material/form-field";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MedicalRecordEditComponent} from "./medical-record/medical-edit/medical-record-edit.component";
 
 @NgModule({
   declarations: [
@@ -43,26 +52,38 @@ import {PetFavouriteComponent} from './pet/pet-favourite/pet-favourite.component
     UserDeleteComponent,
     ShelterVolunteersAddComponent,
     UserDisableComponent,
-    AddPetComponent
+    AddPetComponent,
+      MedicalRecordEditComponent,
+      MedicalRecordAddComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgbCollapseModule,
-    NgbDropdownModule,
-    NgbPaginationModule,
-    NgxHateoasClientModule.forRoot(),
-    LoginBasicModule,
-    ShelterVolunteersListComponent,
-    UserSearchComponent,
-    UserListComponent,
-    ErrorHandlerModule,
-    NgbModule,
-    ReactiveFormsModule,
-    PetFavouriteComponent,
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgbCollapseModule,
+        NgbDropdownModule,
+        NgbPaginationModule,
+        NgxHateoasClientModule.forRoot(),
+        LoginBasicModule,
+        ShelterVolunteersListComponent,
+        UserSearchComponent,
+        UserListComponent,
+        ErrorHandlerModule,
+        NgbModule,
+        ReactiveFormsModule,
+        PetFavouriteComponent,
+        MatFormField,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatDatepicker,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
